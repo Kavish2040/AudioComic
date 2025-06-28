@@ -17,13 +17,85 @@
 
 {% block extra_css %}
 <style>
+    /* Professional Corporate Reader Design */
+    :root {
+        --primary-color: #667eea;
+        --secondary-color: #764ba2;
+        --accent-color: #ff6b6b;
+        --success-color: #ffa726;
+        --text-dark: #2c3e50;
+        --text-light: #7f8c8d;
+        --bg-light: #f8f9fa;
+        --bg-white: #ffffff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        color: var(--text-dark);
+        line-height: 1.6;
+    }
+
+    /* Header Section */
+    .reader-header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: var(--shadow);
+    }
+
+    .reader-header h4 {
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .reader-header h4 i {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-right: 0.75rem;
+    }
+
+    .progress-indicator {
+        height: 6px;
+        background: rgba(102, 126, 234, 0.1);
+        border-radius: 3px;
+        overflow: hidden;
+        margin-top: 0.5rem;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        transition: width 0.3s ease;
+        border-radius: 3px;
+    }
+
+    /* Main Content Area */
+    .reader-content {
+        padding: 2rem 0;
+        min-height: calc(100vh - 200px);
+    }
+
+    /* Comic Viewer */
     .comic-viewer {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        min-height: 70vh;
+        background: var(--bg-white);
+        border-radius: 20px;
+        box-shadow: var(--shadow-lg);
+        padding: 2rem;
         position: relative;
         overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .comic-page {
@@ -32,92 +104,219 @@
         object-fit: contain;
         display: block;
         margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
     .panel-overlay {
         position: absolute;
         border: 3px solid transparent;
-        border-radius: 8px;
+        border-radius: 12px;
         transition: all 0.3s ease;
         cursor: pointer;
-        background: rgba(52, 152, 219, 0.1);
+        background: rgba(102, 126, 234, 0.1);
         opacity: 0;
     }
 
     .panel-overlay.active {
-        border-color: #3498db;
-        box-shadow: 0 0 20px rgba(52, 152, 219, 0.6);
+        border-color: var(--accent-color);
+        box-shadow: 0 0 25px rgba(255, 107, 107, 0.4);
         opacity: 1;
-        background: rgba(52, 152, 219, 0.2);
+        background: rgba(255, 107, 107, 0.15);
     }
 
     .panel-overlay.highlight {
-        border-color: #f39c12;
-        box-shadow: 0 0 15px rgba(243, 156, 18, 0.5);
+        border-color: var(--success-color);
+        box-shadow: 0 0 20px rgba(255, 167, 38, 0.5);
         opacity: 0.8;
     }
 
-    .reading-controls {
-        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-        color: white;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 20px;
+    /* Control Panel */
+    .control-panel {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 2rem;
     }
 
-    .page-navigation {
-        background: white;
-        border-radius: 10px;
-        padding: 15px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        margin-bottom: 20px;
+    .control-panel h6 {
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
     }
 
-    .panel-info {
-        background: #f8f9fa;
-        border-left: 4px solid #3498db;
-        padding: 15px;
-        border-radius: 0 10px 10px 0;
-        margin-bottom: 20px;
+    .control-panel h6 i {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-right: 0.75rem;
     }
 
+    /* Audio Player */
     .audio-player {
-        background: white;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         position: sticky;
-        bottom: 20px;
+        bottom: 2rem;
         z-index: 1000;
     }
 
-    .voice-controls {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 15px;
-        margin-bottom: 20px;
+    .audio-player audio {
+        width: 100%;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.5);
     }
 
-    .reading-mode-toggle {
-        background: white;
-        border-radius: 10px;
-        padding: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .progress-indicator {
-        height: 4px;
-        background: #e9ecef;
-        border-radius: 2px;
+    /* Buttons */
+    .btn {
+        border-radius: 12px;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.3s ease;
+        border: none;
+        position: relative;
         overflow: hidden;
     }
 
-    .progress-fill {
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, #3498db 0%, #27ae60 100%);
-        transition: width 0.3s ease;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
     }
 
+    .btn:hover::before {
+        left: 100%;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+    }
+
+    .btn-outline-primary {
+        background: transparent;
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .btn-outline-primary:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* Switches */
+    .form-check-input {
+        width: 3rem;
+        height: 1.5rem;
+        border-radius: 1rem;
+        border: 2px solid rgba(102, 126, 234, 0.3);
+        background-color: rgba(102, 126, 234, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .form-check-input:focus {
+        box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+    }
+
+    /* Panel Info */
+    .panel-info {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 1.5rem;
+    }
+
+    .panel-info h6 {
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+    }
+
+    .panel-text {
+        background: rgba(102, 126, 234, 0.05);
+        border-radius: 8px;
+        padding: 1rem;
+        border-left: 4px solid var(--primary-color);
+        font-style: italic;
+        color: var(--text-dark);
+    }
+
+    /* Status Indicators */
+    .status-indicator {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin: 0.25rem;
+    }
+
+    .status-playing {
+        background: rgba(255, 167, 38, 0.1);
+        color: var(--success-color);
+        border: 1px solid rgba(255, 167, 38, 0.2);
+    }
+
+    .status-analyzing {
+        background: rgba(102, 126, 234, 0.1);
+        color: var(--primary-color);
+        border: 1px solid rgba(102, 126, 234, 0.2);
+    }
+
+    .status-ready {
+        background: rgba(39, 174, 96, 0.1);
+        color: #27ae60;
+        border: 1px solid rgba(39, 174, 96, 0.2);
+    }
+
+    /* Loading Animation */
+    .loading-spinner {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid rgba(102, 126, 234, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--primary-color);
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 0.5rem;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
         .comic-page {
             max-height: 50vh;
@@ -128,148 +327,126 @@
             bottom: 0;
             left: 0;
             right: 0;
-            border-radius: 15px 15px 0 0;
+            border-radius: 20px 20px 0 0;
             margin: 0;
         }
         
-        body {
-            padding-bottom: 120px;
+        .control-panel {
+            margin-bottom: 1rem;
         }
+    }
+
+    /* Smooth transitions */
+    * {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <!-- Alert Container -->
-    <div id="alertContainer"></div>
-    
-    <!-- Reading Controls -->
-    <div class="reading-controls">
+<!-- Reader Header -->
+<div class="reader-header">
+    <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <h4 class="mb-0">
-                    <i class="fas fa-book-open me-2"></i>
+                <h4>
+                    <i class="fas fa-book-open"></i>
                     {{ filename }}
                 </h4>
-                <small class="text-light">Session: {{ session_id[:8] }}...</small>
+                <small class="text-muted">Session: {{ session_id[:8] }}...</small>
             </div>
-            <div class="col-md-6 text-md-end">
-                <div class="reading-mode-toggle d-inline-block">
-                    <div class="btn-group" role="group">
-                        <input type="radio" class="btn-check" name="readingMode" id="panelMode" value="panel" checked>
-                        <label class="btn btn-outline-primary btn-sm" for="panelMode">
-                            <i class="fas fa-th-large me-1"></i>Panel Mode
-                        </label>
-                        
-                        <input type="radio" class="btn-check" name="readingMode" id="pageMode" value="page">
-                        <label class="btn btn-outline-primary btn-sm" for="pageMode">
-                            <i class="fas fa-file-alt me-1"></i>Page Mode
-                        </label>
+            <div class="col-md-6">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="status-indicator status-ready">
+                        <i class="fas fa-check-circle me-2"></i>Ready
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <!-- Main Comic Viewer -->
-        <div class="col-lg-8">
-            <!-- Page Navigation -->
-            <div class="page-navigation">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <div class="d-flex align-items-center">
-                            <button class="btn btn-outline-primary me-2" onclick="previousPage()" id="prevPageBtn">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <span class="fw-bold">Page <span id="currentPageNum">1</span> of {{ total_pages }}</span>
-                            <button class="btn btn-outline-primary ms-2" onclick="nextPage()" id="nextPageBtn">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="text-end">
+                        <div class="fw-bold">Page <span id="currentPageNum">1</span> of {{ total_pages }}</div>
                         <div class="progress-indicator">
                             <div class="progress-fill" id="pageProgress" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
+<!-- Main Content -->
+<div class="reader-content">
+    <div class="container">
+        <div class="row">
             <!-- Comic Viewer -->
-            <div class="comic-viewer" id="comicViewer">
-                <img id="comicPage" class="comic-page" src="" alt="Comic Page">
-                <div id="panelOverlays"></div>
-            </div>
-            <div class="text-end my-2">
-                <button class="btn btn-primary btn-sm" onclick="analyzeCurrentPage()" id="analyzeBtn">
-                    <i class="fas fa-eye me-1"></i>Analyze Page
-                </button>
-            </div>
+            <div class="col-lg-8">
+                <div class="comic-viewer" id="comicViewer">
+                    <img id="comicPage" class="comic-page" src="" alt="Comic Page">
+                    <div id="panelOverlays"></div>
+                </div>
 
-            <!-- Panel Navigation -->
-            <div class="page-navigation" id="panelNavigation" style="display: none;">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <div class="d-flex align-items-center">
-                            <button class="btn btn-outline-secondary me-2" onclick="previousPanel()" id="prevPanelBtn">
-                                <i class="fas fa-step-backward"></i>
-                            </button>
-                            <span class="fw-bold">Panel <span id="currentPanelNum">1</span> of <span id="totalPanels">0</span></span>
-                            <button class="btn btn-outline-secondary ms-2" onclick="nextPanel()" id="nextPanelBtn">
-                                <i class="fas fa-step-forward"></i>
-                            </button>
+                <!-- Control Panel -->
+                <div class="control-panel">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-cog"></i>Reading Controls</h6>
+                            <div class="d-flex align-items-center gap-3">
+                                <button class="btn btn-outline-primary" onclick="previousPage()" id="prevPageBtn">
+                                    <i class="fas fa-chevron-left"></i> Previous
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="nextPage()" id="nextPageBtn">
+                                    Next <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-play-circle"></i>Auto-Playback</h6>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="autoPlaySwitch" checked>
+                                    <label class="form-check-label" for="autoPlaySwitch">
+                                        Auto-play
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="autoAdvanceSwitch" checked>
+                                    <label class="form-check-label" for="autoAdvanceSwitch">
+                                        Auto-advance
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Sidebar -->
-        <div class="col-lg-4">
-            <!-- Panel Information -->
-            <div class="panel-info" id="panelInfo" style="display: none;">
-                <h6><i class="fas fa-info-circle me-2"></i>Current Panel</h6>
-                <div id="panelText" class="mb-3"></div>
-                <div id="panelDescription" class="text-muted small"></div>
-            </div>
-
-            <!-- Voice Controls -->
-            <div class="voice-controls">
-                <h6><i class="fas fa-microphone me-2"></i>Voice Settings</h6>
-                <div class="mb-3">
-                    <label for="voiceSelect" class="form-label">Voice</label>
-                    <select class="form-select" id="voiceSelect">
-                        <option value="en-US-natalie" selected>Natalie (Female)</option>
-                    </select>
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Panel Information -->
+                <div class="panel-info" id="panelInfo" style="display: none;">
+                    <h6><i class="fas fa-info-circle"></i>Current Panel</h6>
+                    <div class="panel-text" id="panelText"></div>
+                    <div class="text-muted small" id="panelDescription"></div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <label for="speedRange" class="form-label">Speed</label>
-                        <input type="range" class="form-range" id="speedRange" min="0.5" max="2" step="0.1" value="1">
+
+                <!-- Voice Settings -->
+                <div class="control-panel">
+                    <h6><i class="fas fa-microphone"></i>Voice Settings</h6>
+                    <div class="mb-3">
+                        <label for="voiceSelect" class="form-label">Voice</label>
+                        <select class="form-select" id="voiceSelect">
+                            <option value="en-US-natalie" selected>Natalie (Female)</option>
+                            <option value="en-US-miles">Miles (Male)</option>
+                        </select>
                     </div>
-                    <div class="col-6">
-                        <label for="pitchRange" class="form-label">Pitch</label>
-                        <input type="range" class="form-range" id="pitchRange" min="0.5" max="2" step="0.1" value="1">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="speedRange" class="form-label">Speed</label>
+                            <input type="range" class="form-range" id="speedRange" min="0.5" max="2" step="0.1" value="1">
+                        </div>
+                        <div class="col-6">
+                            <label for="pitchRange" class="form-label">Pitch</label>
+                            <input type="range" class="form-range" id="pitchRange" min="0.5" max="2" step="0.1" value="1">
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Auto-play Controls -->
-            <div class="voice-controls">
-                <h6><i class="fas fa-play-circle me-2"></i>Playback</h6>
-                <div class="form-check form-switch mb-2">
-                    <input class="form-check-input" type="checkbox" id="autoPlaySwitch">
-                    <label class="form-check-label" for="autoPlaySwitch">
-                        Auto-play panels
-                    </label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="autoAdvanceSwitch">
-                    <label class="form-check-label" for="autoAdvanceSwitch">
-                        Auto-advance after audio
-                    </label>
                 </div>
             </div>
         </div>
@@ -292,11 +469,8 @@
             </div>
         </div>
         <div class="col-md-4 text-end">
-            <button class="btn btn-outline-primary me-2" onclick="generatePageSummary()" id="summaryBtn">
+            <button class="btn btn-outline-primary" onclick="generatePageSummary()" id="summaryBtn">
                 <i class="fas fa-list-alt me-1"></i>Page Summary
-            </button>
-            <button class="btn btn-outline-success" onclick="downloadAudio()" id="downloadBtn" style="display: none;">
-                <i class="fas fa-download me-1"></i>Download
             </button>
         </div>
     </div>
@@ -325,15 +499,15 @@
 <script>
     // Global variables
     const sessionId = "{{ session_id }}";
-    // Jinja2 template variable - this gets replaced server-side
     const totalPages = parseInt("{{ total_pages }}");
     let currentPage = 0;
     let currentPanel = 0;
     let panels = [];
     let currentAudioUrl = null;
-    let readingMode = 'panel';
-    let autoPlay = false;
-    let autoAdvance = false;
+    let autoPlay = true;
+    let autoAdvance = true;
+    let isPlaying = false;
+    let autoAdvanceTimeout = null;
 
     // Initialize the reader
     document.addEventListener('DOMContentLoaded', function() {
@@ -343,33 +517,62 @@
     });
 
     function initializeReader() {
-        // Set up reading mode listeners
-        document.querySelectorAll('input[name="readingMode"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                readingMode = this.value;
-                updateReadingMode();
-            });
-        });
-
         // Set up auto-play listeners
         document.getElementById('autoPlaySwitch').addEventListener('change', function() {
             autoPlay = this.checked;
+            console.log('🎵 Auto-play set to:', autoPlay);
         });
 
         document.getElementById('autoAdvanceSwitch').addEventListener('change', function() {
             autoAdvance = this.checked;
+            console.log('⏭️ Auto-advance set to:', autoAdvance);
         });
 
         // Set up audio player listeners
         const audioPlayer = document.getElementById('audioPlayer');
+        
+        audioPlayer.addEventListener('loadstart', function() {
+            console.log('🔄 Audio loading started');
+            updateStatus('loading');
+        });
+        
+        audioPlayer.addEventListener('canplay', function() {
+            console.log('✅ Audio can play');
+        });
+        
+        audioPlayer.addEventListener('play', function() {
+            console.log('▶️ Audio started playing');
+            isPlaying = true;
+            updateStatus('playing');
+        });
+        
+        audioPlayer.addEventListener('pause', function() {
+            console.log('⏸️ Audio paused');
+            isPlaying = false;
+            updateStatus('ready');
+        });
+        
         audioPlayer.addEventListener('ended', function() {
+            console.log('🏁 Audio ended, auto-advance is:', autoAdvance);
+            isPlaying = false;
+            updateStatus('ready');
+            
             if (autoAdvance) {
-                if (readingMode === 'panel') {
-                    nextPanel();
-                } else {
-                    nextPage();
-                }
+                console.log('🎵 Audio ended, auto-advancing...');
+                clearTimeout(autoAdvanceTimeout);
+                setTimeout(async () => {
+                    try {
+                        await nextPanel();
+                    } catch (error) {
+                        console.error('❌ Auto-advance error:', error);
+                    }
+                }, 500);
             }
+        });
+
+        audioPlayer.addEventListener('error', function() {
+            console.error('❌ Audio error occurred');
+            updateStatus('ready');
         });
     }
 
@@ -379,39 +582,53 @@
             switch(e.key) {
                 case 'ArrowLeft':
                     e.preventDefault();
-                    if (readingMode === 'panel') previousPanel();
-                    else previousPage();
+                    previousPage();
                     break;
                 case 'ArrowRight':
                     e.preventDefault();
-                    if (readingMode === 'panel') nextPanel();
-                    else nextPage();
+                    nextPage();
                     break;
                 case ' ':
                     e.preventDefault();
                     togglePlayback();
                     break;
-                case 'a':
-                    if (e.ctrlKey || e.metaKey) {
-                        e.preventDefault();
-                        analyzeCurrentPage();
-                    }
-                    break;
             }
         });
     }
 
+    function updateStatus(status) {
+        const statusIndicator = document.querySelector('.status-indicator');
+        statusIndicator.className = `status-indicator status-${status}`;
+        
+        switch(status) {
+            case 'playing':
+                statusIndicator.innerHTML = '<i class="fas fa-play-circle me-2"></i>Playing';
+                break;
+            case 'loading':
+                statusIndicator.innerHTML = '<div class="loading-spinner"></div>Loading...';
+                break;
+            case 'analyzing':
+                statusIndicator.innerHTML = '<div class="loading-spinner"></div>Analyzing...';
+                break;
+            case 'ready':
+            default:
+                statusIndicator.innerHTML = '<i class="fas fa-check-circle me-2"></i>Ready';
+                break;
+        }
+    }
+
+    function updatePageNavigation() {
+        document.getElementById('currentPageNum').textContent = currentPage + 1;
+        document.getElementById('prevPageBtn').disabled = currentPage === 0;
+        document.getElementById('nextPageBtn').disabled = currentPage === totalPages - 1;
+    }
+
     async function loadFirstPage() {
         try {
-            showLoading();
+            updateStatus('loading');
             await loadPage(0);
-            // Automatically start page analysis
-            console.log('🚀 Auto-starting page analysis...');
-            await analyzeCurrentPage();
         } catch (error) {
             showAlert('Error loading comic page: ' + error.message, 'danger');
-        } finally {
-            hideLoading();
         }
     }
 
@@ -421,7 +638,7 @@
         currentPage = pageNum;
         updatePageNavigation();
 
-        // Load page image - need to construct proper path
+        // Load page image
         const pageImageUrl = `/temp/${sessionId}/page_${String(pageNum + 1).padStart(3, '0')}.png`;
         document.getElementById('comicPage').src = pageImageUrl;
 
@@ -429,28 +646,28 @@
         panels = [];
         currentPanel = 0;
         document.getElementById('panelOverlays').innerHTML = '';
-        document.getElementById('panelNavigation').style.display = 'none';
         document.getElementById('panelInfo').style.display = 'none';
 
         // Update progress
         const progress = ((pageNum + 1) / totalPages) * 100;
         document.getElementById('pageProgress').style.width = progress + '%';
+
+        // Automatically analyze the new page
+        console.log('🔄 Auto-analyzing new page...');
+        updateStatus('analyzing');
+        await analyzeCurrentPage();
     }
 
     async function analyzeCurrentPage() {
         try {
             console.log('🔍 Starting page analysis for page', currentPage);
-            showLoading();
             
             const response = await fetch(`/analyze-page/${sessionId}/${currentPage}`, {
                 method: 'POST'
             });
 
-            console.log('📡 Analysis response status:', response.status);
-
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error('❌ Analysis failed:', errorText);
                 throw new Error(`Failed to analyze page: ${response.status} - ${errorText}`);
             }
 
@@ -463,7 +680,6 @@
             if (panels.length > 0) {
                 currentPanel = 0;
                 displayPanelOverlays();
-                updatePanelNavigation();
                 showPanelInfo();
                 
                 // Log panel text for debugging
@@ -473,18 +689,18 @@
                 
                 if (autoPlay) {
                     console.log('🎵 Auto-play enabled, playing current panel');
-                    playCurrentPanel();
+                    await playCurrentPanel();
                 }
             } else {
                 console.warn('⚠️ No panels detected on this page');
                 showAlert('No panels detected on this page.', 'warning');
+                updateStatus('ready');
             }
 
         } catch (error) {
             console.error('❌ Error analyzing page:', error);
             showAlert('Error analyzing page: ' + error.message, 'danger');
-        } finally {
-            hideLoading();
+            updateStatus('ready');
         }
     }
 
@@ -531,7 +747,6 @@
         if (panelIndex >= 0 && panelIndex < panels.length) {
             currentPanel = panelIndex;
             updatePanelHighlight();
-            updatePanelNavigation();
             showPanelInfo();
             
             if (autoPlay) {
@@ -548,8 +763,18 @@
         if (!text && panel.text_elements && panel.text_elements.length > 0) {
             text = panel.text_elements.map(e => e.text).join(' ');
         }
+        
+        // If no text in this panel, advance to next panel automatically
         if (!text || text.trim() === '') {
-            showAlert('This panel has no readable text.', 'info');
+            console.log('📝 No text in panel, advancing to next panel...');
+            if (autoAdvance) {
+                // Small delay to show the panel briefly
+                setTimeout(async () => {
+                    await nextPanel();
+                }, 1000);
+            } else {
+                showAlert('This panel has no readable text.', 'info');
+            }
             return;
         }
 
@@ -565,10 +790,9 @@
         }
 
         try {
-            showLoading();
+            updateStatus('loading');
             console.log('🎤 Generating audio for text:', text.substring(0, 100) + '...');
 
-            // Get voice settings (still send for UI, but backend will override if gender is male)
             const voiceId = document.getElementById('voiceSelect').value;
             console.log('🎵 Using voice:', voiceId, 'Gender:', gender);
 
@@ -585,11 +809,8 @@
                 body: params.toString()
             });
 
-            console.log('📡 Audio generation response status:', response.status);
-
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error('❌ Audio generation failed:', errorText);
                 throw new Error(`Failed to generate audio: ${response.status} - ${errorText}`);
             }
 
@@ -601,7 +822,7 @@
             // Check if we got a text fallback instead of audio
             if (result.audio_url && result.audio_url.includes('text_')) {
                 showAlert('Audio generation unavailable. Using text-only mode.', 'warning');
-                // Handle text fallback - could show text in a modal or sidebar
+                updateStatus('ready');
                 return;
             }
 
@@ -609,64 +830,44 @@
             const audioPlayer = document.getElementById('audioPlayer');
             audioPlayer.src = currentAudioUrl;
             
-            // Add error handling for audio playback
-            audioPlayer.onerror = function() {
-                console.error('❌ Audio playback error');
-                showAlert('Error playing audio. Please try again.', 'danger');
-            };
-            
-            audioPlayer.onloadstart = function() {
-                console.log('🔄 Loading audio...');
-            };
-            
-            audioPlayer.oncanplay = function() {
-                console.log('✅ Audio ready to play');
-            };
-            
             const playPromise = audioPlayer.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     console.log('▶️ Audio started playing');
-                    document.getElementById('downloadBtn').style.display = 'inline-block';
+                    
+                    // Set up auto-advance timeout as backup
+                    if (autoAdvance) {
+                        audioPlayer.addEventListener('loadedmetadata', function() {
+                            const duration = audioPlayer.duration;
+                            if (duration && duration > 0) {
+                                console.log(`⏰ Setting auto-advance timeout for ${duration + 2} seconds`);
+                                clearTimeout(autoAdvanceTimeout);
+                                autoAdvanceTimeout = setTimeout(async () => {
+                                    console.log('⏰ Timeout-based auto-advance triggered');
+                                    if (!isPlaying) {
+                                        try {
+                                            await nextPanel();
+                                        } catch (error) {
+                                            console.error('❌ Timeout auto-advance error:', error);
+                                        }
+                                    }
+                                }, (duration + 2) * 1000);
+                            }
+                        }, { once: true });
+                    }
                 }).catch(error => {
                     console.error('❌ Audio play failed:', error);
                     showAlert('Error playing audio: ' + error.message, 'danger');
+                    updateStatus('ready');
                 });
             }
 
         } catch (error) {
             console.error('❌ Audio generation error:', error);
             showAlert('Error generating audio: ' + error.message, 'danger');
-        } finally {
-            hideLoading();
+            updateStatus('ready');
         }
-    }
-
-    function updateReadingMode() {
-        if (readingMode === 'panel') {
-            document.getElementById('panelNavigation').style.display = panels.length > 0 ? 'block' : 'none';
-            showPanelInfo();
-        } else {
-            document.getElementById('panelNavigation').style.display = 'none';
-            document.getElementById('panelInfo').style.display = 'none';
-        }
-    }
-
-    function updatePageNavigation() {
-        document.getElementById('currentPageNum').textContent = currentPage + 1;
-        document.getElementById('prevPageBtn').disabled = currentPage === 0;
-        document.getElementById('nextPageBtn').disabled = currentPage === totalPages - 1;
-    }
-
-    function updatePanelNavigation() {
-        if (panels.length === 0) return;
-
-        document.getElementById('currentPanelNum').textContent = currentPanel + 1;
-        document.getElementById('totalPanels').textContent = panels.length;
-        document.getElementById('prevPanelBtn').disabled = currentPanel === 0;
-        document.getElementById('nextPanelBtn').disabled = currentPanel === panels.length - 1;
-        document.getElementById('panelNavigation').style.display = 'block';
     }
 
     function showPanelInfo() {
@@ -683,12 +884,6 @@
             panelText = 'No text in this panel.';
         }
         const panelDescription = panel.description || 'No description available.';
-        
-        console.log(`📋 Panel ${currentPanel + 1} info:`, {
-            text: panelText,
-            description: panelDescription,
-            text_elements: panel.text_elements || []
-        });
         
         document.getElementById('panelText').textContent = panelText;
         document.getElementById('panelDescription').textContent = panelDescription;
@@ -709,29 +904,16 @@
         }
     }
 
-    function previousPanel() {
-        if (currentPanel > 0) {
-            selectPanel(currentPanel - 1);
-        } else if (currentPage > 0) {
-            // Go to previous page, last panel
-            previousPage().then(() => {
-                if (panels.length > 0) {
-                    selectPanel(panels.length - 1);
-                }
-            });
-        }
-    }
-
-    function nextPanel() {
+    async function nextPanel() {
         if (currentPanel < panels.length - 1) {
             selectPanel(currentPanel + 1);
         } else if (currentPage < totalPages - 1) {
             // Go to next page, first panel
-            nextPage().then(() => {
-                if (panels.length > 0) {
-                    selectPanel(0);
-                }
-            });
+            console.log('📄 Moving to next page...');
+            await nextPage();
+        } else {
+            console.log('🏁 Reached the end of the comic');
+            showAlert('You have reached the end of the comic.', 'info');
         }
     }
 
@@ -759,7 +941,7 @@
         }
 
         try {
-            showLoading();
+            updateStatus('loading');
             
             // Create page summary from all panels
             const summaryText = panels.map((panel, index) => 
@@ -787,16 +969,7 @@
         } catch (error) {
             showAlert('Error generating page summary: ' + error.message, 'danger');
         } finally {
-            hideLoading();
-        }
-    }
-
-    function downloadAudio() {
-        if (currentAudioUrl) {
-            const link = document.createElement('a');
-            link.href = currentAudioUrl;
-            link.download = `comic_audio_page${currentPage + 1}_panel${currentPanel + 1}.mp3`;
-            link.click();
+            updateStatus('ready');
         }
     }
 
@@ -808,7 +981,8 @@
             <p><strong>Total Pages:</strong> ${totalPages}</p>
             <p><strong>Current Page:</strong> ${currentPage + 1}</p>
             <p><strong>Current Panel:</strong> ${currentPanel + 1}</p>
-            <p><strong>Reading Mode:</strong> ${readingMode}</p>
+            <p><strong>Auto-play:</strong> ${autoPlay ? 'Enabled' : 'Disabled'}</p>
+            <p><strong>Auto-advance:</strong> ${autoAdvance ? 'Enabled' : 'Disabled'}</p>
         `;
         modal.show();
     }
@@ -821,6 +995,26 @@
                 window.location.href = '/';
             });
         }
+    }
+
+    function showAlert(message, type) {
+        // Create a simple alert notification
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(alertDiv);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            if (alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, 5000);
     }
 </script>
 {% endblock %}

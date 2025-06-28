@@ -58,6 +58,8 @@ class VisionAnalyzer:
             
             # Parse the response
             analysis_text = response.choices[0].message.content
+            print(f"🤖 Raw AI response: {analysis_text[:500]}...")
+            
             analysis = self._parse_analysis_response(analysis_text)
             
             return analysis
@@ -90,18 +92,18 @@ class VisionAnalyzer:
     
     def _create_analysis_prompt(self) -> str:
         """Create the prompt for comic page analysis"""
-        return """
-        Analyze this comic page and provide a detailed breakdown in JSON format. I need you to:
+        return """Analyze this comic page and provide ONLY a JSON response in the exact format specified below. Do not include any explanatory text, markdown formatting, or additional content outside the JSON object.
 
+        Your task:
         1. Identify all panels/frames in the comic page
-        2. Determine the correct reading order (typically left-to-right, top-to-bottom)
+        2. Determine the correct reading order (left-to-right, top-to-bottom)
         3. Extract all text from speech bubbles, thought bubbles, captions, and sound effects
-        4. Identify the approximate coordinates/bounds of each panel
+        4. Identify approximate coordinates/bounds of each panel
         5. Describe what's happening in each panel briefly
-        6. **VISUALLY ANALYZE EACH CHARACTER** who is speaking and determine their gender based on visual appearance (facial features, hair style, clothing, body shape, etc.)
-        7. Match each text element to the visually identified character who is speaking
+        6. Visually analyze each speaking character and determine their gender based on visual appearance
+        7. Match each text element to the visually identified character
 
-        Please respond with a JSON object in this exact format:
+        RESPOND WITH ONLY THIS JSON FORMAT (no other text):
         {
             "panels": [
                 {
@@ -115,101 +117,114 @@ class VisionAnalyzer:
                             "speaker": "Character name or description",
                             "speaker_gender": "male/female/unknown",
                             "visual_description": "Brief description of the character's visual appearance"
-                        },
-                        {
-                            "type": "narration",
-                            "text": "Meanwhile...",
-                            "speaker": "Narrator",
-                            "speaker_gender": "unknown",
-                            "visual_description": "Narration text"
-                        },
-                        {
-                            "type": "sound_effect",
-                            "text": "BOOM!",
-                            "speaker": "Sound effect",
-                            "speaker_gender": "unknown",
-                            "visual_description": "Sound effect"
                         }
                     ],
                     "description": "Brief description of what's happening in this panel"
                 }
             ],
             "page_summary": "Overall summary of what happens on this page",
-            "total_panels": 4
+            "total_panels": 1
         }
 
-        **IMPORTANT VISUAL ANALYSIS INSTRUCTIONS:**
-        - Look at the actual drawn characters in each panel
-        - Analyze visual cues like: facial features, hair style/length, clothing, body shape, facial hair, makeup, etc.
+        Visual analysis guidelines:
+        - Analyze visual cues: facial features, hair style/length, clothing, body shape, facial hair, makeup
         - Determine gender based on visual appearance, not text content
-        - For each speech bubble, identify which character is speaking by their visual appearance
         - Assign "male", "female", or "unknown" based on visual analysis
-        - Include a brief visual description of each speaking character
-        - If multiple characters are in a panel, distinguish between them visually
-        - For thought bubbles, identify the character thinking
+        - Include brief visual description of each speaking character
         - For narration, use "unknown" gender
+        - For sound effects, use "unknown" gender
 
-        Notes:
-        - Bounds should be approximate percentages (0-100) of the page dimensions
-        - Text types can be: "speech", "thought", "narration", "sound_effect"
-        - Reading order should follow typical comic conventions
-        - If you can't determine exact bounds, provide reasonable estimates
-        - Include ALL visible text, even small sound effects
-        - Focus on visual character analysis for accurate gender detection
-        """
+        Text types: "speech", "thought", "narration", "sound_effect"
+        Bounds should be approximate percentages (0-100) of page dimensions
+        Include ALL visible text, even small sound effects"""
     
     def _parse_analysis_response(self, response_text: str) -> Dict[str, Any]:
         """Parse the AI response and extract structured data from visual analysis."""
         try:
+            # Clean the response text
+            response_text = response_text.strip()
+            
             # Try to extract JSON from the response
             start_idx = response_text.find('{')
             end_idx = response_text.rfind('}') + 1
+            
             if start_idx == -1 or end_idx == 0:
+                print(f"❌ No JSON brackets found in response: {response_text[:200]}...")
                 raise ValueError("No JSON found in response")
+            
             json_str = response_text[start_idx:end_idx]
+            print(f"🔍 Extracted JSON string: {json_str[:200]}...")
+            
+            # Try to parse the JSON
             analysis = json.loads(json_str)
+            
             # Validate the structure
             if not isinstance(analysis.get('panels'), list):
+                print(f"❌ Invalid panels structure: {type(analysis.get('panels'))}")
                 raise ValueError("Invalid panels structure")
+            
             # Sort panels by reading order
             analysis['panels'].sort(key=lambda x: x.get('reading_order', 999))
+            
             # Add panel navigation info
             for i, panel in enumerate(analysis['panels']):
                 panel['panel_index'] = i
                 panel['is_first'] = i == 0
                 panel['is_last'] = i == len(analysis['panels']) - 1
-                # The AI now provides speaker_gender directly from visual analysis
-                # No need for additional gender detection logic
+                
+                # Ensure text_elements is a list
+                if 'text_elements' not in panel:
+                    panel['text_elements'] = []
+                
+                # Ensure each text element has required fields
+                for text_elem in panel['text_elements']:
+                    if 'type' not in text_elem:
+                        text_elem['type'] = 'speech'
+                    if 'speaker_gender' not in text_elem:
+                        text_elem['speaker_gender'] = 'unknown'
+                    if 'visual_description' not in text_elem:
+                        text_elem['visual_description'] = 'Character description not available'
+            
+            print(f"✅ Successfully parsed analysis with {len(analysis['panels'])} panels")
             return analysis
+            
         except json.JSONDecodeError as e:
+            print(f"❌ JSON decode error: {str(e)}")
+            print(f"🔍 Problematic JSON: {json_str[:500]}...")
             # Fallback: create a simple single-panel analysis
-            return {
-                "panels": [
-                    {
-                        "panel_id": 1,
-                        "reading_order": 1,
-                        "panel_index": 0,
-                        "is_first": True,
-                        "is_last": True,
-                        "bounds": {"x": 0, "y": 0, "width": 100, "height": 100},
-                        "text_elements": [
-                            {
-                                "type": "narration",
-                                "text": "Unable to parse comic text automatically. Please check the image quality.",
-                                "speaker": "System",
-                                "speaker_gender": "unknown",
-                                "visual_description": "Error message"
-                            }
-                        ],
-                        "description": "Comic panel analysis failed - manual review needed"
-                    }
-                ],
-                "page_summary": "Page analysis incomplete due to parsing error",
-                "total_panels": 1,
-                "error": f"JSON parsing failed: {str(e)}"
-            }
+            return self._create_fallback_analysis(f"JSON parsing failed: {str(e)}")
+            
         except Exception as e:
-            raise Exception(f"Error parsing analysis response: {str(e)}")
+            print(f"❌ Error parsing analysis response: {str(e)}")
+            return self._create_fallback_analysis(f"Parsing error: {str(e)}")
+    
+    def _create_fallback_analysis(self, error_message: str) -> Dict[str, Any]:
+        """Create a fallback analysis when parsing fails"""
+        return {
+            "panels": [
+                {
+                    "panel_id": 1,
+                    "reading_order": 1,
+                    "panel_index": 0,
+                    "is_first": True,
+                    "is_last": True,
+                    "bounds": {"x": 0, "y": 0, "width": 100, "height": 100},
+                    "text_elements": [
+                        {
+                            "type": "narration",
+                            "text": "Unable to parse comic text automatically. Please check the image quality or try again.",
+                            "speaker": "System",
+                            "speaker_gender": "unknown",
+                            "visual_description": "Error message"
+                        }
+                    ],
+                    "description": "Comic panel analysis failed - manual review needed"
+                }
+            ],
+            "page_summary": "Page analysis incomplete due to parsing error",
+            "total_panels": 1,
+            "error": error_message
+        }
     
     async def get_panel_text(self, panel_data: Dict[str, Any]) -> str:
         """Extract and format all text from a panel for TTS"""
