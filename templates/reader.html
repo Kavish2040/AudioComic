@@ -1,0 +1,826 @@
+{% extends "base.html" %}
+
+{% block title %}Reading: {{ filename }} - Audio Comic Reader{% endblock %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href="#" onclick="showSessionInfo()">
+        <i class="fas fa-info-circle"></i>Session Info
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="#" onclick="confirmExit()">
+        <i class="fas fa-times"></i>Exit Reader
+    </a>
+</li>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .comic-viewer {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        min-height: 70vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .comic-page {
+        max-width: 100%;
+        max-height: 70vh;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .panel-overlay {
+        position: absolute;
+        border: 3px solid transparent;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        background: rgba(52, 152, 219, 0.1);
+        opacity: 0;
+    }
+
+    .panel-overlay.active {
+        border-color: #3498db;
+        box-shadow: 0 0 20px rgba(52, 152, 219, 0.6);
+        opacity: 1;
+        background: rgba(52, 152, 219, 0.2);
+    }
+
+    .panel-overlay.highlight {
+        border-color: #f39c12;
+        box-shadow: 0 0 15px rgba(243, 156, 18, 0.5);
+        opacity: 0.8;
+    }
+
+    .reading-controls {
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .page-navigation {
+        background: white;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+
+    .panel-info {
+        background: #f8f9fa;
+        border-left: 4px solid #3498db;
+        padding: 15px;
+        border-radius: 0 10px 10px 0;
+        margin-bottom: 20px;
+    }
+
+    .audio-player {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        position: sticky;
+        bottom: 20px;
+        z-index: 1000;
+    }
+
+    .voice-controls {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .reading-mode-toggle {
+        background: white;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .progress-indicator {
+        height: 4px;
+        background: #e9ecef;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(135deg, #3498db 0%, #27ae60 100%);
+        transition: width 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+        .comic-page {
+            max-height: 50vh;
+        }
+        
+        .audio-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 15px 15px 0 0;
+            margin: 0;
+        }
+        
+        body {
+            padding-bottom: 120px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Alert Container -->
+    <div id="alertContainer"></div>
+    
+    <!-- Reading Controls -->
+    <div class="reading-controls">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h4 class="mb-0">
+                    <i class="fas fa-book-open me-2"></i>
+                    {{ filename }}
+                </h4>
+                <small class="text-light">Session: {{ session_id[:8] }}...</small>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="reading-mode-toggle d-inline-block">
+                    <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="readingMode" id="panelMode" value="panel" checked>
+                        <label class="btn btn-outline-primary btn-sm" for="panelMode">
+                            <i class="fas fa-th-large me-1"></i>Panel Mode
+                        </label>
+                        
+                        <input type="radio" class="btn-check" name="readingMode" id="pageMode" value="page">
+                        <label class="btn btn-outline-primary btn-sm" for="pageMode">
+                            <i class="fas fa-file-alt me-1"></i>Page Mode
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Main Comic Viewer -->
+        <div class="col-lg-8">
+            <!-- Page Navigation -->
+            <div class="page-navigation">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-outline-primary me-2" onclick="previousPage()" id="prevPageBtn">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="fw-bold">Page <span id="currentPageNum">1</span> of {{ total_pages }}</span>
+                            <button class="btn btn-outline-primary ms-2" onclick="nextPage()" id="nextPageBtn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="progress-indicator">
+                            <div class="progress-fill" id="pageProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comic Viewer -->
+            <div class="comic-viewer" id="comicViewer">
+                <img id="comicPage" class="comic-page" src="" alt="Comic Page">
+                <div id="panelOverlays"></div>
+            </div>
+            <div class="text-end my-2">
+                <button class="btn btn-primary btn-sm" onclick="analyzeCurrentPage()" id="analyzeBtn">
+                    <i class="fas fa-eye me-1"></i>Analyze Page
+                </button>
+            </div>
+
+            <!-- Panel Navigation -->
+            <div class="page-navigation" id="panelNavigation" style="display: none;">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-outline-secondary me-2" onclick="previousPanel()" id="prevPanelBtn">
+                                <i class="fas fa-step-backward"></i>
+                            </button>
+                            <span class="fw-bold">Panel <span id="currentPanelNum">1</span> of <span id="totalPanels">0</span></span>
+                            <button class="btn btn-outline-secondary ms-2" onclick="nextPanel()" id="nextPanelBtn">
+                                <i class="fas fa-step-forward"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Panel Information -->
+            <div class="panel-info" id="panelInfo" style="display: none;">
+                <h6><i class="fas fa-info-circle me-2"></i>Current Panel</h6>
+                <div id="panelText" class="mb-3"></div>
+                <div id="panelDescription" class="text-muted small"></div>
+            </div>
+
+            <!-- Voice Controls -->
+            <div class="voice-controls">
+                <h6><i class="fas fa-microphone me-2"></i>Voice Settings</h6>
+                <div class="mb-3">
+                    <label for="voiceSelect" class="form-label">Voice</label>
+                    <select class="form-select" id="voiceSelect">
+                        <option value="en-US-natalie" selected>Natalie (Female)</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="speedRange" class="form-label">Speed</label>
+                        <input type="range" class="form-range" id="speedRange" min="0.5" max="2" step="0.1" value="1">
+                    </div>
+                    <div class="col-6">
+                        <label for="pitchRange" class="form-label">Pitch</label>
+                        <input type="range" class="form-range" id="pitchRange" min="0.5" max="2" step="0.1" value="1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auto-play Controls -->
+            <div class="voice-controls">
+                <h6><i class="fas fa-play-circle me-2"></i>Playback</h6>
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="autoPlaySwitch">
+                    <label class="form-check-label" for="autoPlaySwitch">
+                        Auto-play panels
+                    </label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="autoAdvanceSwitch">
+                    <label class="form-check-label" for="autoAdvanceSwitch">
+                        Auto-advance after audio
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Audio Player -->
+<div class="audio-player">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-primary me-3" onclick="togglePlayback()" id="playBtn">
+                    <i class="fas fa-play" id="playIcon"></i>
+                </button>
+                <div class="flex-grow-1">
+                    <audio id="audioPlayer" controls style="width: 100%;" preload="none">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-outline-primary me-2" onclick="generatePageSummary()" id="summaryBtn">
+                <i class="fas fa-list-alt me-1"></i>Page Summary
+            </button>
+            <button class="btn btn-outline-success" onclick="downloadAudio()" id="downloadBtn" style="display: none;">
+                <i class="fas fa-download me-1"></i>Download
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Session Info Modal -->
+<div class="modal fade" id="sessionModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Session Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="sessionModalBody">
+                <!-- Session info will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Global variables
+    const sessionId = "{{ session_id }}";
+    // Jinja2 template variable - this gets replaced server-side
+    const totalPages = parseInt("{{ total_pages }}");
+    let currentPage = 0;
+    let currentPanel = 0;
+    let panels = [];
+    let currentAudioUrl = null;
+    let readingMode = 'panel';
+    let autoPlay = false;
+    let autoAdvance = false;
+
+    // Initialize the reader
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeReader();
+        setupEventListeners();
+        loadFirstPage();
+    });
+
+    function initializeReader() {
+        // Set up reading mode listeners
+        document.querySelectorAll('input[name="readingMode"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                readingMode = this.value;
+                updateReadingMode();
+            });
+        });
+
+        // Set up auto-play listeners
+        document.getElementById('autoPlaySwitch').addEventListener('change', function() {
+            autoPlay = this.checked;
+        });
+
+        document.getElementById('autoAdvanceSwitch').addEventListener('change', function() {
+            autoAdvance = this.checked;
+        });
+
+        // Set up audio player listeners
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.addEventListener('ended', function() {
+            if (autoAdvance) {
+                if (readingMode === 'panel') {
+                    nextPanel();
+                } else {
+                    nextPage();
+                }
+            }
+        });
+    }
+
+    function setupEventListeners() {
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    if (readingMode === 'panel') previousPanel();
+                    else previousPage();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    if (readingMode === 'panel') nextPanel();
+                    else nextPage();
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    togglePlayback();
+                    break;
+                case 'a':
+                    if (e.ctrlKey || e.metaKey) {
+                        e.preventDefault();
+                        analyzeCurrentPage();
+                    }
+                    break;
+            }
+        });
+    }
+
+    async function loadFirstPage() {
+        try {
+            showLoading();
+            await loadPage(0);
+            // Automatically start page analysis
+            console.log('🚀 Auto-starting page analysis...');
+            await analyzeCurrentPage();
+        } catch (error) {
+            showAlert('Error loading comic page: ' + error.message, 'danger');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    async function loadPage(pageNum) {
+        if (pageNum < 0 || pageNum >= totalPages) return;
+
+        currentPage = pageNum;
+        updatePageNavigation();
+
+        // Load page image - need to construct proper path
+        const pageImageUrl = `/temp/${sessionId}/page_${String(pageNum + 1).padStart(3, '0')}.png`;
+        document.getElementById('comicPage').src = pageImageUrl;
+
+        // Clear previous panels
+        panels = [];
+        currentPanel = 0;
+        document.getElementById('panelOverlays').innerHTML = '';
+        document.getElementById('panelNavigation').style.display = 'none';
+        document.getElementById('panelInfo').style.display = 'none';
+
+        // Update progress
+        const progress = ((pageNum + 1) / totalPages) * 100;
+        document.getElementById('pageProgress').style.width = progress + '%';
+    }
+
+    async function analyzeCurrentPage() {
+        try {
+            console.log('🔍 Starting page analysis for page', currentPage);
+            showLoading();
+            
+            const response = await fetch(`/analyze-page/${sessionId}/${currentPage}`, {
+                method: 'POST'
+            });
+
+            console.log('📡 Analysis response status:', response.status);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('❌ Analysis failed:', errorText);
+                throw new Error(`Failed to analyze page: ${response.status} - ${errorText}`);
+            }
+
+            const analysis = await response.json();
+            console.log('✅ Analysis result:', analysis);
+            
+            panels = analysis.panels || [];
+            console.log(`📊 Found ${panels.length} panels`);
+            
+            if (panels.length > 0) {
+                currentPanel = 0;
+                displayPanelOverlays();
+                updatePanelNavigation();
+                showPanelInfo();
+                
+                // Log panel text for debugging
+                panels.forEach((panel, index) => {
+                    console.log(`Panel ${index + 1} text:`, panel.text_for_speech || 'No text');
+                });
+                
+                if (autoPlay) {
+                    console.log('🎵 Auto-play enabled, playing current panel');
+                    playCurrentPanel();
+                }
+            } else {
+                console.warn('⚠️ No panels detected on this page');
+                showAlert('No panels detected on this page.', 'warning');
+            }
+
+        } catch (error) {
+            console.error('❌ Error analyzing page:', error);
+            showAlert('Error analyzing page: ' + error.message, 'danger');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function displayPanelOverlays() {
+        const overlaysContainer = document.getElementById('panelOverlays');
+        overlaysContainer.innerHTML = '';
+
+        const comicPage = document.getElementById('comicPage');
+        const imageRect = comicPage.getBoundingClientRect();
+        const containerRect = overlaysContainer.getBoundingClientRect();
+        const offsetX = imageRect.left - containerRect.left;
+        const offsetY = imageRect.top - containerRect.top;
+
+        panels.forEach((panel, index) => {
+            const overlay = document.createElement('div');
+            overlay.className = 'panel-overlay';
+            overlay.dataset.panelIndex = index;
+
+            // Calculate position relative to the image
+            const bounds = panel.bounds || {x: 0, y: 0, width: 100, height: 100};
+            overlay.style.left = offsetX + (bounds.x / 100) * comicPage.offsetWidth + 'px';
+            overlay.style.top = offsetY + (bounds.y / 100) * comicPage.offsetHeight + 'px';
+            overlay.style.width = (bounds.width / 100) * comicPage.offsetWidth + 'px';
+            overlay.style.height = (bounds.height / 100) * comicPage.offsetHeight + 'px';
+
+            overlay.addEventListener('click', () => {
+                selectPanel(index);
+            });
+
+            overlaysContainer.appendChild(overlay);
+        });
+
+        // Highlight current panel
+        updatePanelHighlight();
+    }
+
+    function updatePanelHighlight() {
+        document.querySelectorAll('.panel-overlay').forEach((overlay, index) => {
+            overlay.classList.toggle('active', index === currentPanel);
+        });
+    }
+
+    function selectPanel(panelIndex) {
+        if (panelIndex >= 0 && panelIndex < panels.length) {
+            currentPanel = panelIndex;
+            updatePanelHighlight();
+            updatePanelNavigation();
+            showPanelInfo();
+            
+            if (autoPlay) {
+                playCurrentPanel();
+            }
+        }
+    }
+
+    async function playCurrentPanel() {
+        if (panels.length === 0 || currentPanel >= panels.length) return;
+
+        const panel = panels[currentPanel];
+        let text = panel.text_for_speech;
+        if (!text && panel.text_elements && panel.text_elements.length > 0) {
+            text = panel.text_elements.map(e => e.text).join(' ');
+        }
+        if (!text || text.trim() === '') {
+            showAlert('This panel has no readable text.', 'info');
+            return;
+        }
+
+        // Detect gender from text_elements
+        let gender = null;
+        if (panel.text_elements && panel.text_elements.length > 0) {
+            for (const elem of panel.text_elements) {
+                if (elem.speaker_gender === 'male') {
+                    gender = 'male';
+                    break;
+                }
+            }
+        }
+
+        try {
+            showLoading();
+            console.log('🎤 Generating audio for text:', text.substring(0, 100) + '...');
+
+            // Get voice settings (still send for UI, but backend will override if gender is male)
+            const voiceId = document.getElementById('voiceSelect').value;
+            console.log('🎵 Using voice:', voiceId, 'Gender:', gender);
+
+            const params = new URLSearchParams();
+            params.append('text', text);
+            params.append('voice_id', voiceId);
+            if (gender) params.append('gender', gender);
+
+            const response = await fetch(`/generate-audio/${sessionId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: params.toString()
+            });
+
+            console.log('📡 Audio generation response status:', response.status);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('❌ Audio generation failed:', errorText);
+                throw new Error(`Failed to generate audio: ${response.status} - ${errorText}`);
+            }
+
+            const result = await response.json();
+            console.log('✅ Audio generation result:', result);
+            
+            currentAudioUrl = result.audio_url;
+
+            // Check if we got a text fallback instead of audio
+            if (result.audio_url && result.audio_url.includes('text_')) {
+                showAlert('Audio generation unavailable. Using text-only mode.', 'warning');
+                // Handle text fallback - could show text in a modal or sidebar
+                return;
+            }
+
+            // Play audio
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = currentAudioUrl;
+            
+            // Add error handling for audio playback
+            audioPlayer.onerror = function() {
+                console.error('❌ Audio playback error');
+                showAlert('Error playing audio. Please try again.', 'danger');
+            };
+            
+            audioPlayer.onloadstart = function() {
+                console.log('🔄 Loading audio...');
+            };
+            
+            audioPlayer.oncanplay = function() {
+                console.log('✅ Audio ready to play');
+            };
+            
+            const playPromise = audioPlayer.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('▶️ Audio started playing');
+                    document.getElementById('downloadBtn').style.display = 'inline-block';
+                }).catch(error => {
+                    console.error('❌ Audio play failed:', error);
+                    showAlert('Error playing audio: ' + error.message, 'danger');
+                });
+            }
+
+        } catch (error) {
+            console.error('❌ Audio generation error:', error);
+            showAlert('Error generating audio: ' + error.message, 'danger');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function updateReadingMode() {
+        if (readingMode === 'panel') {
+            document.getElementById('panelNavigation').style.display = panels.length > 0 ? 'block' : 'none';
+            showPanelInfo();
+        } else {
+            document.getElementById('panelNavigation').style.display = 'none';
+            document.getElementById('panelInfo').style.display = 'none';
+        }
+    }
+
+    function updatePageNavigation() {
+        document.getElementById('currentPageNum').textContent = currentPage + 1;
+        document.getElementById('prevPageBtn').disabled = currentPage === 0;
+        document.getElementById('nextPageBtn').disabled = currentPage === totalPages - 1;
+    }
+
+    function updatePanelNavigation() {
+        if (panels.length === 0) return;
+
+        document.getElementById('currentPanelNum').textContent = currentPanel + 1;
+        document.getElementById('totalPanels').textContent = panels.length;
+        document.getElementById('prevPanelBtn').disabled = currentPanel === 0;
+        document.getElementById('nextPanelBtn').disabled = currentPanel === panels.length - 1;
+        document.getElementById('panelNavigation').style.display = 'block';
+    }
+
+    function showPanelInfo() {
+        if (panels.length === 0 || currentPanel >= panels.length) return;
+
+        const panel = panels[currentPanel];
+        const panelInfo = document.getElementById('panelInfo');
+        
+        let panelText = panel.text_for_speech;
+        if (!panelText && panel.text_elements && panel.text_elements.length > 0) {
+            panelText = panel.text_elements.map(e => e.text).join(' ');
+        }
+        if (!panelText || panelText.trim() === '') {
+            panelText = 'No text in this panel.';
+        }
+        const panelDescription = panel.description || 'No description available.';
+        
+        console.log(`📋 Panel ${currentPanel + 1} info:`, {
+            text: panelText,
+            description: panelDescription,
+            text_elements: panel.text_elements || []
+        });
+        
+        document.getElementById('panelText').textContent = panelText;
+        document.getElementById('panelDescription').textContent = panelDescription;
+        
+        panelInfo.style.display = 'block';
+    }
+
+    // Navigation functions
+    async function previousPage() {
+        if (currentPage > 0) {
+            await loadPage(currentPage - 1);
+        }
+    }
+
+    async function nextPage() {
+        if (currentPage < totalPages - 1) {
+            await loadPage(currentPage + 1);
+        }
+    }
+
+    function previousPanel() {
+        if (currentPanel > 0) {
+            selectPanel(currentPanel - 1);
+        } else if (currentPage > 0) {
+            // Go to previous page, last panel
+            previousPage().then(() => {
+                if (panels.length > 0) {
+                    selectPanel(panels.length - 1);
+                }
+            });
+        }
+    }
+
+    function nextPanel() {
+        if (currentPanel < panels.length - 1) {
+            selectPanel(currentPanel + 1);
+        } else if (currentPage < totalPages - 1) {
+            // Go to next page, first panel
+            nextPage().then(() => {
+                if (panels.length > 0) {
+                    selectPanel(0);
+                }
+            });
+        }
+    }
+
+    function togglePlayback() {
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playIcon = document.getElementById('playIcon');
+
+        if (audioPlayer.paused) {
+            if (currentAudioUrl) {
+                audioPlayer.play();
+                playIcon.className = 'fas fa-pause';
+            } else {
+                playCurrentPanel();
+            }
+        } else {
+            audioPlayer.pause();
+            playIcon.className = 'fas fa-play';
+        }
+    }
+
+    async function generatePageSummary() {
+        if (panels.length === 0) {
+            showAlert('Please analyze the page first.', 'warning');
+            return;
+        }
+
+        try {
+            showLoading();
+            
+            // Create page summary from all panels
+            const summaryText = panels.map((panel, index) => 
+                `Panel ${index + 1}: ${panel.description || 'Visual content'}`
+            ).join('. ');
+
+            const response = await fetch(`/generate-audio/${sessionId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `text=${encodeURIComponent(summaryText)}&voice_id=en-US-davis`
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate summary audio');
+            }
+
+            const result = await response.json();
+            
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = result.audio_url;
+            audioPlayer.play();
+
+        } catch (error) {
+            showAlert('Error generating page summary: ' + error.message, 'danger');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function downloadAudio() {
+        if (currentAudioUrl) {
+            const link = document.createElement('a');
+            link.href = currentAudioUrl;
+            link.download = `comic_audio_page${currentPage + 1}_panel${currentPanel + 1}.mp3`;
+            link.click();
+        }
+    }
+
+    function showSessionInfo() {
+        const modal = new bootstrap.Modal(document.getElementById('sessionModal'));
+        document.getElementById('sessionModalBody').innerHTML = `
+            <p><strong>Session ID:</strong> ${sessionId}</p>
+            <p><strong>Comic:</strong> {{ filename }}</p>
+            <p><strong>Total Pages:</strong> ${totalPages}</p>
+            <p><strong>Current Page:</strong> ${currentPage + 1}</p>
+            <p><strong>Current Panel:</strong> ${currentPanel + 1}</p>
+            <p><strong>Reading Mode:</strong> ${readingMode}</p>
+        `;
+        modal.show();
+    }
+
+    function confirmExit() {
+        if (confirm('Are you sure you want to exit? Your session will be cleaned up.')) {
+            fetch(`/session/${sessionId}`, {
+                method: 'DELETE'
+            }).finally(() => {
+                window.location.href = '/';
+            });
+        }
+    }
+</script>
+{% endblock %}
