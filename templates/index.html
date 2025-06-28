@@ -4,35 +4,57 @@
 
 {% block extra_css %}
 <style>
-    /* Professional Corporate Design */
     :root {
-        --primary-color: #667eea;
-        --secondary-color: #764ba2;
-        --accent-color: #ff6b6b;
-        --success-color: #ffa726;
-        --warning-color: #ff9800;
-        --text-dark: #2c3e50;
-        --text-light: #7f8c8d;
-        --bg-light: #f8f9fa;
-        --bg-white: #ffffff;
-        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        --primary-blue: #2563EB;
+        --primary-dark: #1E40AF;
+        --primary-light: #3B82F6;
+        --text-primary: #111827;
+        --text-secondary: #6B7280;
+        --text-muted: #9CA3AF;
+        --background: #FFFFFF;
+        --surface: #F9FAFB;
+        --surface-dark: #F3F4F6;
+        --border: #E5E7EB;
+        --border-light: #F3F4F6;
+        --hover-bg: #F8FAFC;
+        --success: #10B981;
+        --success-dark: #059669;
+        --radius: 8px;
+        --radius-lg: 12px;
+        --radius-xl: 16px;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+        box-sizing: border-box;
     }
 
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
         line-height: 1.6;
-        color: var(--text-dark);
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        margin: 0;
+        padding: 0;
+        font-weight: 400;
     }
 
-    /* Hero Section - Clean Modern Design */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* Hero Section */
     .hero-section {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 100px 0;
+        background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+        padding: 54px 0 64px 10px;
         position: relative;
         overflow: hidden;
+        font-family: 'Inter', 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
     }
 
     .hero-section::before {
@@ -42,623 +64,622 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.3);
-        z-index: 1;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E5E7EB' fill-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.5;
     }
 
     .hero-content {
         position: relative;
         z-index: 2;
-    }
-
-    .hero-badge {
-        display: inline-block;
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        padding: 8px 16px;
-        border-radius: 25px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        margin-bottom: 1.5rem;
-        backdrop-filter: blur(10px);
+        text-align: center;
+        max-width: 980px;
+        margin: 0 auto;
     }
 
     .hero-title {
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
-        font-weight: 800;
-        margin-bottom: 2rem;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
+        font-family: 'Montserrat', 'Inter', 'Poppins', 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
+        font-size: 3.1rem;
+        font-weight: 900;
+        color: #181818;
+        margin-bottom: 18px;
+        letter-spacing: 0.01em;
+        line-height: 1.12;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .hero-title .highlight {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    .hero-highlight {
+        color: #2563EB;
     }
 
     .hero-subtitle {
-        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        font-size: 1.18rem;
+        color: #555;
+        margin-bottom: 36px;
+        max-width: 740px;
+        margin-left: auto;
+        margin-right: auto;
         font-weight: 400;
-        margin-bottom: 2.5rem;
-        opacity: 0.9;
-        max-width: 500px;
         line-height: 1.6;
+        font-family: 'Inter', 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
     }
 
     .hero-cta {
         display: flex;
-        gap: 1rem;
+        gap: 10px;
+        justify-content: center;
         flex-wrap: wrap;
+        margin-bottom: 32px;
     }
 
-    .hero-cta .btn {
-        padding: 15px 30px;
-        font-size: 1rem;
-        font-weight: 600;
+    .btn {
+        padding: 8px 18px;
         border-radius: 8px;
-        text-decoration: none;
-        transition: all 0.3s ease;
+        font-size: 1rem;
+        font-weight: 500;
         border: none;
         cursor: pointer;
-    }
-
-    .hero-cta .btn-primary {
-        background: #ff6b6b;
-        color: white;
-        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-    }
-
-    .hero-cta .btn-primary:hover {
-        background: #ff5252;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
-    }
-
-    .hero-cta .btn-secondary {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-    }
-
-    .hero-cta .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.5);
-        transform: translateY(-2px);
-    }
-
-    .hero-visual {
-        position: relative;
-        z-index: 2;
-        display: flex;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .hero-image-container {
+        gap: 6px;
         position: relative;
-        max-width: 450px;
-        width: 100%;
-        border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease;
     }
 
-    .hero-image-container:hover {
-        transform: translateY(-10px);
-    }
-
-    .hero-image {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    /* Modern Illustration Styles */
-    .modern-illustration {
-        position: relative;
-        width: 100%;
-        height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .comic-panel {
-        width: 200px;
-        height: 150px;
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-        border-radius: 16px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: panelFloat 6s ease-in-out infinite;
-    }
-
-    .comic-panel::before {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(135deg, #60a5fa, #3b82f6, #1d4ed8);
-        border-radius: 18px;
-        z-index: -1;
-        opacity: 0.3;
-    }
-
-    .speech-bubble {
-        width: 60px;
-        height: 40px;
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .btn-primary {
+        background: var(--primary-blue);
         color: white;
-        font-size: 1.2rem;
-        position: relative;
-        animation: bubblePulse 2s ease-in-out infinite;
     }
 
-    .speech-bubble::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 20px;
-        width: 0;
-        height: 0;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 8px solid #1d4ed8;
+    .btn-primary:hover {
+        background: var(--primary-dark);
     }
 
-    .audio-wave {
-        position: absolute;
-        right: 20%;
-        top: 50%;
-        transform: translateY(-50%);
+    .btn-secondary {
+        background: var(--background);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+        background: var(--surface);
+        border-color: var(--primary-blue);
+        color: var(--primary-blue);
+    }
+
+    .hero-stats {
         display: flex;
-        align-items: flex-end;
-        gap: 4px;
-        height: 60px;
+        justify-content: center;
+        gap: 36px;
+        margin-top: 24px;
     }
 
-    .wave-bar {
-        width: 4px;
-        background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-        border-radius: 2px;
-        animation: waveAnimation 1.5s ease-in-out infinite;
+    .stat-item {
+        text-align: center;
     }
 
-    .wave-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
-    .wave-bar:nth-child(2) { height: 40px; animation-delay: 0.1s; }
-    .wave-bar:nth-child(3) { height: 60px; animation-delay: 0.2s; }
-    .wave-bar:nth-child(4) { height: 45px; animation-delay: 0.3s; }
-    .wave-bar:nth-child(5) { height: 30px; animation-delay: 0.4s; }
-    .wave-bar:nth-child(6) { height: 50px; animation-delay: 0.5s; }
-    .wave-bar:nth-child(7) { height: 35px; animation-delay: 0.6s; }
-    .wave-bar:nth-child(8) { height: 25px; animation-delay: 0.7s; }
-
-    .floating-shapes {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        pointer-events: none;
+    .stat-number {
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: #181818;
+        display: block;
+        font-family: 'Inter', 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
+        letter-spacing: -0.01em;
     }
 
-    .shape {
-        position: absolute;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-        opacity: 0.3;
-        animation: shapeFloat 8s ease-in-out infinite;
-    }
-
-    .shape-1 {
-        width: 20px;
-        height: 20px;
-        top: 20%;
-        left: 15%;
-        animation-delay: 0s;
-    }
-
-    .shape-2 {
-        width: 30px;
-        height: 30px;
-        top: 60%;
-        right: 20%;
-        animation-delay: 2s;
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    }
-
-    .shape-3 {
-        width: 15px;
-        height: 15px;
-        bottom: 30%;
-        left: 25%;
-        animation-delay: 4s;
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    }
-
-    .shape-4 {
-        width: 25px;
-        height: 25px;
-        top: 40%;
-        right: 30%;
-        animation-delay: 6s;
-        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    }
-
-    @keyframes panelFloat {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(1deg); }
-    }
-
-    @keyframes bubblePulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-    }
-
-    @keyframes waveAnimation {
-        0%, 100% { transform: scaleY(1); }
-        50% { transform: scaleY(1.5); }
-    }
-
-    @keyframes shapeFloat {
-        0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-        50% { transform: translateY(-30px) rotate(180deg) scale(1.2); }
+    .stat-label {
+        font-size: 1.02rem;
+        color: #888;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-top: 2px;
+        font-family: 'Inter', 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
     }
 
     /* Upload Section */
     .upload-section {
-        background: var(--bg-white);
-        padding: 60px 0;
-        margin-top: -30px;
-        border-radius: 30px 30px 0 0;
-        position: relative;
-        z-index: 3;
-        box-shadow: var(--shadow-lg);
+        background: var(--surface);
+        padding: 48px 0;
     }
 
-    .upload-card {
-        background: var(--bg-white);
-        border-radius: 20px;
-        box-shadow: var(--shadow);
-        border: none;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .upload-container {
+        max-width: 480px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 18px;
+        padding: 32px 28px 28px 28px;
+        box-shadow: 0 2px 16px 0 rgba(60,60,60,0.06);
+        border: 1px solid #e5e7eb;
     }
 
-    .upload-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .upload-header {
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-        color: white;
-        padding: 2rem;
+    .section-header {
         text-align: center;
+        margin-bottom: 24px;
     }
 
-    .upload-header h3 {
-        font-size: 1.75rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
+    .section-header h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #181818;
+        margin-bottom: 6px;
     }
 
-    .upload-header p {
-        opacity: 0.9;
+    .section-header p {
+        font-size: 1rem;
+        color: #666;
         margin: 0;
     }
 
-    .upload-body {
-        padding: 2.5rem;
+    .language-section {
+        margin-bottom: 24px;
+        padding: 18px;
+        background: #f7f8fa;
+        border-radius: 12px;
+        border: 1px solid #ececec;
     }
 
-    /* File Upload Area */
-    .file-upload-area {
-        border: 3px dashed #e1e8ed;
-        border-radius: 15px;
-        padding: 3rem 2rem;
+    .language-section h3 {
+        font-size: 1.08rem;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .language-section p {
+        font-size: 0.98rem;
+        color: #888;
+        margin-bottom: 12px;
+    }
+
+    .form-select {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        background: #fff;
+        color: #181818;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 12px center;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        padding-right: 36px;
+    }
+
+    .form-select:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.08);
+    }
+
+    .language-info {
+        margin-top: 10px;
+        padding: 10px 12px;
+        background: #fff;
+        border-radius: 8px;
+        border: 1px solid #ececec;
+        font-size: 0.97rem;
+        color: #444;
+    }
+
+    .language-info-grid {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 6px;
+    }
+
+    .language-info strong {
+        color: #181818;
+        font-weight: 600;
+    }
+
+    .status-available {
+        color: var(--success);
+        font-weight: 500;
+    }
+
+    .language-note {
+        font-size: 0.95rem;
+        color: #888;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .upload-area {
+        border: 2px dashed #e5e7eb;
+        border-radius: 14px;
+        padding: 32px 12px 24px 12px;
         text-align: center;
-        transition: all 0.3s ease;
-        background: var(--bg-light);
+        background: #f7f8fa;
+        transition: all 0.2s ease;
         cursor: pointer;
+        margin-bottom: 18px;
+        position: relative;
     }
 
-    .file-upload-area:hover {
-        border-color: var(--primary-color);
-        background: rgba(102, 126, 234, 0.05);
-    }
-
-    .file-upload-area.dragover {
-        border-color: var(--success-color);
-        background: rgba(255, 167, 38, 0.1);
-        transform: scale(1.02);
+    .upload-area:hover,
+    .upload-area.dragover {
+        border-color: var(--primary-blue);
+        background: #f0f6ff;
     }
 
     .upload-icon {
-        font-size: 4rem;
-        color: var(--primary-color);
-        margin-bottom: 1.5rem;
+        font-size: 2.2rem;
+        color: #b0b4bb;
+        margin-bottom: 10px;
     }
 
-    .upload-text h5 {
-        font-size: 1.5rem;
+    .upload-area.dragover .upload-icon {
+        color: var(--primary-blue);
+    }
+
+    .upload-text h4 {
+        font-size: 1.08rem;
         font-weight: 600;
-        color: var(--text-dark);
-        margin-bottom: 0.5rem;
+        color: #181818;
+        margin-bottom: 4px;
     }
 
     .upload-text p {
-        color: var(--text-light);
-        margin-bottom: 1.5rem;
+        font-size: 0.97rem;
+        color: #888;
+        margin-bottom: 12px;
     }
 
-    /* Upload Progress */
-    .processing-message {
-        padding: 2rem;
-        border-radius: 15px;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(102, 126, 234, 0.1);
-        margin: 1.5rem 0;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    .file-input {
+        display: none;
     }
 
-    .processing-message .spinner-border {
-        width: 3rem;
-        height: 3rem;
-        color: var(--primary-color) !important;
+    .btn-upload {
+        background: var(--primary-blue);
+        color: white;
+        padding: 8px 18px;
+        border-radius: 8px;
+        font-size: 0.98rem;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
     }
 
-    .processing-message h5 {
+    .btn-upload:hover {
+        background: var(--primary-dark);
+    }
+
+    .file-info {
+        display: none;
+        padding: 12px 16px;
+        background: #f7f8fa;
+        border-radius: 10px;
+        margin-bottom: 14px;
+        border: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 0.98rem;
+        color: #222;
+    }
+
+    .file-info .file-icon {
+        font-size: 1.3rem;
+        color: #888;
+        margin-right: 6px;
+    }
+
+    .file-info strong {
+        color: #181818;
         font-weight: 600;
-        color: var(--primary-color) !important;
+        margin-right: 4px;
     }
 
-    .processing-message p {
-        font-size: 0.95rem;
-        margin-bottom: 0;
+    .file-info .file-size {
+        color: #666;
+        font-weight: 500;
+        margin-left: 8px;
     }
 
-    /* Features Section */
-    .features-section {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        padding: 80px 0;
-        position: relative;
-        overflow: hidden;
+    .btn-process {
+        background: var(--success);
+        color: white;
+        padding: 12px 28px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        display: none;
+        margin: 0 auto;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
     }
 
-    .features-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-        opacity: 0.5;
-        pointer-events: none;
+    .btn-process:hover {
+        background: var(--success-dark);
     }
 
-    .features-section .container {
-        position: relative;
-        z-index: 2;
-    }
-
-    .section-title {
+    .processing {
+        display: none;
         text-align: center;
-        margin-bottom: 4rem;
+        padding: 24px;
+        background: #f7f8fa;
+        border-radius: 10px;
+        margin: 14px 0;
+        border: 1px solid #e5e7eb;
     }
 
-    .section-title h2 {
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 800;
-        color: var(--text-dark);
-        margin-bottom: 1rem;
-        background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-color) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    .spinner {
+        width: 28px;
+        height: 28px;
+        border: 3px solid #e5e7eb;
+        border-top: 3px solid var(--primary-blue);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 10px;
     }
 
-    .section-title p {
-        font-size: 1.2rem;
-        color: var(--text-light);
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .processing h4 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+    }
+
+    .processing p {
+        font-size: 16px;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    /* Apple/Modern Pastel Feature Cards */
+    .features-section {
+        background: #fff;
+        padding: 64px 0 48px 0;
+        position: relative;
+    }
+    .features-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .features-header h2 {
+        font-family: 'Montserrat', 'Inter', 'Poppins', 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
+        font-size: 2.3rem;
+        font-weight: 900;
+        color: #181818;
+        letter-spacing: 0.01em;
+        margin-bottom: 10px;
+    }
+    .features-header p {
+        font-size: 1.08rem;
+        color: #555;
         max-width: 600px;
         margin: 0 auto;
-        font-weight: 400;
-        line-height: 1.6;
+        line-height: 1.5;
     }
-
+    .features-grid {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        gap: 24px;
+        max-width: 1100px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+    }
     .feature-card {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        flex: 1 1 260px;
+        max-width: 320px;
+        min-width: 200px;
+        min-height: 220px;
+        background: #fff;
         border-radius: 20px;
-        padding: 3rem 2rem;
-        text-align: center;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        height: 100%;
+        padding: 24px 16px 18px 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        transition: background 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.2s cubic-bezier(0.4,0,0.2,1);
         position: relative;
-        overflow: hidden;
+        background-clip: padding-box;
+        box-shadow: none;
+        border: none;
     }
-
-    .feature-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
+    .feature-card:nth-child(1) {
+        background: linear-gradient(180deg, #ffe6ea 0%, #fff 100%);
     }
-
-    .feature-card:hover {
-        transform: translateY(-15px) scale(1.02);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        border-color: rgba(102, 126, 234, 0.3);
+    .feature-card:nth-child(2) {
+        background: linear-gradient(180deg, #e6f0ff 0%, #fff 100%);
     }
-
-    .feature-card:hover::before {
-        transform: scaleX(1);
+    .feature-card:nth-child(3) {
+        background: linear-gradient(180deg, #fff6e6 0%, #fff 100%);
     }
-
     .feature-icon {
-        width: 90px;
-        height: 90px;
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
+        background: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 2rem;
-        font-size: 2.2rem;
-        color: white;
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        transition: all 0.3s ease;
-        position: relative;
-    }
-
-    .feature-icon::after {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-        border-radius: 50%;
-        z-index: -1;
-        opacity: 0.3;
-        transition: opacity 0.3s ease;
-    }
-
-    .feature-card:hover .feature-icon {
-        transform: scale(1.1) rotate(5deg);
-        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-    }
-
-    .feature-card:hover .feature-icon::after {
-        opacity: 0.6;
-    }
-
-    .feature-card h5 {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin-bottom: 1.2rem;
-        background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-color) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .feature-card p {
-        color: var(--text-light);
-        line-height: 1.7;
-        font-size: 1rem;
-        margin-bottom: 0;
-    }
-
-    /* Buttons */
-    .btn-primary {
-        background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+        font-size: 22px;
+        color: #222;
+        margin-bottom: 16px;
         border: none;
-        border-radius: 10px;
-        padding: 12px 30px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: var(--shadow);
     }
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
-        background: linear-gradient(135deg, #2980b9 0%, var(--secondary-color) 100%);
-    }
-
-    .btn-success {
-        background: linear-gradient(135deg, var(--success-color) 0%, #229954 100%);
-        border: none;
-        border-radius: 10px;
-        padding: 15px 40px;
-        font-weight: 600;
+    .feature-card h3 {
         font-size: 1.1rem;
-        transition: all 0.3s ease;
-        box-shadow: var(--shadow);
+        font-weight: 600;
+        color: #181818;
+        margin-bottom: 10px;
+        text-align: center;
+        letter-spacing: -0.01em;
+    }
+    .feature-card p {
+        font-size: 0.98rem;
+        color: #888;
+        text-align: center;
+        line-height: 1.5;
+        font-weight: 400;
+        margin: 0;
+    }
+    @media (max-width: 900px) {
+        .features-grid {
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        .feature-card {
+            max-width: 400px;
+            width: 100%;
+        }
     }
 
-    .btn-success:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
-        background: linear-gradient(135deg, #229954 0%, var(--success-color) 100%);
+    /* Alerts */
+    .alert {
+        padding: 16px 20px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+    }
+
+    .alert-warning {
+        background: #FEF3C7;
+        color: #92400E;
+        border: 1px solid #FDE68A;
+    }
+
+    .alert-danger {
+        background: #FEE2E2;
+        color: #991B1B;
+        border: 1px solid #FECACA;
+    }
+
+    .alert-info {
+        background: #DBEAFE;
+        color: #1E40AF;
+        border: 1px solid #BFDBFE;
     }
 
     /* Responsive Design */
     @media (max-width: 768px) {
-        .hero-section {
-            padding: 60px 0;
-            text-align: center;
+        .container {
+            padding: 0 16px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+        }
+        
+        .upload-container {
+            margin: 0 16px;
+            padding: 32px 24px;
         }
         
         .hero-cta {
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
-        
-        .hero-visual {
-            margin-top: 3rem;
+
+        .btn {
+            width: 100%;
+            max-width: 280px;
         }
-        
-        .hero-image-container {
-            max-width: 300px;
+
+        .language-info-grid,
+        .file-info-grid {
+            grid-template-columns: 1fr;
         }
-        
-        .upload-section {
-            margin-top: -20px;
-            border-radius: 20px 20px 0 0;
+
+        .features-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
         }
-        
-        .section-title h2 {
-            font-size: 2rem;
+
+        .features-header h2 {
+            font-size: 40px;
+        }
+
+        .features-header p {
+            font-size: 18px;
+        }
+
+        .feature-card {
+            padding: 24px 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            font-size: 18px;
+        }
+
+        .hero-stats {
+            flex-direction: column;
+            gap: 24px;
         }
     }
 
-    /* Animations */
-    .fade-in {
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 0.8s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
+    @media (max-width: 480px) {
+        .hero-title {
+            font-size: 36px;
         }
-    }
+        
+        .hero-subtitle {
+            font-size: 16px;
+        }
 
-    .fade-in:nth-child(1) { animation-delay: 0.1s; }
-    .fade-in:nth-child(2) { animation-delay: 0.2s; }
-    .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .features-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
 
-    /* Smooth scrolling */
-    html {
-        scroll-behavior: smooth;
+        .feature-card {
+            padding: 16px 12px;
+        }
+
+        .feature-card h3 {
+            font-size: 16px;
+        }
+
+        .feature-card p {
+            font-size: 12px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
     }
 </style>
 {% endblock %}
@@ -667,33 +688,30 @@
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 hero-content">
-                <h1 class="hero-title fade-in">
-                    Transform Your <span class="highlight">Comics</span> Into <span class="highlight">Audio Stories</span>
-                </h1>
-                
-                <p class="hero-subtitle fade-in">
-                    Upload any comic PDF and let our AI convert it into an immersive audio experience with natural voices and intelligent character recognition.
-                </p>
-                
-                <div class="hero-cta fade-in">
-                    <button class="btn btn-primary" onclick="scrollToUpload()">
-                        <i class="fas fa-upload me-2"></i>Upload Comic Now
-                    </button>
-                    <button class="btn btn-secondary" onclick="showDemo()">
-                        <i class="fas fa-play me-2"></i>See Demo
-                    </button>
-                </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Transform <span class="hero-highlight">Comics</span> Into Immersive <span class="hero-highlight">Audio Stories</span></h1>
+            <p class="hero-subtitle">
+                Upload any PDF comic and experience it like never before. Our advanced AI converts visual storytelling into rich audio narratives with natural voices and intelligent character recognition.
+            </p>
+            <div class="hero-cta">
+               
+                <button class="btn btn-secondary" onclick="showDemo()">
+                    <i class="fas fa-play"></i>
+                    Watch Demo
+                </button>
             </div>
-            
-            <div class="col-lg-6 hero-visual">
-                <div class="fade-in">
-                    <div class="hero-image-container">
-                        <img src="/static/comic.jpg" 
-                             alt="Comic book illustration" 
-                             class="hero-image">
-                    </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Languages</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Voice Options</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">Accuracy</span>
                 </div>
             </div>
         </div>
@@ -701,126 +719,151 @@
 </section>
 
 <!-- Upload Section -->
-<section class="upload-section">
+<section class="upload-section" id="upload">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="upload-card">
-                    <div class="upload-header">
-                        <h3><i class="fas fa-cloud-upload-alt me-2"></i>Upload Your Comic</h3>
-                        <p>Drag and drop your PDF comic or click to browse files</p>
-                    </div>
+        <div class="upload-container">
+            <div class="section-header">
+                <h2>Convert Your Comic</h2>
+                <p>Choose your language and upload your PDF comic to begin the transformation</p>
+            </div>
                     
-                    <div class="upload-body">
-                        <!-- Alert Container -->
-                        <div id="alertContainer"></div>
-                        
-                        <!-- File Upload Area -->
-                        <div id="uploadArea" class="file-upload-area mb-4">
-                            <div class="upload-icon">
-                                <i class="fas fa-file-pdf"></i>
-                            </div>
-                            <div class="upload-text">
-                                <h5>Drop your PDF comic here</h5>
-                                <p>or click to browse files</p>
-                            </div>
-                            <input type="file" id="fileInput" accept=".pdf" style="display: none;">
-                            <button type="button" class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
-                                <i class="fas fa-folder-open me-2"></i>
-                                Choose File
-                            </button>
+            <!-- Alert Container -->
+            <div id="alertContainer"></div>
+            
+            <!-- Language Selection -->
+            <div class="language-section">
+                <h3>
+                    <i class="fas fa-globe"></i>
+                    Language Settings
+                </h3>
+                <p>Select your preferred language for text translation and audio narration</p>
+                
+                <select id="languageSelect" class="form-select" onchange="updateLanguageInfo()">
+                    <option value="en-US" selected>English - US & Canada</option>
+                    <option value="en-UK">English - UK</option>
+                    <option value="es-ES">Spanish - Spain</option>
+                    <option value="es-MX">Spanish - Mexico</option>
+                    <option value="fr-FR">French - France</option>
+                    <option value="de-DE">German - Germany</option>
+                    <option value="it-IT">Italian - Italy</option>
+                    <option value="pt-BR">Portuguese - Brazil</option>
+                    <option value="zh-CN">Chinese - China</option>
+                    <option value="hi-IN">Hindi - India</option>
+                </select>
+                
+                <div id="languageInfo" class="language-info">
+                    <div class="language-info-grid">
+                        <div>
+                            <strong>Text Translation:</strong> <span id="translationStatus" class="status-available">✓ Available</span>
                         </div>
-
-                        <!-- Upload Progress -->
-                        <div id="uploadProgress" style="display: none;">
-                            <div class="processing-message">
-                                <div class="text-center">
-                                    <div class="spinner-border text-primary mb-3" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                    <h5 class="text-primary mb-2">Processing your comic...</h5>
-                                    <p class="text-muted">Please wait while we analyze and convert your comic to audio</p>
-                                </div>
-                            </div>
+                        <div>
+                            <strong>Audio Narration:</strong> <span id="audioStatus" class="status-available">✓ Available</span>
                         </div>
-
-                        <!-- File Info -->
-                        <div id="fileInfo" style="display: none;" class="mb-4">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <strong>File:</strong> <span id="fileName"></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <strong>Size:</strong> <span id="fileSize"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Upload Button -->
-                        <div class="text-center">
-                            <button id="uploadBtn" class="btn btn-success btn-lg" style="display: none;" onclick="uploadFile()">
-                                <i class="fas fa-magic me-2"></i>
-                                Process Comic
-                            </button>
-                        </div>
+                    </div>
+                    <div class="language-note">
+                        <i class="fas fa-info-circle"></i>
+                        Your comic will be translated to <span id="selectedLanguageName">English - US & Canada</span> with native voice narration
                     </div>
                 </div>
+            </div>
+                        
+            <!-- File Upload Area -->
+            <div id="uploadArea" class="upload-area">
+                <div class="upload-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div class="upload-text">
+                    <h4>Drop your PDF comic here</h4>
+                    <p>or click to browse files</p>
+                </div>
+                <input type="file" id="fileInput" class="file-input" accept=".pdf">
+                <button type="button" class="btn-upload" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-folder-open" style="margin-right: 8px;"></i>
+                    Choose File
+                </button>
+            </div>
+
+            <!-- File Info -->
+            <div id="fileInfo" class="file-info">
+                <div class="file-info-grid">
+                    <div><strong>File:</strong> <span id="fileName"></span></div>
+                    <div><strong>Size:</strong> <span id="fileSize"></span></div>
+                </div>
+            </div>
+
+            <!-- Processing -->
+            <div id="uploadProgress" class="processing">
+                <div class="spinner"></div>
+                <h4>Processing your comic...</h4>
+                <p>Please wait while we analyze and convert your comic to audio</p>
+            </div>
+
+            <!-- Process Button -->
+            <div style="text-align: center;">
+                <button id="uploadBtn" class="btn-process" onclick="uploadFile()">
+                    <i class="fas fa-magic" style="margin-right: 8px;"></i>
+                    Convert to Audio
+                </button>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Features Section -->
-<section class="features-section">
+<section class="features-section" id="features">
     <div class="container">
-        <div class="section-title">
-            <h2>Professional Features</h2>
-            <p>Advanced AI technology designed for seamless comic-to-audio conversion</p>
+        <div class="features-header">
+            <h2>Transforming Comics Into Immersive Audio Experiences</h2>
+            <p>Cutting-edge features for seamless comic-to-audio conversion</p>
         </div>
-        
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h5>AI Vision Analysis</h5>
-                    <p>
-                        Advanced computer vision technology analyzes comic panels, identifies speech bubbles, 
-                        and determines the correct reading order with 99% accuracy.
-                    </p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="far fa-eye"></i>
                 </div>
+                <h3>AI Vision Analysis</h3>
+                <p>Advanced computer vision technology analyzes comic panels with precision, identifying speech bubbles, text elements, and determining optimal reading order for natural storytelling flow.</p>
             </div>
-            
-            <div class="col-lg-4 mb-4">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-volume-up"></i>
-                    </div>
-                    <h5>Natural Voice Synthesis</h5>
-                    <p>
-                        High-quality text-to-speech with 50+ voice options, automatic gender detection, 
-                        and character-specific voice assignment for immersive storytelling.
-                    </p>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="far fa-comment-dots"></i>
                 </div>
+                <h3>Natural Voice Synthesis</h3>
+                <p>High-quality text-to-speech with multiple voice options and intelligent character-specific voice assignment for truly immersive and engaging audio storytelling experiences.</p>
             </div>
-            
-            <div class="col-lg-4 mb-4">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-play-circle"></i>
-                    </div>
-                    <h5>Interactive Reading</h5>
-                    <p>
-                        Navigate panel by panel or page by page with synchronized audio playback, 
-                        auto-advance features, and professional reading controls.
-                    </p>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="far fa-play-circle"></i>
                 </div>
+                <h3>Interactive Reading</h3>
+                <p>Navigate panel by panel with synchronized audio playback, auto-advance features, and professional reading controls for the ultimate comic reading experience.</p>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <span style="display: flex; align-items: center;">
+                <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 6px; vertical-align: middle;">
+                    <path d="M6 20V16C6 10.477 10.477 6 16 6C21.523 6 26 10.477 26 16V20" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="4" y="20" width="6" height="8" rx="3" fill="#222"/>
+                    <rect x="22" y="20" width="6" height="8" rx="3" fill="#222"/>
+                </svg>
+            </span>
+            <a href="/" style="font-weight: 700; color: #181818; text-decoration: none; font-size: 20px; letter-spacing: -0.02em;">AudioComic</a>
+        </div>
+        <div style="margin-bottom: 18px;">
+            <a href="#features" style="color: #666; margin: 0 14px; text-decoration: none; font-size: 16px;">Features</a>
+            <a href="#upload" style="color: #666; margin: 0 14px; text-decoration: none; font-size: 16px;">Convert</a>
+            <a href="#contact" style="color: #666; margin: 0 14px; text-decoration: none; font-size: 16px;">Contact</a>
+        </div>
+        <div style="width: 100%; border-top: 1px solid #e5e7eb; margin-bottom: 0; margin-top: 8px;"></div>
+        <div style="font-size: 15px; color: #999; padding: 16px 0 0 0; width: 100%; text-align: center;">&copy; {{ year or 2024 }} AudioComic. All rights reserved.</div>
+    </div>
+</footer>
 {% endblock %}
 
 {% block extra_js %}
@@ -866,7 +909,7 @@
         document.getElementById('fileName').textContent = file.name;
         document.getElementById('fileSize').textContent = formatFileSize(file.size);
         document.getElementById('fileInfo').style.display = 'block';
-        document.getElementById('uploadBtn').style.display = 'inline-block';
+        document.getElementById('uploadBtn').style.display = 'inline-flex';
         
         // Update upload area
         document.getElementById('uploadArea').classList.add('dragover');
@@ -928,6 +971,10 @@
 
         const formData = new FormData();
         formData.append('file', selectedFile);
+        
+        // Add selected language
+        const selectedLanguage = document.getElementById('languageSelect').value;
+        formData.append('preferred_language', selectedLanguage);
 
         // Show progress
         document.getElementById('uploadProgress').style.display = 'block';
@@ -957,13 +1004,25 @@
         }
     }
 
+    function updateLanguageInfo() {
+        const languageSelect = document.getElementById('languageSelect');
+        const selectedOption = languageSelect.options[languageSelect.selectedIndex];
+        const selectedLanguageName = selectedOption.text;
+        
+        document.getElementById('selectedLanguageName').textContent = selectedLanguageName;
+        
+        // Update status indicators (all languages are supported)
+        document.getElementById('translationStatus').textContent = '✓ Available';
+        document.getElementById('audioStatus').textContent = '✓ Available';
+    }
+
     function showAlert(message, type) {
         const alertContainer = document.getElementById('alertContainer');
         const alert = document.createElement('div');
-        alert.className = `alert alert-${type} alert-dismissible fade show`;
+        alert.className = `alert alert-${type}`;
         alert.innerHTML = `
+            <i class="fas fa-${type === 'warning' ? 'exclamation-triangle' : type === 'danger' ? 'times-circle' : 'info-circle'}"></i>
             ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         `;
         alertContainer.appendChild(alert);
         
@@ -984,4 +1043,4 @@
         showAlert('Demo feature coming soon! Stay tuned for video demonstrations.', 'info');
     }
 </script>
-{% endblock %} 
+{% endblock %}

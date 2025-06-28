@@ -360,6 +360,9 @@
                     <div class="status-indicator status-ready">
                         <i class="fas fa-check-circle me-2"></i>Ready
                     </div>
+                    <div id="languageIndicator" class="status-indicator" style="background: rgba(102, 126, 234, 0.1); color: var(--primary-color); border: 1px solid rgba(102, 126, 234, 0.2);">
+                        <i class="fas fa-globe me-2"></i><span id="currentLanguage">Loading...</span>
+                    </div>
                     <div class="text-end">
                         <div class="fw-bold">Page <span id="currentPageNum">1</span> of {{ total_pages }}</div>
                         <div class="progress-indicator">
@@ -431,11 +434,17 @@
                 <div class="control-panel">
                     <h6><i class="fas fa-microphone"></i>Voice Settings</h6>
                     <div class="mb-3">
-                        <label for="voiceSelect" class="form-label">Voice</label>
-                        <select class="form-select" id="voiceSelect">
-                            <option value="en-US-natalie" selected>Natalie (Female)</option>
-                            <option value="en-US-miles">Miles (Male)</option>
+                        <label for="genderSelect" class="form-label">Voice Gender</label>
+                        <select class="form-select" id="genderSelect" onchange="updateVoiceInfo()">
+                            <option value="female" selected>Female</option>
+                            <option value="male">Male</option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="voiceInfo" class="form-label">Current Voice</label>
+                        <div class="form-control-plaintext" id="voiceInfo">
+                            Natalie (Female) - English US
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -513,7 +522,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         initializeReader();
         setupEventListeners();
+        loadSessionInfo();
         loadFirstPage();
+        updateVoiceInfo();
     });
 
     function initializeReader() {
@@ -687,6 +698,9 @@
                     console.log(`Panel ${index + 1} text:`, panel.text_for_speech || 'No text');
                 });
                 
+                // Translate panels to user's preferred language
+                await translatePanels();
+                
                 if (autoPlay) {
                     console.log('🎵 Auto-play enabled, playing current panel');
                     await playCurrentPanel();
@@ -701,6 +715,42 @@
             console.error('❌ Error analyzing page:', error);
             showAlert('Error analyzing page: ' + error.message, 'danger');
             updateStatus('ready');
+        }
+    }
+
+    async function translatePanels() {
+        try {
+            console.log('🌐 Translating panels to user\'s preferred language...');
+            
+            const response = await fetch(`/translate-panels/${sessionId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `page_num=${currentPage}`
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.warn('⚠️ Translation failed:', errorText);
+                return; // Continue without translation
+            }
+
+            const result = await response.json();
+            console.log('✅ Translation result:', result);
+            
+            // Update panels with translated text
+            if (result.panels && result.panels.length > 0) {
+                panels = result.panels;
+                console.log(`🌐 Successfully translated ${result.translated_count || 0} text elements`);
+                
+                // Update panel info display
+                showPanelInfo();
+            }
+
+        } catch (error) {
+            console.error('❌ Error translating panels:', error);
+            // Continue without translation - don't show error to user
         }
     }
 
@@ -756,52 +806,31 @@
     }
 
     async function playCurrentPanel() {
-        if (panels.length === 0 || currentPanel >= panels.length) return;
-
-        const panel = panels[currentPanel];
-        let text = panel.text_for_speech;
-        if (!text && panel.text_elements && panel.text_elements.length > 0) {
-            text = panel.text_elements.map(e => e.text).join(' ');
-        }
-        
-        // If no text in this panel, advance to next panel automatically
-        if (!text || text.trim() === '') {
-            console.log('📝 No text in panel, advancing to next panel...');
-            if (autoAdvance) {
-                // Small delay to show the panel briefly
-                setTimeout(async () => {
-                    await nextPanel();
-                }, 1000);
-            } else {
-                showAlert('This panel has no readable text.', 'info');
-            }
+        if (panels.length === 0 || currentPanel >= panels.length) {
+            showAlert('No panel to play.', 'warning');
             return;
         }
 
-        // Detect gender from text_elements
-        let gender = null;
-        if (panel.text_elements && panel.text_elements.length > 0) {
-            for (const elem of panel.text_elements) {
-                if (elem.speaker_gender === 'male') {
-                    gender = 'male';
-                    break;
-                }
-            }
+        const panel = panels[currentPanel];
+        const text = panel.text_for_speech || panel.description || 'No text available';
+        
+        if (!text || text === 'No text in this panel.' || text === 'No text available') {
+            showAlert('No text to read in this panel.', 'info');
+            return;
         }
 
         try {
             updateStatus('loading');
             console.log('🎤 Generating audio for text:', text.substring(0, 100) + '...');
 
-            const voiceId = document.getElementById('voiceSelect').value;
-            console.log('🎵 Using voice:', voiceId, 'Gender:', gender);
+            const gender = document.getElementById('genderSelect').value;
+            console.log('🎵 Using gender:', gender);
 
             const params = new URLSearchParams();
             params.append('text', text);
-            params.append('voice_id', voiceId);
-            if (gender) params.append('gender', gender);
+            params.append('gender', gender);
 
-            const response = await fetch(`/generate-audio/${sessionId}`, {
+            const response = await fetch(`/translate-and-generate-audio/${sessionId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -826,45 +855,29 @@
                 return;
             }
 
+            // Show translation info if available
+            if (result.translated_text && result.translated_text !== text) {
+                console.log('🌐 Translation applied:', {
+                    original: text.substring(0, 100) + '...',
+                    translated: result.translated_text.substring(0, 100) + '...',
+                    language: result.language_name,
+                    voice: result.voice_id,
+                    gender: result.gender
+                });
+            }
+
             // Play audio
             const audioPlayer = document.getElementById('audioPlayer');
             audioPlayer.src = currentAudioUrl;
             
-            const playPromise = audioPlayer.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log('▶️ Audio started playing');
-                    
-                    // Set up auto-advance timeout as backup
-                    if (autoAdvance) {
-                        audioPlayer.addEventListener('loadedmetadata', function() {
-                            const duration = audioPlayer.duration;
-                            if (duration && duration > 0) {
-                                console.log(`⏰ Setting auto-advance timeout for ${duration + 2} seconds`);
-                                clearTimeout(autoAdvanceTimeout);
-                                autoAdvanceTimeout = setTimeout(async () => {
-                                    console.log('⏰ Timeout-based auto-advance triggered');
-                                    if (!isPlaying) {
-                                        try {
-                                            await nextPanel();
-                                        } catch (error) {
-                                            console.error('❌ Timeout auto-advance error:', error);
-                                        }
-                                    }
-                                }, (duration + 2) * 1000);
-                            }
-                        }, { once: true });
-                    }
-                }).catch(error => {
-                    console.error('❌ Audio play failed:', error);
-                    showAlert('Error playing audio: ' + error.message, 'danger');
-                    updateStatus('ready');
-                });
+            if (autoPlay) {
+                audioPlayer.play();
             }
 
+            updateStatus('ready');
+
         } catch (error) {
-            console.error('❌ Audio generation error:', error);
+            console.error('❌ Error generating audio:', error);
             showAlert('Error generating audio: ' + error.message, 'danger');
             updateStatus('ready');
         }
@@ -1015,6 +1028,79 @@
                 alertDiv.remove();
             }
         }, 5000);
+    }
+
+    async function loadSessionInfo() {
+        try {
+            const response = await fetch(`/session/${sessionId}/status`);
+            if (response.ok) {
+                const sessionData = await response.json();
+                
+                // Update language indicator
+                const languageName = sessionData.language_name || 'English - US & Canada';
+                document.getElementById('currentLanguage').textContent = languageName;
+                
+                console.log('🌐 Session language:', languageName);
+            }
+        } catch (error) {
+            console.error('❌ Error loading session info:', error);
+            document.getElementById('currentLanguage').textContent = 'English - US & Canada';
+        }
+    }
+
+    async function updateVoiceInfo() {
+        const gender = document.getElementById('genderSelect').value;
+        const sessionData = await getSessionInfo();
+        const language = sessionData.preferred_language || 'en-US';
+        
+        try {
+            const response = await fetch(`/voices/${language}`);
+            const data = await response.json();
+            
+            const voiceId = data.voices[gender];
+            const voiceName = getVoiceDisplayName(voiceId);
+            
+            document.getElementById('voiceInfo').textContent = 
+                `${voiceName} (${gender.charAt(0).toUpperCase() + gender.slice(1)}) - ${data.language_name}`;
+        } catch (error) {
+            console.error('Error updating voice info:', error);
+        }
+    }
+
+    function getVoiceDisplayName(voiceId) {
+        const voiceNames = {
+            // English US
+            'en-US-natalie': 'Natalie',
+            'en-US-miles': 'Miles',
+            // English UK
+            'en-UK-ruby': 'Ruby',
+            'en-UK-theo': 'Theo',
+            // Spanish Spain
+            'es-ES-elvira': 'Elvira',
+            'es-ES-enrique': 'Enrique',
+            // Spanish Mexico
+            'es-MX-valeria': 'Valeria',
+            'es-MX-carlos': 'Carlos',
+            // French
+            'fr-FR-adélie': 'Adelie',
+            'fr-FR-maxime': 'Maxime',
+            // German
+            'de-DE-lia': 'Lia',
+            'de-DE-matthias': 'Matthias',
+            // Italian
+            'it-IT-greta': 'Greta',
+            'it-IT-lorenzo': 'Lorenzo',
+            // Portuguese
+            'pt-BR-isadora': 'Isadora',
+            'pt-BR-heitor': 'Heitor',
+            // Chinese
+            'zh-CN-jiao': 'Jiao',
+            'zh-CN-tao': 'Tao',
+            // Hindi
+            'hi-IN-ayushi': 'Ayushi',
+            'hi-IN-kabir': 'Kabir'
+        };
+        return voiceNames[voiceId] || voiceId;
     }
 </script>
 {% endblock %}
