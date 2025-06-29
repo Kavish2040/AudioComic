@@ -153,10 +153,15 @@ async def analyze_page(session_id: str, page_num: int):
         
         print(f"✅ Analysis complete. Found {len(analysis.get('panels', []))} panels")
         
-        # Log panel details for debugging
+        # Process each panel to add text_for_speech field
         for i, panel in enumerate(analysis.get('panels', [])):
+            # Extract text for speech from this panel
+            panel_text = await vision_analyzer.get_panel_text(panel)
+            panel['text_for_speech'] = panel_text
+            
             text_elements = panel.get('text_elements', [])
             print(f"  Panel {i+1}: {len(text_elements)} text elements")
+            print(f"    Text for speech: '{panel_text[:100]}...'")
             for j, text_elem in enumerate(text_elements):
                 print(f"    Text {j+1}: '{text_elem.get('text', '')[:50]}...'")
         

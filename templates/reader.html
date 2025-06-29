@@ -812,7 +812,24 @@
         }
 
         const panel = panels[currentPanel];
-        const text = panel.text_for_speech || panel.description || 'No text available';
+        
+        // Prioritize text_for_speech (actual dialogue) over description (synopsis)
+        let text = panel.text_for_speech;
+        
+        // If no text_for_speech, try to extract from text_elements
+        if (!text && panel.text_elements && panel.text_elements.length > 0) {
+            const speechElements = panel.text_elements.filter(e => e.type === 'speech');
+            if (speechElements.length > 0) {
+                text = speechElements.map(e => e.text).join('. ');
+            } else {
+                text = panel.text_elements.map(e => e.text).join('. ');
+            }
+        }
+        
+        // Only use description as last resort
+        if (!text || text.trim() === '') {
+            text = panel.description || 'No text available';
+        }
         
         if (!text || text === 'No text in this panel.' || text === 'No text available') {
             showAlert('No text to read in this panel.', 'info');
@@ -822,6 +839,7 @@
         try {
             updateStatus('loading');
             console.log('🎤 Generating audio for text:', text.substring(0, 100) + '...');
+            console.log('📝 Text source:', panel.text_for_speech ? 'text_for_speech' : (panel.text_elements ? 'text_elements' : 'description'));
 
             const gender = document.getElementById('genderSelect').value;
             console.log('🎵 Using gender:', gender);

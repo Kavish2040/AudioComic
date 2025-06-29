@@ -233,6 +233,7 @@ class VisionAnalyzer:
             
             # Group text by type for better narration flow
             speech_texts = []
+            thought_texts = []
             narration_texts = []
             sound_effects = []
             
@@ -253,9 +254,9 @@ class VisionAnalyzer:
                 elif text_type == 'thought':
                     speaker = text_element.get('speaker', 'Character')
                     if speaker and speaker.lower() != 'unknown':
-                        speech_texts.append(f"{speaker} thinks: {text_content}")
+                        thought_texts.append(f"{speaker} thinks: {text_content}")
                     else:
-                        speech_texts.append(f"Thinking: {text_content}")
+                        thought_texts.append(f"Thinking: {text_content}")
                         
                 elif text_type == 'narration':
                     narration_texts.append(text_content)
@@ -263,12 +264,15 @@ class VisionAnalyzer:
                 elif text_type == 'sound_effect':
                     sound_effects.append(f"Sound effect: {text_content}")
             
-            # Combine in logical order: narration first, then speech, then sound effects
-            if narration_texts:
-                text_parts.extend(narration_texts)
-            
+            # Combine in logical order: speech first (primary dialogue), then thoughts, then narration, then sound effects
             if speech_texts:
                 text_parts.extend(speech_texts)
+            
+            if thought_texts:
+                text_parts.extend(thought_texts)
+            
+            if narration_texts:
+                text_parts.extend(narration_texts)
             
             if sound_effects:
                 text_parts.extend(sound_effects)
