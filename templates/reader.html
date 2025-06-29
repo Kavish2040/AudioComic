@@ -5,25 +5,19 @@
 {% block extra_css %}
 <style>
     :root {
-        /* Professional Color Palette */
-        --primary-color: #2c3e50;
-        --secondary-color: #34495e;
-        --accent-color: #3498db;
-        --success-color: #27ae60;
-        --warning-color: #f39c12;
-        --danger-color: #e74c3c;
-        --light-bg: #f8f9fa;
-        --dark-bg: #2c3e50;
-        --text-primary: #2c3e50;
-        --text-secondary: #7f8c8d;
-        --text-light: #ecf0f1;
-        --border-color: #e9ecef;
-        --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
-        --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
-        --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.2);
-        --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        --gradient-dark: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        --text-primary: #1f2937;
+        --text-secondary: #6b7280;
+        --text-muted: #9ca3af;
+        --background: #ffffff;
+        --surface: #f9fafb;
+        --border: #e5e7eb;
+        --border-light: #f3f4f6;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --radius: 8px;
+        --radius-lg: 12px;
+        --accent-orange: #F59E0B;
     }
 
     * {
@@ -34,59 +28,43 @@
 
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: var(--gradient-dark);
+        background: var(--background);
         color: var(--text-primary);
         line-height: 1.6;
-        overflow-x: hidden;
     }
 
-    /* Professional Typography */
+    /* Clean Typography */
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
         letter-spacing: -0.025em;
         margin-bottom: 1rem;
+        color: var(--text-primary);
     }
 
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.75rem; }
-    h4 { font-size: 1.5rem; }
-    h5 { font-size: 1.25rem; }
-    h6 { font-size: 1.125rem; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+    h5 { font-size: 1.125rem; }
+    h6 { font-size: 1rem; }
 
-    /* Immersive Reader Layout */
+    /* Clean Reader Layout */
     .reader-container {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        background: var(--gradient-dark);
-        position: relative;
+        background: var(--background);
     }
 
-    .reader-container::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            radial-gradient(circle at 20% 80%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(155, 89, 182, 0.1) 0%, transparent 50%);
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    /* Professional Header */
+    /* Clean Header */
     .reader-header {
-        background: rgba(44, 62, 80, 0.95);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 1.5rem 0;
+        background: var(--background);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
         position: sticky;
         top: 0;
         z-index: 100;
-        box-shadow: var(--shadow-medium);
+        box-shadow: var(--shadow-sm);
     }
 
     .reader-header .container {
@@ -100,59 +78,58 @@
     .header-left {
         display: flex;
         align-items: center;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .comic-title {
-        color: var(--text-light);
-        font-size: 1.5rem;
+        color: var(--text-primary);
+        font-size: 1.25rem;
         font-weight: 600;
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.5rem;
     }
 
     .comic-title i {
-        color: var(--accent-color);
-        font-size: 1.25rem;
+        color: var(--accent-orange);
+        font-size: 1.125rem;
     }
 
     .session-info {
         color: var(--text-secondary);
         font-size: 0.875rem;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: var(--surface);
+        padding: 0.5rem 0.75rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
     }
 
     .header-right {
         display: flex;
         align-items: center;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .status-indicator {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.75rem 1.25rem;
-        border-radius: 25px;
+        padding: 0.5rem 0.75rem;
+        border-radius: var(--radius);
         font-size: 0.875rem;
         font-weight: 500;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: var(--text-light);
-        backdrop-filter: blur(10px);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
     }
 
     .status-indicator i {
-        font-size: 1rem;
+        font-size: 0.875rem;
     }
 
-    .status-ready { color: #27ae60; }
-    .status-loading { color: var(--accent-color); }
-    .status-playing { color: var(--warning-color); }
+    .status-ready { color: #059669; }
+    .status-loading { color: var(--text-secondary); }
+    .status-playing { color: var(--accent-orange); }
 
     .page-progress-container {
         display: flex;
@@ -162,52 +139,32 @@
     }
 
     .page-info {
-        color: var(--text-light);
+        color: var(--text-secondary);
         font-weight: 500;
         font-size: 0.875rem;
     }
 
     .progress-bar {
-        width: 200px;
-        height: 6px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 3px;
+        width: 150px;
+        height: 4px;
+        background: var(--border-light);
+        border-radius: 2px;
         overflow: hidden;
-        position: relative;
     }
 
     .progress-fill {
         height: 100%;
-        background: var(--gradient-primary);
-        border-radius: 3px;
+        background: var(--accent-orange);
+        border-radius: 2px;
         transition: width 0.3s ease;
-        position: relative;
-    }
-
-    .progress-fill::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
     }
 
     /* Main Content Area */
     .reader-content {
         flex: 1;
         display: flex;
-        gap: 2rem;
-        padding: 2rem 0;
-        position: relative;
-        z-index: 1;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
     }
 
     .content-main {
@@ -216,88 +173,66 @@
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 
-    /* Professional Comic Viewer */
+    /* Clean Comic Viewer */
     .comic-viewer {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: var(--shadow-heavy);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .comic-viewer::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
-        pointer-events: none;
+        background: var(--background);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border);
     }
 
     .comic-page {
         width: 100%;
         max-height: 70vh;
         object-fit: contain;
-        border-radius: 12px;
-        box-shadow: var(--shadow-medium);
-        transition: transform 0.3s ease;
-    }
-
-    .comic-page:hover {
-        transform: scale(1.02);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
     }
 
     .panel-overlays {
         position: absolute;
-        top: 2rem;
-        left: 2rem;
-        right: 2rem;
-        bottom: 2rem;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         pointer-events: none;
     }
 
     .panel-overlay {
         position: absolute;
-        border: 3px solid var(--accent-color);
-        border-radius: 8px;
-        background: rgba(52, 152, 219, 0.1);
-        transition: all 0.3s ease;
+        border: 2px solid var(--text-secondary);
+        border-radius: var(--radius);
+        background: rgba(107, 114, 128, 0.1);
+        transition: all 0.2s ease;
         cursor: pointer;
         pointer-events: auto;
     }
 
     .panel-overlay:hover {
-        background: rgba(52, 152, 219, 0.2);
-        border-color: var(--warning-color);
-        transform: scale(1.02);
+        background: rgba(107, 114, 128, 0.15);
+        border-color: var(--accent-orange);
     }
 
     .panel-overlay.active {
-        border-color: var(--success-color);
-        background: rgba(39, 174, 96, 0.2);
-        box-shadow: 0 0 20px rgba(39, 174, 96, 0.3);
+        border-color: var(--accent-orange);
+        background: rgba(245, 158, 11, 0.1);
     }
 
-    /* Professional Control Panel */
+    /* Clean Control Panel */
     .control-panel {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: var(--shadow-medium);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
+        background: var(--background);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border);
     }
 
     .control-section {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
     }
 
     .control-section:last-child {
@@ -305,93 +240,67 @@
     }
 
     .section-title {
-        color: var(--text-light);
-        font-size: 1.125rem;
+        color: var(--text-primary);
+        font-size: 1rem;
         font-weight: 600;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.5rem;
     }
 
     .section-title i {
-        color: var(--accent-color);
-        font-size: 1.25rem;
+        color: var(--accent-orange);
+        font-size: 1rem;
     }
 
-    /* Professional Buttons */
+    /* Clean Buttons */
     .btn {
-        padding: 0.875rem 1.5rem;
-        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius);
         font-weight: 500;
         font-size: 0.875rem;
-        border: none;
+        border: 1px solid var(--border);
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
         text-decoration: none;
-        position: relative;
-        overflow: hidden;
+        background: var(--background);
+        color: var(--text-primary);
     }
 
-    .btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s ease;
-    }
-
-    .btn:hover::before {
-        left: 100%;
+    .btn:hover {
+        background: var(--surface);
+        border-color: var(--text-secondary);
     }
 
     .btn-primary {
-        background: var(--gradient-primary);
+        background: var(--accent-orange);
         color: white;
-        box-shadow: var(--shadow-light);
+        border-color: var(--accent-orange);
     }
 
     .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-medium);
+        background: #d97706;
+        border-color: #d97706;
     }
 
     .btn-secondary {
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--text-light);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: var(--surface);
+        color: var(--text-secondary);
+        border-color: var(--border);
     }
 
     .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-    }
-
-    .btn-success {
-        background: var(--gradient-secondary);
-        color: white;
-    }
-
-    .btn-warning {
-        background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-        color: white;
-    }
-
-    .btn-danger {
-        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-        color: white;
+        background: var(--border-light);
+        color: var(--text-primary);
     }
 
     .btn:disabled {
         opacity: 0.5;
         cursor: not-allowed;
-        transform: none !important;
     }
 
     /* Professional Switches */
@@ -403,18 +312,21 @@
     }
 
     .form-check-input {
-        width: 3.5rem;
-        height: 2rem;
-        border-radius: 1rem;
-        border: 2px solid rgba(255, 255, 255, 0.3);
+        width: 1.2rem;
+        height: 1.2rem;
+        border-radius: 0.25rem;
+        border: 2px solid rgba(255, 255, 255, 0.4);
         background: rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
-        position: relative;
+        transition: all 0.2s ease;
         cursor: pointer;
+    }
+    
+    .form-check-input[type="radio"] {
+        border-radius: 50%;
     }
 
     .form-check-input:checked {
-        background: var(--gradient-primary);
+        background: var(--accent-color);
         border-color: var(--accent-color);
     }
 
@@ -726,6 +638,8 @@
     <!-- Main Content -->
     <main class="reader-content">
         <div class="content-main">
+
+
             <!-- Immersive Comic Viewer -->
             <div class="comic-viewer" id="comicViewer">
                 <img id="comicPage" class="comic-page" src="" alt="Comic Page">
@@ -761,7 +675,7 @@
 
                 <div class="control-section">
                     <h6 class="section-title">
-                        <i class="fas fa-sliders-h"></i>
+                        <i class="fas fa-cog"></i>
                         Reading Preferences
                     </h6>
                     <div class="row">
@@ -769,12 +683,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="autoPlaySwitch" checked>
                                 <label class="form-check-label" for="autoPlaySwitch">
+                                    <i class="fas fa-play-circle" style="margin-right: 0.5rem; color: var(--accent-orange);"></i>
                                     Auto-play audio
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="autoAdvanceSwitch" checked>
                                 <label class="form-check-label" for="autoAdvanceSwitch">
+                                    <i class="fas fa-forward" style="margin-right: 0.5rem; color: var(--accent-orange);"></i>
                                     Auto-advance panels
                                 </label>
                             </div>
@@ -783,12 +699,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="bgMusicSwitch" checked>
                                 <label class="form-check-label" for="bgMusicSwitch">
+                                    <i class="fas fa-music" style="margin-right: 0.5rem; color: var(--accent-orange);"></i>
                                     Background music
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="readingMode" value="panel" checked>
                                 <label class="form-check-label">
+                                    <i class="fas fa-th-large" style="margin-right: 0.5rem; color: var(--accent-orange);"></i>
                                     Panel by panel
                                 </label>
                             </div>
@@ -1295,16 +1213,24 @@
     }
 
     function showPanelInfo() {
-        if (panels.length === 0 || currentPanel >= panels.length) return;
+        if (panels.length === 0 || currentPanel >= panels.length) {
+            return;
+        }
 
         const panel = panels[currentPanel];
         const panelInfo = document.getElementById('panelInfo');
         
-        document.getElementById('panelText').textContent = panel.text_for_speech || 'No text in this panel.';
-        document.getElementById('panelDescription').textContent = panel.description || 'No description available.';
+        // Update panel information
+        const panelText = panel.text_for_speech || 'No text in this panel.';
+        const panelDescription = panel.description || 'No description available.';
+        
+        document.getElementById('panelText').textContent = panelText;
+        document.getElementById('panelDescription').textContent = panelDescription;
         
         // Show voice information
         const voiceInfo = document.getElementById('voiceInfo');
+        let voiceText = 'Voice: Auto-detected';
+        
         if (panel.voice_id) {
             const voiceNames = {
                 'en-US-natalie': 'Natalie (Female)',
@@ -1314,11 +1240,12 @@
                 'en-US-ariana': 'Ariana (Female)',
                 'en-US-terrell': 'Terrell (Male)'
             };
-            voiceInfo.textContent = `Voice: ${voiceNames[panel.voice_id] || panel.voice_id}`;
-        } else {
-            voiceInfo.textContent = 'Voice: Auto-detected';
+            voiceText = `Voice: ${voiceNames[panel.voice_id] || panel.voice_id}`;
         }
         
+        voiceInfo.textContent = voiceText;
+        
+        // Show panel info section
         panelInfo.style.display = 'block';
     }
 

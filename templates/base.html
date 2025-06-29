@@ -323,36 +323,7 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg" id="mainNavbar" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(229, 231, 235, 0.6); box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05); padding: 0; min-height: 70px; margin-bottom: 0; position: sticky; top: 0; z-index: 1000;">
-        <div class="container" style="padding-top: 18px; padding-bottom: 18px; min-height: 70px; margin-bottom: 0;">
-            <a class="navbar-brand" href="/" style="display: flex; align-items: center; transition: all 0.3s ease; text-decoration: none;">
-                <span style="font-family: 'Montserrat', 'Poppins', 'Inter', sans-serif; font-size: 1.6rem; font-weight: 800; color: #2d3748; letter-spacing: -0.02em;">
-                  Audio<span style="color: #F59E0B; font-weight: 900;">Comic</span>
-                </span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border: none; padding: 8px 12px; border-radius: 8px; background: #f8fafc;">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto" style="gap: 4px;">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/" id="homeLink" style="font-size: 0.95rem; color: #374151; font-weight: 600; padding: 10px 16px; border-radius: 10px; transition: all 0.2s ease; font-family: 'Inter', 'SF Pro Display', sans-serif; letter-spacing: -0.01em;">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#features" style="font-size: 0.95rem; color: #374151; font-weight: 600; padding: 10px 16px; border-radius: 10px; transition: all 0.2s ease; font-family: 'Inter', 'SF Pro Display', sans-serif; letter-spacing: -0.01em;">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#upload" style="font-size: 0.95rem; color: #374151; font-weight: 600; padding: 10px 16px; border-radius: 10px; transition: all 0.2s ease; font-family: 'Inter', 'SF Pro Display', sans-serif; letter-spacing: -0.01em;">Convert</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact" style="font-size: 0.95rem; color: #374151; font-weight: 600; padding: 10px 16px; border-radius: 10px; transition: all 0.2s ease; font-family: 'Inter', 'SF Pro Display', sans-serif; letter-spacing: -0.01em;">Contact</a>
-                    </li>
-                    {% block nav_items %}{% endblock %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- Navigation will be moved inside hero section -->
     <style>
     .navbar-nav .nav-link:hover {
         background: linear-gradient(135deg, rgba(107, 114, 128, 0.08) 0%, rgba(75, 85, 99, 0.08) 100%);

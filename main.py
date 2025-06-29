@@ -147,21 +147,25 @@ async def analyze_page(session_id: str, page_num: int):
             print(f"❌ Image file not found: {page_image_path}")
             raise HTTPException(status_code=404, detail="Page image not found")
         
-        # Analyze page with vision model
-        print("🤖 Starting vision analysis...")
-        analysis = await vision_analyzer.analyze_page(page_image_path)
+        # Get user's preferred language
+        preferred_language = session_data.get("preferred_language", "en-US")
+        print(f"🌐 Using language: {preferred_language}")
+        
+        # Analyze page with vision model and generate audio with proper voice selection
+        print("🤖 Starting vision analysis and audio generation...")
+        analysis = await comic_reader.analyze_and_generate_audio(
+            page_image_path, 
+            language_code=preferred_language
+        )
         
         print(f"✅ Analysis complete. Found {len(analysis.get('panels', []))} panels")
         
-        # Process each panel to add text_for_speech field
+        # Log panel details
         for i, panel in enumerate(analysis.get('panels', [])):
-            # Extract text for speech from this panel
-            panel_text = await vision_analyzer.get_panel_text(panel)
-            panel['text_for_speech'] = panel_text
-            
             text_elements = panel.get('text_elements', [])
             print(f"  Panel {i+1}: {len(text_elements)} text elements")
-            print(f"    Text for speech: '{panel_text[:100]}...'")
+            print(f"    Text for speech: '{panel.get('text_for_speech', '')[:100]}...'")
+            print(f"    Voice ID: {panel.get('voice_id', 'None')}")
             for j, text_elem in enumerate(text_elements):
                 print(f"    Text {j+1}: '{text_elem.get('text', '')[:50]}...'")
         
