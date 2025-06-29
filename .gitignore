@@ -59,3 +59,4 @@ temp/
 uploads/
 *.tmp
 *.temp 
+.vercel
