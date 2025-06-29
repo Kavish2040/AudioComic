@@ -26,15 +26,26 @@ class VisionAnalyzer:
             self.client = None
         else:
             try:
-                # Try to initialize with minimal parameters to avoid compatibility issues
+                # Try to initialize with explicit configuration for Railway compatibility
+                import httpx
                 self.client = AsyncOpenAI(
                     api_key=config.OPENAI_API_KEY,
-                    timeout=30.0
+                    timeout=30.0,
+                    http_client=httpx.AsyncClient(
+                        timeout=30.0,
+                        limits=httpx.Limits(max_connections=10, max_keepalive_connections=5)
+                    )
                 )
                 print("✅ OpenAI AsyncClient initialized successfully")
             except Exception as e:
                 print(f"⚠️ Warning: Failed to initialize OpenAI client: {str(e)}")
-                self.client = None
+                # Try fallback initialization without custom http client
+                try:
+                    self.client = AsyncOpenAI(api_key=config.OPENAI_API_KEY)
+                    print("✅ OpenAI AsyncClient initialized with fallback method")
+                except Exception as e2:
+                    print(f"⚠️ Warning: Fallback initialization also failed: {str(e2)}")
+                    self.client = None
         
     async def analyze_page(self, image_path: str) -> Dict[str, Any]:
         """
@@ -57,27 +68,31 @@ class VisionAnalyzer:
             # Create the prompt for comic analysis
             prompt = self._create_analysis_prompt()
             
-            # Call OpenAI Vision API
-            response = await self.client.chat.completions.create(
-                model="gpt-4o",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": [
-                            {"type": "text", "text": prompt},
-                            {
-                                "type": "image_url",
-                                "image_url": {
-                                    "url": f"data:image/png;base64,{base64_image}",
-                                    "detail": "high"
+            # Call OpenAI Vision API with error handling
+            try:
+                response = await self.client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": prompt},
+                                {
+                                    "type": "image_url",
+                                    "image_url": {
+                                        "url": f"data:image/png;base64,{base64_image}",
+                                        "detail": "high"
+                                    }
                                 }
-                            }
-                        ]
-                    }
-                ],
-                max_tokens=2000,
-                temperature=0.1
-            )
+                            ]
+                        }
+                    ],
+                    max_tokens=2000,
+                    temperature=0.1
+                )
+            except Exception as api_error:
+                print(f"❌ OpenAI API call failed: {str(api_error)}")
+                return self._create_fallback_analysis(f"OpenAI API error: {str(api_error)}")
             
             # Parse the response
             analysis_text = response.choices[0].message.content
