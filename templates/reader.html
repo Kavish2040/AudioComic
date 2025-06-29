@@ -289,13 +289,25 @@
 
     .btn-secondary {
         background: var(--surface);
-        color: var(--text-secondary);
+        color: var(--text-primary);
         border-color: var(--border);
     }
 
     .btn-secondary:hover {
         background: var(--border-light);
         color: var(--text-primary);
+    }
+
+    .btn-success {
+        background: #10b981;
+        color: white;
+        border-color: #10b981;
+    }
+
+    .btn-success:hover {
+        background: #059669;
+        border-color: #059669;
+        color: white;
     }
 
     .btn:disabled {
@@ -335,7 +347,7 @@
     }
 
     .form-check-label {
-        color: var(--text-light);
+        color: var(--text-primary);
         font-weight: 500;
         cursor: pointer;
     }
@@ -362,28 +374,30 @@
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
-        background: var(--gradient-primary);
+        background: var(--accent-orange);
         border: none;
         color: white;
         font-size: 1.5rem;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: var(--shadow-light);
+        box-shadow: var(--shadow-md);
     }
 
     .play-btn:hover {
         transform: scale(1.1);
-        box-shadow: var(--shadow-medium);
+        background: #d97706;
+        box-shadow: var(--shadow-lg);
     }
 
     .audio-info {
         flex: 1;
-        color: var(--text-light);
+        color: var(--text-primary);
     }
 
     .audio-title {
         font-weight: 600;
         margin-bottom: 0.25rem;
+        color: var(--text-primary);
     }
 
     .audio-status {
@@ -395,7 +409,7 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        color: var(--text-light);
+        color: var(--text-primary);
     }
 
     .volume-slider {
@@ -721,7 +735,7 @@
                     </h6>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="voiceSelect" class="form-label text-light">Voice Selection:</label>
+                            <label for="voiceSelect" class="form-label" style="color: var(--text-primary);">Voice Selection:</label>
                             <select class="form-select" id="voiceSelect" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-light); border-radius: 8px;">
                                 <option value="en-US-natalie">Natalie (Female)</option>
                                 <option value="en-US-miles">Miles (Male)</option>
@@ -732,7 +746,7 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="volumeSlider" class="form-label text-light">Volume:</label>
+                            <label for="volumeSlider" class="form-label" style="color: var(--text-primary);">Volume:</label>
                             <input type="range" class="form-range" id="volumeSlider" min="0" max="100" value="80" style="background: rgba(255, 255, 255, 0.1); border-radius: 4px;">
                         </div>
                     </div>
