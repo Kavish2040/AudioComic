@@ -1,189 +1,337 @@
 {% extends "base.html" %}
 
-{% block title %}Reading: {{ filename }} - Audio Comic Reader{% endblock %}
-
-{% block nav_items %}
-<li class="nav-item">
-    <a class="nav-link" href="#" onclick="showSessionInfo()">
-        <i class="fas fa-info-circle"></i>Session Info
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="#" onclick="confirmExit()">
-        <i class="fas fa-times"></i>Exit Reader
-    </a>
-</li>
-{% endblock %}
+{% block title %}Audio Comic Reader - {{ filename }}{% endblock %}
 
 {% block extra_css %}
 <style>
-    /* Professional Corporate Reader Design */
     :root {
-        --primary-color: #667eea;
-        --secondary-color: #764ba2;
-        --accent-color: #ff6b6b;
-        --success-color: #ffa726;
-        --text-dark: #2c3e50;
-        --text-light: #7f8c8d;
-        --bg-light: #f8f9fa;
-        --bg-white: #ffffff;
-        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        /* Professional Color Palette */
+        --primary-color: #2c3e50;
+        --secondary-color: #34495e;
+        --accent-color: #3498db;
+        --success-color: #27ae60;
+        --warning-color: #f39c12;
+        --danger-color: #e74c3c;
+        --light-bg: #f8f9fa;
+        --dark-bg: #2c3e50;
+        --text-primary: #2c3e50;
+        --text-secondary: #7f8c8d;
+        --text-light: #ecf0f1;
+        --border-color: #e9ecef;
+        --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+        --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
+        --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.2);
+        --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --gradient-dark: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        color: var(--text-dark);
+        background: var(--gradient-dark);
+        color: var(--text-primary);
         line-height: 1.6;
+        overflow-x: hidden;
     }
 
-    /* Header Section */
+    /* Professional Typography */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        margin-bottom: 1rem;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 1.5rem; }
+    h5 { font-size: 1.25rem; }
+    h6 { font-size: 1.125rem; }
+
+    /* Immersive Reader Layout */
+    .reader-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: var(--gradient-dark);
+        position: relative;
+    }
+
+    .reader-container::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 80%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(155, 89, 182, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* Professional Header */
     .reader-header {
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(44, 62, 80, 0.95);
         backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.5rem 0;
         position: sticky;
         top: 0;
-        z-index: 1000;
-        box-shadow: var(--shadow);
+        z-index: 100;
+        box-shadow: var(--shadow-medium);
     }
 
-    .reader-header h4 {
-        font-weight: 700;
-        color: var(--text-dark);
-        margin: 0;
+    .reader-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .header-left {
         display: flex;
         align-items: center;
+        gap: 1.5rem;
     }
 
-    .reader-header h4 i {
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-right: 0.75rem;
+    .comic-title {
+        color: var(--text-light);
+        font-size: 1.5rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
     }
 
-    .progress-indicator {
+    .comic-title i {
+        color: var(--accent-color);
+        font-size: 1.25rem;
+    }
+
+    .session-info {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .status-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border-radius: 25px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--text-light);
+        backdrop-filter: blur(10px);
+    }
+
+    .status-indicator i {
+        font-size: 1rem;
+    }
+
+    .status-ready { color: #27ae60; }
+    .status-loading { color: var(--accent-color); }
+    .status-playing { color: var(--warning-color); }
+
+    .page-progress-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+    }
+
+    .page-info {
+        color: var(--text-light);
+        font-weight: 500;
+        font-size: 0.875rem;
+    }
+
+    .progress-bar {
+        width: 200px;
         height: 6px;
-        background: rgba(102, 126, 234, 0.1);
+        background: rgba(255, 255, 255, 0.2);
         border-radius: 3px;
         overflow: hidden;
-        margin-top: 0.5rem;
+        position: relative;
     }
 
     .progress-fill {
         height: 100%;
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-        transition: width 0.3s ease;
+        background: var(--gradient-primary);
         border-radius: 3px;
+        transition: width 0.3s ease;
+        position: relative;
+    }
+
+    .progress-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
     }
 
     /* Main Content Area */
     .reader-content {
+        flex: 1;
+        display: flex;
+        gap: 2rem;
         padding: 2rem 0;
-        min-height: calc(100vh - 200px);
+        position: relative;
+        z-index: 1;
     }
 
-    /* Comic Viewer */
+    .content-main {
+        flex: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* Professional Comic Viewer */
     .comic-viewer {
-        background: var(--bg-white);
+        background: rgba(255, 255, 255, 0.05);
         border-radius: 20px;
-        box-shadow: var(--shadow-lg);
         padding: 2rem;
+        box-shadow: var(--shadow-heavy);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .comic-viewer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+        pointer-events: none;
     }
 
     .comic-page {
-        max-width: 100%;
+        width: 100%;
         max-height: 70vh;
         object-fit: contain;
-        display: block;
-        margin: 0 auto;
         border-radius: 12px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-medium);
+        transition: transform 0.3s ease;
+    }
+
+    .comic-page:hover {
+        transform: scale(1.02);
+    }
+
+    .panel-overlays {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        right: 2rem;
+        bottom: 2rem;
+        pointer-events: none;
     }
 
     .panel-overlay {
         position: absolute;
-        border: 3px solid transparent;
-        border-radius: 12px;
+        border: 3px solid var(--accent-color);
+        border-radius: 8px;
+        background: rgba(52, 152, 219, 0.1);
         transition: all 0.3s ease;
         cursor: pointer;
-        background: rgba(102, 126, 234, 0.1);
-        opacity: 0;
+        pointer-events: auto;
+    }
+
+    .panel-overlay:hover {
+        background: rgba(52, 152, 219, 0.2);
+        border-color: var(--warning-color);
+        transform: scale(1.02);
     }
 
     .panel-overlay.active {
-        border-color: var(--accent-color);
-        box-shadow: 0 0 25px rgba(255, 107, 107, 0.4);
-        opacity: 1;
-        background: rgba(255, 107, 107, 0.15);
-    }
-
-    .panel-overlay.highlight {
         border-color: var(--success-color);
-        box-shadow: 0 0 20px rgba(255, 167, 38, 0.5);
-        opacity: 0.8;
+        background: rgba(39, 174, 96, 0.2);
+        box-shadow: 0 0 20px rgba(39, 174, 96, 0.3);
     }
 
-    /* Control Panel */
+    /* Professional Control Panel */
     .control-panel {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.05);
         border-radius: 20px;
         padding: 2rem;
-        box-shadow: var(--shadow-lg);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: var(--shadow-medium);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+    }
+
+    .control-section {
         margin-bottom: 2rem;
     }
 
-    .control-panel h6 {
+    .control-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .section-title {
+        color: var(--text-light);
+        font-size: 1.125rem;
         font-weight: 600;
-        color: var(--text-dark);
         margin-bottom: 1.5rem;
         display: flex;
         align-items: center;
+        gap: 0.75rem;
     }
 
-    .control-panel h6 i {
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-right: 0.75rem;
+    .section-title i {
+        color: var(--accent-color);
+        font-size: 1.25rem;
     }
 
-    /* Audio Player */
-    .audio-player {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-        backdrop-filter: blur(20px);
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: var(--shadow-lg);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        position: sticky;
-        bottom: 2rem;
-        z-index: 1000;
-    }
-
-    .audio-player audio {
-        width: 100%;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.5);
-    }
-
-    /* Buttons */
+    /* Professional Buttons */
     .btn {
+        padding: 0.875rem 1.5rem;
         border-radius: 12px;
-        font-weight: 600;
-        padding: 0.75rem 1.5rem;
-        transition: all 0.3s ease;
+        font-weight: 500;
+        font-size: 0.875rem;
         border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
         position: relative;
         overflow: hidden;
     }
@@ -196,7 +344,7 @@
         width: 100%;
         height: 100%;
         background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s;
+        transition: left 0.5s ease;
     }
 
     .btn:hover::before {
@@ -204,135 +352,317 @@
     }
 
     .btn-primary {
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        background: var(--gradient-primary);
         color: white;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        box-shadow: var(--shadow-light);
     }
 
     .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        box-shadow: var(--shadow-medium);
     }
 
-    .btn-outline-primary {
-        background: transparent;
-        border: 2px solid var(--primary-color);
-        color: var(--primary-color);
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .btn-outline-primary:hover {
-        background: var(--primary-color);
-        color: white;
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
         transform: translateY(-2px);
     }
 
-    /* Switches */
-    .form-check-input {
-        width: 3rem;
-        height: 1.5rem;
-        border-radius: 1rem;
-        border: 2px solid rgba(102, 126, 234, 0.3);
-        background-color: rgba(102, 126, 234, 0.1);
-        transition: all 0.3s ease;
+    .btn-success {
+        background: var(--gradient-secondary);
+        color: white;
     }
 
-    .form-check-input:checked {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
+    .btn-warning {
+        background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        color: white;
     }
 
-    .form-check-input:focus {
-        box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+    .btn-danger {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
     }
 
-    /* Panel Info */
-    .panel-info {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-        backdrop-filter: blur(20px);
-        border-radius: 16px;
-        padding: 1.5rem;
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        margin-bottom: 1.5rem;
+    .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none !important;
     }
 
-    .panel-info h6 {
-        font-weight: 600;
-        color: var(--text-dark);
+    /* Professional Switches */
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         margin-bottom: 1rem;
     }
 
-    .panel-text {
-        background: rgba(102, 126, 234, 0.05);
-        border-radius: 8px;
-        padding: 1rem;
-        border-left: 4px solid var(--primary-color);
-        font-style: italic;
-        color: var(--text-dark);
+    .form-check-input {
+        width: 3.5rem;
+        height: 2rem;
+        border-radius: 1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        cursor: pointer;
     }
 
-    /* Status Indicators */
-    .status-indicator {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        font-size: 0.875rem;
+    .form-check-input:checked {
+        background: var(--gradient-primary);
+        border-color: var(--accent-color);
+    }
+
+    .form-check-input:focus {
+        box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+    }
+
+    .form-check-label {
+        color: var(--text-light);
         font-weight: 500;
-        margin: 0.25rem;
+        cursor: pointer;
     }
 
-    .status-playing {
-        background: rgba(255, 167, 38, 0.1);
-        color: var(--success-color);
-        border: 1px solid rgba(255, 167, 38, 0.2);
+    /* Professional Audio Player */
+    .audio-player {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-medium);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        margin-top: 2rem;
     }
 
-    .status-analyzing {
-        background: rgba(102, 126, 234, 0.1);
-        color: var(--primary-color);
-        border: 1px solid rgba(102, 126, 234, 0.2);
+    .audio-controls {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
     }
 
-    .status-ready {
+    .play-btn {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow-light);
+    }
+
+    .play-btn:hover {
+        transform: scale(1.1);
+        box-shadow: var(--shadow-medium);
+    }
+
+    .audio-info {
+        flex: 1;
+        color: var(--text-light);
+    }
+
+    .audio-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .audio-status {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    .volume-control {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--text-light);
+    }
+
+    .volume-slider {
+        width: 100px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    /* Professional Panel Info */
+    .panel-info {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-medium);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        margin-top: 2rem;
+        display: none;
+    }
+
+    .panel-info h6 {
+        color: var(--text-light);
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .panel-info h6 i {
+        color: var(--accent-color);
+    }
+
+    .panel-text {
+        background: rgba(52, 152, 219, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem;
+        border-left: 4px solid var(--accent-color);
+        font-style: italic;
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+    }
+
+    .panel-description {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    .voice-info {
         background: rgba(39, 174, 96, 0.1);
-        color: #27ae60;
-        border: 1px solid rgba(39, 174, 96, 0.2);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        color: var(--success-color);
+        font-weight: 500;
+        font-size: 0.875rem;
+        display: inline-block;
     }
 
-    /* Loading Animation */
+    /* Professional Loading States */
     .loading-spinner {
         display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        border: 2px solid rgba(102, 126, 234, 0.3);
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 3px solid rgba(52, 152, 219, 0.3);
         border-radius: 50%;
-        border-top-color: var(--primary-color);
+        border-top-color: var(--accent-color);
         animation: spin 1s ease-in-out infinite;
-        margin-right: 0.5rem;
+        margin-right: 0.75rem;
     }
 
     @keyframes spin {
         to { transform: rotate(360deg); }
     }
 
+    /* Professional Alerts */
+    .alert {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        z-index: 1000;
+        max-width: 400px;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        animation: slideIn 0.3s ease;
+    }
+
+    .alert-success {
+        background: rgba(39, 174, 96, 0.9);
+        color: white;
+    }
+
+    .alert-warning {
+        background: rgba(243, 156, 18, 0.9);
+        color: white;
+    }
+
+    .alert-danger {
+        background: rgba(231, 76, 60, 0.9);
+        color: white;
+    }
+
+    .alert-info {
+        background: rgba(52, 152, 219, 0.9);
+        color: white;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
     /* Responsive Design */
-    @media (max-width: 768px) {
-        .comic-page {
-            max-height: 50vh;
+    @media (max-width: 1200px) {
+        .reader-content {
+            flex-direction: column;
+            gap: 1.5rem;
         }
         
-        .audio-player {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            border-radius: 20px 20px 0 0;
-            margin: 0;
+        .content-main {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .reader-header .container {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .header-right {
+            width: 100%;
+            justify-content: space-between;
+        }
+        
+        .comic-viewer {
+            padding: 1rem;
         }
         
         .control-panel {
-            margin-bottom: 1rem;
+            padding: 1.5rem;
+        }
+        
+        .audio-player {
+            padding: 1.5rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.8rem;
+        }
+        
+        .play-btn {
+            width: 3.5rem;
+            height: 3.5rem;
+            font-size: 1.25rem;
         }
     }
 
@@ -340,163 +670,218 @@
     * {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--accent-color);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-color);
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- Reader Header -->
-<div class="reader-header">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h4>
+<div class="reader-container">
+    <!-- Professional Header -->
+    <header class="reader-header">
+        <div class="container">
+            <div class="header-left">
+                <div class="comic-title">
                     <i class="fas fa-book-open"></i>
                     {{ filename }}
-                </h4>
-                <small class="text-muted">Session: {{ session_id[:8] }}...</small>
+                </div>
+                <div class="session-info">
+                    Session: {{ session_id[:8] }}...
+                </div>
             </div>
-            <div class="col-md-6">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="status-indicator status-ready">
-                        <i class="fas fa-check-circle me-2"></i>Ready
+            <div class="header-right">
+                <div class="status-indicator status-ready">
+                    <i class="fas fa-check-circle"></i>
+                    Ready
+                </div>
+                <div class="page-progress-container">
+                    <div class="page-info">
+                        Page <span id="currentPageNum">1</span> of {{ total_pages }}
                     </div>
-                    <div id="languageIndicator" class="status-indicator" style="background: rgba(102, 126, 234, 0.1); color: var(--primary-color); border: 1px solid rgba(102, 126, 234, 0.2);">
-                        <i class="fas fa-globe me-2"></i><span id="currentLanguage">Loading...</span>
-                    </div>
-                    <div class="text-end">
-                        <div class="fw-bold">Page <span id="currentPageNum">1</span> of {{ total_pages }}</div>
-                        <div class="progress-indicator">
-                            <div class="progress-fill" id="pageProgress" style="width: 0%"></div>
-                        </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="pageProgress" style="width: 0%"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </header>
 
-<!-- Main Content -->
-<div class="reader-content">
-    <div class="container">
-        <div class="row">
-            <!-- Comic Viewer -->
-            <div class="col-lg-8">
-                <div class="comic-viewer" id="comicViewer">
-                    <img id="comicPage" class="comic-page" src="" alt="Comic Page">
-                    <div id="panelOverlays"></div>
-                </div>
-
-                <!-- Control Panel -->
-                <div class="control-panel">
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <h6><i class="fas fa-cog"></i>Reading Controls</h6>
-                            <div class="d-flex align-items-center gap-3">
-                                <button class="btn btn-outline-primary" onclick="previousPage()" id="prevPageBtn">
-                                    <i class="fas fa-chevron-left"></i> Previous
-                                </button>
-                                <button class="btn btn-outline-primary" onclick="nextPage()" id="nextPageBtn">
-                                    Next <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h6><i class="fas fa-play-circle"></i>Auto-Playback</h6>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="autoPlaySwitch" checked>
-                                    <label class="form-check-label" for="autoPlaySwitch">
-                                        Auto-play
-                                    </label>
-                                </div>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="autoAdvanceSwitch" checked>
-                                    <label class="form-check-label" for="autoAdvanceSwitch">
-                                        Auto-advance
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Main Content -->
+    <main class="reader-content">
+        <div class="content-main">
+            <!-- Immersive Comic Viewer -->
+            <div class="comic-viewer" id="comicViewer">
+                <img id="comicPage" class="comic-page" src="" alt="Comic Page">
+                <div id="panelOverlays" class="panel-overlays"></div>
             </div>
 
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-                <!-- Panel Information -->
-                <div class="panel-info" id="panelInfo" style="display: none;">
-                    <h6><i class="fas fa-info-circle"></i>Current Panel</h6>
-                    <div class="panel-text" id="panelText"></div>
-                    <div class="text-muted small" id="panelDescription"></div>
+            <!-- Professional Control Panel -->
+            <div class="control-panel">
+                <div class="control-section">
+                    <h6 class="section-title">
+                        <i class="fas fa-cog"></i>
+                        Reading Controls
+                    </h6>
+                    <div class="d-flex align-items-center gap-3 flex-wrap">
+                        <button class="btn btn-secondary" onclick="previousPage()" id="prevPageBtn">
+                            <i class="fas fa-chevron-left"></i>
+                            Previous
+                        </button>
+                        <button class="btn btn-secondary" onclick="nextPage()" id="nextPageBtn">
+                            Next
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="btn btn-primary" onclick="analyzePage()" id="analyzeBtn">
+                            <i class="fas fa-magic"></i>
+                            Analyze Page
+                        </button>
+                        <button class="btn btn-success" onclick="generatePageSummary()">
+                            <i class="fas fa-file-audio"></i>
+                            Page Summary
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Voice Settings -->
-                <div class="control-panel">
-                    <h6><i class="fas fa-microphone"></i>Voice Settings</h6>
-                    <div class="mb-3">
-                        <label for="genderSelect" class="form-label">Voice Gender</label>
-                        <select class="form-select" id="genderSelect" onchange="updateVoiceInfo()">
-                            <option value="female" selected>Female</option>
-                            <option value="male">Male</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="voiceInfo" class="form-label">Current Voice</label>
-                        <div class="form-control-plaintext" id="voiceInfo">
-                            Natalie (Female) - English US
-                        </div>
-                    </div>
+                <div class="control-section">
+                    <h6 class="section-title">
+                        <i class="fas fa-sliders-h"></i>
+                        Reading Preferences
+                    </h6>
                     <div class="row">
-                        <div class="col-6">
-                            <label for="speedRange" class="form-label">Speed</label>
-                            <input type="range" class="form-range" id="speedRange" min="0.5" max="2" step="0.1" value="1">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="autoPlaySwitch" checked>
+                                <label class="form-check-label" for="autoPlaySwitch">
+                                    Auto-play audio
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="autoAdvanceSwitch" checked>
+                                <label class="form-check-label" for="autoAdvanceSwitch">
+                                    Auto-advance panels
+                                </label>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <label for="pitchRange" class="form-label">Pitch</label>
-                            <input type="range" class="form-range" id="pitchRange" min="0.5" max="2" step="0.1" value="1">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="bgMusicSwitch" checked>
+                                <label class="form-check-label" for="bgMusicSwitch">
+                                    Background music
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="readingMode" value="panel" checked>
+                                <label class="form-check-label">
+                                    Panel by panel
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h6 class="section-title">
+                        <i class="fas fa-microphone"></i>
+                        Voice Settings
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="voiceSelect" class="form-label text-light">Voice Selection:</label>
+                            <select class="form-select" id="voiceSelect" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-light); border-radius: 8px;">
+                                <option value="en-US-natalie">Natalie (Female)</option>
+                                <option value="en-US-miles">Miles (Male)</option>
+                                <option value="en-US-ken">Ken (Narrator)</option>
+                                <option value="en-US-river">River (Child-friendly)</option>
+                                <option value="en-US-ariana">Ariana (Female)</option>
+                                <option value="en-US-terrell">Terrell (Male)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="volumeSlider" class="form-label text-light">Volume:</label>
+                            <input type="range" class="form-range" id="volumeSlider" min="0" max="100" value="80" style="background: rgba(255, 255, 255, 0.1); border-radius: 4px;">
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<!-- Audio Player -->
-<div class="audio-player">
-    <div class="row align-items-center">
-        <div class="col-md-8">
-            <div class="d-flex align-items-center">
-                <button class="btn btn-primary me-3" onclick="togglePlayback()" id="playBtn">
-                    <i class="fas fa-play" id="playIcon"></i>
-                </button>
-                <div class="flex-grow-1">
-                    <audio id="audioPlayer" controls style="width: 100%;" preload="none">
-                        Your browser does not support the audio element.
-                    </audio>
+            <!-- Professional Audio Player -->
+            <div class="audio-player">
+                <div class="audio-controls">
+                    <button class="play-btn" onclick="togglePlayback()" id="playBtn">
+                        <i class="fas fa-play" id="playIcon"></i>
+                    </button>
+                    <div class="audio-info">
+                        <div class="audio-title" id="audioTitle">No audio loaded</div>
+                        <div class="audio-status" id="audioStatus">Ready to play</div>
+                    </div>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up"></i>
+                        <input type="range" class="volume-slider" id="volumeControl" min="0" max="100" value="80">
+                    </div>
+                </div>
+                <audio id="audioPlayer" controls style="width: 100%; border-radius: 8px; background: rgba(255, 255, 255, 0.1);">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <!-- Professional Panel Info -->
+            <div class="panel-info" id="panelInfo">
+                <h6>
+                    <i class="fas fa-info-circle"></i>
+                    Panel Information
+                </h6>
+                <div class="panel-text" id="panelText">
+                    No text in this panel.
+                </div>
+                <div class="panel-description" id="panelDescription">
+                    No description available.
+                </div>
+                <div class="voice-info" id="voiceInfo">
+                    Voice: Auto-detected
                 </div>
             </div>
         </div>
-        <div class="col-md-4 text-end">
-            <button class="btn btn-outline-primary" onclick="generatePageSummary()" id="summaryBtn">
-                <i class="fas fa-list-alt me-1"></i>Page Summary
-            </button>
-        </div>
-    </div>
+    </main>
 </div>
 
-<!-- Session Info Modal -->
+<!-- Background Music (Hidden) -->
+<audio id="bgMusic" loop preload="auto" style="display: none;">
+    <source src="/static/background.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<!-- Professional Session Info Modal -->
 <div class="modal fade" id="sessionModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Session Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background: rgba(44, 62, 80, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px;">
+            <div class="modal-header" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                <h5 class="modal-title text-light">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Session Information
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body" id="sessionModalBody">
+            <div class="modal-body text-light" id="sessionModalBody">
                 <!-- Session info will be loaded here -->
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -517,6 +902,7 @@
     let autoAdvance = true;
     let isPlaying = false;
     let autoAdvanceTimeout = null;
+    let readingMode = 'panel';
 
     // Initialize the reader
     document.addEventListener('DOMContentLoaded', function() {
@@ -528,63 +914,110 @@
     });
 
     function initializeReader() {
-        // Set up auto-play listeners
-        document.getElementById('autoPlaySwitch').addEventListener('change', function() {
-            autoPlay = this.checked;
-            console.log('🎵 Auto-play set to:', autoPlay);
+        // Set up reading mode listeners
+        document.querySelectorAll('input[name="readingMode"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                readingMode = this.value;
+                updateReadingMode();
+            });
         });
 
-        document.getElementById('autoAdvanceSwitch').addEventListener('change', function() {
-            autoAdvance = this.checked;
-            console.log('⏭️ Auto-advance set to:', autoAdvance);
-        });
+        // Set up auto-play listeners
+        const autoPlaySwitch = document.getElementById('autoPlaySwitch');
+        if (autoPlaySwitch) {
+            autoPlaySwitch.addEventListener('change', function() {
+                autoPlay = this.checked;
+            });
+        }
+
+        const autoAdvanceSwitch = document.getElementById('autoAdvanceSwitch');
+        if (autoAdvanceSwitch) {
+            autoAdvanceSwitch.addEventListener('change', function() {
+                autoAdvance = this.checked;
+            });
+        }
+
+        // Set up background music listener
+        const bgMusicSwitch = document.getElementById('bgMusicSwitch');
+        if (bgMusicSwitch) {
+            bgMusicSwitch.addEventListener('change', function() {
+                toggleBackgroundMusic(this.checked);
+            });
+        }
 
         // Set up audio player listeners
         const audioPlayer = document.getElementById('audioPlayer');
-        
-        audioPlayer.addEventListener('loadstart', function() {
-            console.log('🔄 Audio loading started');
-            updateStatus('loading');
-        });
-        
-        audioPlayer.addEventListener('canplay', function() {
-            console.log('✅ Audio can play');
-        });
-        
-        audioPlayer.addEventListener('play', function() {
-            console.log('▶️ Audio started playing');
-            isPlaying = true;
-            updateStatus('playing');
-        });
-        
-        audioPlayer.addEventListener('pause', function() {
-            console.log('⏸️ Audio paused');
-            isPlaying = false;
-            updateStatus('ready');
-        });
-        
-        audioPlayer.addEventListener('ended', function() {
-            console.log('🏁 Audio ended, auto-advance is:', autoAdvance);
-            isPlaying = false;
-            updateStatus('ready');
-            
-            if (autoAdvance) {
-                console.log('🎵 Audio ended, auto-advancing...');
-                clearTimeout(autoAdvanceTimeout);
-                setTimeout(async () => {
-                    try {
-                        await nextPanel();
-                    } catch (error) {
-                        console.error('❌ Auto-advance error:', error);
+        if (audioPlayer) {
+            audioPlayer.addEventListener('ended', function() {
+                if (autoAdvance) {
+                    if (readingMode === 'panel') {
+                        nextPanel();
+                    } else {
+                        nextPage();
                     }
-                }, 500);
-            }
-        });
+                }
+            });
+        }
 
-        audioPlayer.addEventListener('error', function() {
-            console.error('❌ Audio error occurred');
-            updateStatus('ready');
-        });
+        // Set up volume controls
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeControl = document.getElementById('volumeControl');
+        if (volumeSlider) {
+            volumeSlider.addEventListener('input', function() {
+                const volume = this.value / 100;
+                if (audioPlayer) audioPlayer.volume = volume;
+                if (volumeControl) volumeControl.value = this.value;
+            });
+        }
+        if (volumeControl) {
+            volumeControl.addEventListener('input', function() {
+                const volume = this.value / 100;
+                if (audioPlayer) audioPlayer.volume = volume;
+                if (volumeSlider) volumeSlider.value = this.value;
+            });
+        }
+
+        // Initialize background music
+        initializeBackgroundMusic();
+    }
+
+    function initializeBackgroundMusic() {
+        const bgMusic = document.getElementById('bgMusic');
+        const bgMusicSwitch = document.getElementById('bgMusicSwitch');
+        
+        if (bgMusic) {
+            bgMusic.volume = 0.2; // Set to 20% volume for background
+            
+            // Add event listeners for debugging
+            bgMusic.addEventListener('loadstart', () => console.log('🎵 Background music: Loading started'));
+            bgMusic.addEventListener('canplay', () => console.log('🎵 Background music: Can play'));
+            bgMusic.addEventListener('play', () => console.log('🎵 Background music: Started playing'));
+            bgMusic.addEventListener('pause', () => console.log('🎵 Background music: Paused'));
+            bgMusic.addEventListener('error', (e) => console.log('🎵 Background music error:', e));
+            
+            // Start background music if enabled
+            if (bgMusicSwitch && bgMusicSwitch.checked) {
+                console.log('🎵 Attempting to start background music...');
+                bgMusic.play().catch(e => console.log('🎵 Background music autoplay blocked:', e));
+            }
+        } else {
+            console.log('🎵 Background music element not found');
+        }
+    }
+
+    function toggleBackgroundMusic(enabled) {
+        const bgMusic = document.getElementById('bgMusic');
+        if (bgMusic) {
+            if (enabled) {
+                console.log('🎵 Starting background music...');
+                bgMusic.play().catch(e => console.log('🎵 Background music play failed:', e));
+            } else {
+                console.log('🎵 Pausing background music...');
+                bgMusic.pause();
+            }
+        } else {
+            console.log('🎵 Background music element not found for toggle');
+        }
     }
 
     function setupEventListeners() {
@@ -613,7 +1046,7 @@
         
         switch(status) {
             case 'playing':
-                statusIndicator.innerHTML = '<i class="fas fa-play-circle me-2"></i>Playing';
+                statusIndicator.innerHTML = '<i class="fas fa-play-circle"></i>Playing';
                 break;
             case 'loading':
                 statusIndicator.innerHTML = '<div class="loading-spinner"></div>Loading...';
@@ -623,7 +1056,7 @@
                 break;
             case 'ready':
             default:
-                statusIndicator.innerHTML = '<i class="fas fa-check-circle me-2"></i>Ready';
+                statusIndicator.innerHTML = '<i class="fas fa-check-circle"></i>Ready';
                 break;
         }
     }
@@ -806,98 +1239,58 @@
     }
 
     async function playCurrentPanel() {
-        if (panels.length === 0 || currentPanel >= panels.length) {
-            showAlert('No panel to play.', 'warning');
-            return;
-        }
+        if (panels.length === 0 || currentPanel >= panels.length) return;
 
         const panel = panels[currentPanel];
-        
-        // Prioritize text_for_speech (actual dialogue) over description (synopsis)
-        let text = panel.text_for_speech;
-        
-        // If no text_for_speech, try to extract from text_elements
-        if (!text && panel.text_elements && panel.text_elements.length > 0) {
-            const speechElements = panel.text_elements.filter(e => e.type === 'speech');
-            if (speechElements.length > 0) {
-                text = speechElements.map(e => e.text).join('. ');
-            } else {
-                text = panel.text_elements.map(e => e.text).join('. ');
-            }
-        }
-        
-        // Only use description as last resort
-        if (!text || text.trim() === '') {
-            text = panel.description || 'No text available';
-        }
-        
-        if (!text || text === 'No text in this panel.' || text === 'No text available') {
-            showAlert('No text to read in this panel.', 'info');
+        const text = panel.text_for_speech || 'No text in this panel.';
+
+        if (text === 'No text in this panel.') {
+            showAlert('This panel has no readable text.', 'info');
             return;
         }
 
         try {
-            updateStatus('loading');
-            console.log('🎤 Generating audio for text:', text.substring(0, 100) + '...');
-            console.log('📝 Text source:', panel.text_for_speech ? 'text_for_speech' : (panel.text_elements ? 'text_elements' : 'description'));
+            showLoading();
 
-            const gender = document.getElementById('genderSelect').value;
-            console.log('🎵 Using gender:', gender);
+            // Use auto-detected voice from panel analysis, or fall back to manual selection
+            const voiceSelect = document.getElementById('voiceSelect');
+            const voiceId = panel.voice_id || (voiceSelect ? voiceSelect.value : 'en-US-natalie');
 
-            const params = new URLSearchParams();
-            params.append('text', text);
-            params.append('gender', gender);
-
-            const response = await fetch(`/translate-and-generate-audio/${sessionId}`, {
+            const response = await fetch(`/generate-audio/${sessionId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: params.toString()
+                body: `text=${encodeURIComponent(text)}&voice_id=${voiceId}`
             });
 
             if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Failed to generate audio: ${response.status} - ${errorText}`);
+                throw new Error('Failed to generate audio');
             }
 
             const result = await response.json();
-            console.log('✅ Audio generation result:', result);
-            
             currentAudioUrl = result.audio_url;
 
-            // Check if we got a text fallback instead of audio
-            if (result.audio_url && result.audio_url.includes('text_')) {
-                showAlert('Audio generation unavailable. Using text-only mode.', 'warning');
-                updateStatus('ready');
-                return;
-            }
+            // Update audio info
+            document.getElementById('audioTitle').textContent = `Panel ${currentPanel + 1} Audio`;
+            document.getElementById('audioStatus').textContent = 'Playing...';
 
-            // Show translation info if available
-            if (result.translated_text && result.translated_text !== text) {
-                console.log('🌐 Translation applied:', {
-                    original: text.substring(0, 100) + '...',
-                    translated: result.translated_text.substring(0, 100) + '...',
-                    language: result.language_name,
-                    voice: result.voice_id,
-                    gender: result.gender
-                });
+            // Ensure background music is playing
+            const bgMusic = document.getElementById('bgMusic');
+            const bgMusicSwitch = document.getElementById('bgMusicSwitch');
+            if (bgMusic && bgMusicSwitch && bgMusicSwitch.checked && bgMusic.paused) {
+                bgMusic.play().catch(e => console.log('Background music play failed:', e));
             }
 
             // Play audio
             const audioPlayer = document.getElementById('audioPlayer');
             audioPlayer.src = currentAudioUrl;
-            
-            if (autoPlay) {
-                audioPlayer.play();
-            }
-
-            updateStatus('ready');
+            audioPlayer.play();
 
         } catch (error) {
-            console.error('❌ Error generating audio:', error);
             showAlert('Error generating audio: ' + error.message, 'danger');
-            updateStatus('ready');
+        } finally {
+            hideLoading();
         }
     }
 
@@ -907,17 +1300,24 @@
         const panel = panels[currentPanel];
         const panelInfo = document.getElementById('panelInfo');
         
-        let panelText = panel.text_for_speech;
-        if (!panelText && panel.text_elements && panel.text_elements.length > 0) {
-            panelText = panel.text_elements.map(e => e.text).join(' ');
-        }
-        if (!panelText || panelText.trim() === '') {
-            panelText = 'No text in this panel.';
-        }
-        const panelDescription = panel.description || 'No description available.';
+        document.getElementById('panelText').textContent = panel.text_for_speech || 'No text in this panel.';
+        document.getElementById('panelDescription').textContent = panel.description || 'No description available.';
         
-        document.getElementById('panelText').textContent = panelText;
-        document.getElementById('panelDescription').textContent = panelDescription;
+        // Show voice information
+        const voiceInfo = document.getElementById('voiceInfo');
+        if (panel.voice_id) {
+            const voiceNames = {
+                'en-US-natalie': 'Natalie (Female)',
+                'en-US-miles': 'Miles (Male)', 
+                'en-US-ken': 'Ken (Narrator)',
+                'en-US-river': 'River (Child-friendly)',
+                'en-US-ariana': 'Ariana (Female)',
+                'en-US-terrell': 'Terrell (Male)'
+            };
+            voiceInfo.textContent = `Voice: ${voiceNames[panel.voice_id] || panel.voice_id}`;
+        } else {
+            voiceInfo.textContent = 'Voice: Auto-detected';
+        }
         
         panelInfo.style.display = 'block';
     }
@@ -956,12 +1356,14 @@
             if (currentAudioUrl) {
                 audioPlayer.play();
                 playIcon.className = 'fas fa-pause';
+                document.getElementById('audioStatus').textContent = 'Playing...';
             } else {
                 playCurrentPanel();
             }
         } else {
             audioPlayer.pause();
             playIcon.className = 'fas fa-play';
+            document.getElementById('audioStatus').textContent = 'Paused';
         }
     }
 
@@ -984,7 +1386,7 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `text=${encodeURIComponent(summaryText)}&voice_id=en-US-davis`
+                body: `text=${encodeURIComponent(summaryText)}&voice_id=en-US-ken`
             });
 
             if (!response.ok) {
@@ -992,6 +1394,10 @@
             }
 
             const result = await response.json();
+            
+            // Update audio info
+            document.getElementById('audioTitle').textContent = 'Page Summary';
+            document.getElementById('audioStatus').textContent = 'Playing...';
             
             const audioPlayer = document.getElementById('audioPlayer');
             audioPlayer.src = result.audio_url;
@@ -1029,13 +1435,12 @@
     }
 
     function showAlert(message, type) {
-        // Create a simple alert notification
+        // Create a professional alert notification
         const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
-        alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        alertDiv.className = `alert alert-${type}`;
         alertDiv.innerHTML = `
             ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close btn-close-white" onclick="this.parentElement.remove()"></button>
         `;
         
         document.body.appendChild(alertDiv);
@@ -1048,77 +1453,34 @@
         }, 5000);
     }
 
+    function showLoading() {
+        updateStatus('loading');
+    }
+
+    function hideLoading() {
+        updateStatus('ready');
+    }
+
     async function loadSessionInfo() {
         try {
             const response = await fetch(`/session/${sessionId}/status`);
             if (response.ok) {
                 const sessionData = await response.json();
-                
-                // Update language indicator
-                const languageName = sessionData.language_name || 'English - US & Canada';
-                document.getElementById('currentLanguage').textContent = languageName;
-                
-                console.log('🌐 Session language:', languageName);
+                console.log('🌐 Session language:', sessionData.language_name);
             }
         } catch (error) {
             console.error('❌ Error loading session info:', error);
-            document.getElementById('currentLanguage').textContent = 'English - US & Canada';
         }
     }
 
     async function updateVoiceInfo() {
-        const gender = document.getElementById('genderSelect').value;
-        const sessionData = await getSessionInfo();
-        const language = sessionData.preferred_language || 'en-US';
-        
-        try {
-            const response = await fetch(`/voices/${language}`);
-            const data = await response.json();
-            
-            const voiceId = data.voices[gender];
-            const voiceName = getVoiceDisplayName(voiceId);
-            
-            document.getElementById('voiceInfo').textContent = 
-                `${voiceName} (${gender.charAt(0).toUpperCase() + gender.slice(1)}) - ${data.language_name}`;
-        } catch (error) {
-            console.error('Error updating voice info:', error);
-        }
+        // This function can be used to update voice information based on user preferences
+        console.log('🎵 Voice info updated');
     }
 
-    function getVoiceDisplayName(voiceId) {
-        const voiceNames = {
-            // English US
-            'en-US-natalie': 'Natalie',
-            'en-US-miles': 'Miles',
-            // English UK
-            'en-UK-ruby': 'Ruby',
-            'en-UK-theo': 'Theo',
-            // Spanish Spain
-            'es-ES-elvira': 'Elvira',
-            'es-ES-enrique': 'Enrique',
-            // Spanish Mexico
-            'es-MX-valeria': 'Valeria',
-            'es-MX-carlos': 'Carlos',
-            // French
-            'fr-FR-adélie': 'Adelie',
-            'fr-FR-maxime': 'Maxime',
-            // German
-            'de-DE-lia': 'Lia',
-            'de-DE-matthias': 'Matthias',
-            // Italian
-            'it-IT-greta': 'Greta',
-            'it-IT-lorenzo': 'Lorenzo',
-            // Portuguese
-            'pt-BR-isadora': 'Isadora',
-            'pt-BR-heitor': 'Heitor',
-            // Chinese
-            'zh-CN-jiao': 'Jiao',
-            'zh-CN-tao': 'Tao',
-            // Hindi
-            'hi-IN-ayushi': 'Ayushi',
-            'hi-IN-kabir': 'Kabir'
-        };
-        return voiceNames[voiceId] || voiceId;
+    // Add analyze page function
+    async function analyzePage() {
+        await analyzeCurrentPage();
     }
 </script>
 {% endblock %}

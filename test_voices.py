@@ -19,7 +19,7 @@ VOICE_IDS = {
     "it-IT": "it-IT-lorenzo",
     "pt-BR": "pt-BR-heitor",
     "zh-CN": "zh-CN-tao",
-    "hi-IN": "en-IN-aarav"
+    "hi-IN": "hi-IN-kabir"
 }
 
 async def test_voice_id(voice_id: str, language: str):

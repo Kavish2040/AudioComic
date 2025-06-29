@@ -92,18 +92,17 @@ class VisionAnalyzer:
     
     def _create_analysis_prompt(self) -> str:
         """Create the prompt for comic page analysis"""
-        return """Analyze this comic page and provide ONLY a JSON response in the exact format specified below. Do not include any explanatory text, markdown formatting, or additional content outside the JSON object.
+        return """
+        Analyze this comic page and provide a detailed breakdown in JSON format. I need you to:
 
-        Your task:
         1. Identify all panels/frames in the comic page
-        2. Determine the correct reading order (left-to-right, top-to-bottom)
+        2. Determine the correct reading order (typically left-to-right, top-to-bottom)
         3. Extract all text from speech bubbles, thought bubbles, captions, and sound effects
-        4. Identify approximate coordinates/bounds of each panel
+        4. Identify the approximate coordinates/bounds of each panel
         5. Describe what's happening in each panel briefly
-        6. Visually analyze each speaking character and determine their gender based on visual appearance
-        7. Match each text element to the visually identified character
+        6. **CRITICAL**: Identify the speaker/character for each text element with specific gender detection
 
-        RESPOND WITH ONLY THIS JSON FORMAT (no other text):
+        Please respond with a JSON object in this exact format:
         {
             "panels": [
                 {
@@ -114,29 +113,53 @@ class VisionAnalyzer:
                         {
                             "type": "speech",
                             "text": "Hello there!",
-                            "speaker": "Character name or description",
-                            "speaker_gender": "male/female/unknown",
-                            "visual_description": "Brief description of the character's visual appearance"
+                            "speaker": "Male character"
+                        },
+                        {
+                            "type": "thought",
+                            "text": "I wonder what's happening...",
+                            "speaker": "Female character"
+                        },
+                        {
+                            "type": "narration",
+                            "text": "Meanwhile, in another part of the city..."
+                        },
+                        {
+                            "type": "sound_effect",
+                            "text": "BOOM!"
                         }
                     ],
                     "description": "Brief description of what's happening in this panel"
                 }
             ],
             "page_summary": "Overall summary of what happens on this page",
-            "total_panels": 1
+            "total_panels": 4
         }
 
-        Visual analysis guidelines:
-        - Analyze visual cues: facial features, hair style/length, clothing, body shape, facial hair, makeup
-        - Determine gender based on visual appearance, not text content
-        - Assign "male", "female", or "unknown" based on visual analysis
-        - Include brief visual description of each speaking character
-        - For narration, use "unknown" gender
-        - For sound effects, use "unknown" gender
-
-        Text types: "speech", "thought", "narration", "sound_effect"
-        Bounds should be approximate percentages (0-100) of page dimensions
-        Include ALL visible text, even small sound effects"""
+        **SPEAKER IDENTIFICATION GUIDELINES:**
+        - Look at the character speaking in each panel
+        - Examine visual characteristics: facial features, clothing, body type, hair style
+        - Consider context and character roles
+        - Use these specific speaker labels:
+          * "Male character" - for any male-appearing character
+          * "Female character" - for any female-appearing character  
+          * "Child" - for young characters
+          * "Narrator" - for narration boxes/captions
+          * Specific names if clearly visible (e.g., "Superman", "Batman")
+        
+        **GENDER DETECTION CLUES:**
+        - Male indicators: facial hair, masculine features, male clothing, male names
+        - Female indicators: feminine features, female clothing, female names, long hair (context-dependent)
+        - When in doubt, look for the most obvious visual gender markers
+        
+        Notes:
+        - Bounds should be approximate percentages (0-100) of the page dimensions
+        - Text types can be: "speech", "thought", "narration", "sound_effect"
+        - Reading order should follow typical comic conventions
+        - If you can't determine exact bounds, provide reasonable estimates
+        - Include ALL visible text, even small sound effects
+        - **BE SPECIFIC about speaker gender** - this is crucial for voice selection
+        """
     
     def _parse_analysis_response(self, response_text: str) -> Dict[str, Any]:
         """Parse the AI response and extract structured data from visual analysis."""

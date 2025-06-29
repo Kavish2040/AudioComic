@@ -78,7 +78,8 @@ class ComicReader:
                     **panel,
                     "text_for_speech": panel_text,
                     "audio_url": audio_url,
-                    "has_audio": audio_url is not None
+                    "has_audio": audio_url is not None,
+                    "voice_id": voice_id  # Store the voice ID for display
                 }
                 
                 panels_with_audio.append(panel_with_audio)
@@ -109,19 +110,87 @@ class ComicReader:
         
         # Analyze text elements to determine character type
         text_elements = panel.get("text_elements", [])
+        panel_text = " ".join([elem.get("text", "") for elem in text_elements]).lower()
         
         # Check for narration (use narrator voice)
         for element in text_elements:
             if element.get("type") == "narration":
-                return "en-US-davis"  # Narrator voice
+                return "en-US-ken"  # Narrator voice
         
         # Check for sound effects (use dramatic voice)
         sound_effects = [e for e in text_elements if e.get("type") == "sound_effect"]
         if sound_effects and len(sound_effects) == len(text_elements):
-            return "en-US-davis"  # Dramatic voice for sound effects
+            return "en-US-ken"  # Dramatic voice for sound effects
         
-        # Default to main character voice
-        return "en-US-aria"
+        # Analyze character gender and type from text content
+        voice_id = self._analyze_character_voice(panel_text, text_elements)
+        
+        return voice_id
+    
+    def _analyze_character_voice(self, text: str, text_elements: List[Dict[str, Any]]) -> str:
+        """
+        Analyze text to determine character gender and choose appropriate voice
+        
+        Args:
+            text: Combined text from all elements
+            text_elements: List of text elements with metadata
+            
+        Returns:
+            Voice ID to use
+        """
+        # Check for explicit speaker information
+        for element in text_elements:
+            speaker = element.get("speaker", "").lower()
+            if speaker and speaker != "unknown":
+                # Check for gender indicators in speaker name
+                if any(word in speaker for word in ["he", "him", "his", "man", "boy", "guy", "dude", "sir", "mr", "father", "dad", "son", "brother", "male"]):
+                    print(f"🎭 Detected male speaker: {speaker}")
+                    return "en-US-miles"  # Male voice
+                elif any(word in speaker for word in ["she", "her", "woman", "girl", "lady", "miss", "ms", "mrs", "mother", "mom", "daughter", "sister", "female"]):
+                    print(f"🎭 Detected female speaker: {speaker}")
+                    return "en-US-natalie"  # Female voice
+                elif any(word in speaker for word in ["child", "kid", "baby", "young"]):
+                    print(f"🎭 Detected child speaker: {speaker}")
+                    return "en-US-river"  # Child-friendly voice
+        
+        # Analyze text content for gender indicators (including the full text)
+        male_indicators = ["he", "him", "his", "man", "men", "boy", "boys", "guy", "guys", "dude", "father", "dad", "son", "brother", "uncle", "grandfather", "male character", "male"]
+        female_indicators = ["she", "her", "woman", "women", "girl", "girls", "lady", "ladies", "mother", "mom", "daughter", "sister", "aunt", "grandmother", "female character", "female"]
+        child_indicators = ["child", "children", "kid", "kids", "baby", "babies", "young", "little", "small"]
+        
+        # Count gender indicators
+        male_count = sum(1 for word in male_indicators if word in text)
+        female_count = sum(1 for word in female_indicators if word in text)
+        child_count = sum(1 for word in child_indicators if word in text)
+        
+        print(f"🎭 Gender analysis - Male: {male_count}, Female: {female_count}, Child: {child_count}")
+        print(f"🎭 Text being analyzed: '{text[:100]}...'")
+        
+        # Check for emotional content
+        emotional_words = ["cry", "crying", "sad", "angry", "happy", "excited", "scared", "fear", "love", "hate"]
+        is_emotional = any(word in text for word in emotional_words)
+        
+        # Decision logic with higher priority for explicit gender indicators
+        if child_count > 0:
+            print(f"🎭 Selected child voice (en-US-river)")
+            return "en-US-river"  # Child-friendly voice
+        elif male_count > 0:
+            print(f"🎭 Selected male voice (en-US-miles)")
+            return "en-US-miles"  # Male voice
+        elif female_count > 0:
+            print(f"🎭 Selected female voice (en-US-natalie)")
+            return "en-US-natalie"  # Female voice
+        elif is_emotional:
+            print(f"🎭 Selected female voice for emotional content (en-US-natalie)")
+            return "en-US-natalie"  # Female voice for emotional content
+        else:
+            # Default based on text length and content
+            if len(text) > 100:  # Long text, likely narration
+                print(f"🎭 Selected narrator voice (en-US-ken)")
+                return "en-US-ken"  # Male narrator
+            else:
+                print(f"🎭 Selected default female voice (en-US-natalie)")
+                return "en-US-natalie"  # Default to female voice
     
     async def get_reading_session_data(self, session_id: str, page_num: int, 
                                      panel_num: int = 0) -> Dict[str, Any]:
@@ -176,7 +245,7 @@ class ComicReader:
             # Generate audio for the summary
             audio_url = await self.tts_service.generate_speech(
                 page_summary, 
-                voice_id="en-US-davis"  # Use narrator voice for summaries
+                voice_id="en-US-ken"  # Use narrator voice for summaries
             )
             
             return audio_url

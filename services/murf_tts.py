@@ -26,7 +26,7 @@ class MurfTTSService:
         
         # Default voice settings
         self.default_voice_settings = {
-            "voice_id": "en-US-natalie",  # Default Murf AI voice
+            "voice_id": "en-US-natalie",  # Default Murf AI voice - Natalie
             "speed": 1.0,
             "pitch": 1.0,
             "emphasis": 1.0,
@@ -36,8 +36,13 @@ class MurfTTSService:
     def select_voice_for_gender(self, gender: str) -> str:
         """Return the Murf voiceId for the given gender."""
         if gender == "male":
-            return "en-US-miles"
-        return "en-US-natalie"
+            return "en-US-miles"  # Miles - male voice
+        elif gender == "female":
+            return "en-US-natalie"  # Natalie - female voice
+        elif gender == "child":
+            return "en-US-river"  # River - child-like voice
+        else:
+            return "en-US-ken"  # Ken - narrator voice
 
     async def generate_speech(self, text: str, voice_id: Optional[str] = None, 
                             settings: Optional[Dict[str, Any]] = None, gender: Optional[str] = None) -> str:
@@ -210,25 +215,46 @@ class MurfTTSService:
         return {
             "voices": [
                 {
-                    "voice_id": "en-US-aria",
-                    "name": "Aria",
+                    "voice_id": "en-US-natalie",
+                    "name": "Natalie",
                     "language": "English (US)",
                     "gender": "Female",
-                    "description": "Clear and expressive female voice"
+                    "description": "Clear and expressive female voice with multiple styles"
                 },
                 {
-                    "voice_id": "en-US-davis",
-                    "name": "Davis", 
+                    "voice_id": "en-US-miles", 
+                    "name": "Miles",
                     "language": "English (US)",
                     "gender": "Male",
-                    "description": "Professional male narrator voice"
+                    "description": "Professional male voice with conversational style"
                 },
                 {
-                    "voice_id": "en-US-jenny",
-                    "name": "Jenny",
+                    "voice_id": "en-US-ken",
+                    "name": "Ken",
                     "language": "English (US)", 
+                    "gender": "Male",
+                    "description": "Versatile male voice with storytelling capabilities"
+                },
+                {
+                    "voice_id": "en-US-river",
+                    "name": "River",
+                    "language": "English (US)",
+                    "gender": "Child",
+                    "description": "Young and friendly voice for child characters"
+                },
+                {
+                    "voice_id": "en-US-ariana",
+                    "name": "Ariana",
+                    "language": "English (US)",
                     "gender": "Female",
-                    "description": "Friendly and warm female voice"
+                    "description": "Conversational female voice"
+                },
+                {
+                    "voice_id": "en-US-terrell",
+                    "name": "Terrell",
+                    "language": "English (US)",
+                    "gender": "Male",
+                    "description": "Inspirational male voice"
                 }
             ]
         }
@@ -257,28 +283,40 @@ class MurfTTSService:
         """Get appropriate voice settings based on character type"""
         character_voices = {
             "narrator": {
-                "voice_id": "en-US-davis",
+                "voice_id": "en-US-ken",  # Ken - great for narration and storytelling
                 "speed": 0.9,
                 "pitch": 1.0,
                 "emphasis": 1.1
             },
             "hero": {
-                "voice_id": "en-US-aria", 
+                "voice_id": "en-US-miles",  # Miles - strong male hero voice
                 "speed": 1.0,
                 "pitch": 1.1,
                 "emphasis": 1.2
             },
             "villain": {
-                "voice_id": "en-US-davis",
+                "voice_id": "en-US-ken",  # Ken - can do angry/furious styles
                 "speed": 0.8,
                 "pitch": 0.8,
                 "emphasis": 1.3
             },
             "child": {
-                "voice_id": "en-US-jenny",
+                "voice_id": "en-US-river",  # River - young and friendly
                 "speed": 1.1,
                 "pitch": 1.3,
                 "emphasis": 1.0
+            },
+            "female_hero": {
+                "voice_id": "en-US-natalie",  # Natalie - strong female voice
+                "speed": 1.0,
+                "pitch": 1.1,
+                "emphasis": 1.2
+            },
+            "female_villain": {
+                "voice_id": "en-US-natalie",  # Natalie - can do angry styles
+                "speed": 0.8,
+                "pitch": 0.9,
+                "emphasis": 1.3
             },
             "default": self.default_voice_settings
         }
