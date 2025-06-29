@@ -13,9 +13,10 @@ class VisionAnalyzer:
     
     def __init__(self):
         if not config.OPENAI_API_KEY:
-            raise ValueError("OpenAI API key is required for vision analysis")
-        
-        self.client = AsyncOpenAI(api_key=config.OPENAI_API_KEY)
+            print("⚠️ Warning: OpenAI API key not found. Vision analysis will use fallback mode.")
+            self.client = None
+        else:
+            self.client = AsyncOpenAI(api_key=config.OPENAI_API_KEY)
         
     async def analyze_page(self, image_path: str) -> Dict[str, Any]:
         """
@@ -28,6 +29,10 @@ class VisionAnalyzer:
             Dictionary containing panel information and text
         """
         try:
+            # Check if client is available
+            if not self.client:
+                print("⚠️ OpenAI client not available, using fallback analysis")
+                return self._create_fallback_analysis("OpenAI API key not configured")
             # Encode image to base64
             base64_image = self._encode_image(image_path)
             

@@ -31,15 +31,58 @@ app.mount("/temp", StaticFiles(directory="temp"), name="temp")
 # Templates
 templates = Jinja2Templates(directory="templates")
 
-# Initialize services
+# Initialize services with error handling
 pdf_processor = PDFProcessor()
-vision_analyzer = VisionAnalyzer()
-tts_service = MurfTTSService()
+
+# Initialize services that require API keys with proper error handling
+try:
+    vision_analyzer = VisionAnalyzer()
+    print("✅ VisionAnalyzer initialized successfully")
+except Exception as e:
+    print(f"⚠️ Warning: VisionAnalyzer failed to initialize: {str(e)}")
+    vision_analyzer = None
+
+try:
+    tts_service = MurfTTSService()
+    print("✅ MurfTTSService initialized successfully")
+except Exception as e:
+    print(f"⚠️ Warning: MurfTTSService failed to initialize: {str(e)}")
+    tts_service = None
+
 translation_service = TranslationService()
+
+# Initialize comic reader with available services
 comic_reader = ComicReader(pdf_processor, vision_analyzer, tts_service)
 
 # Store active sessions
 active_sessions: Dict[str, Dict[str, Any]] = {}
+
+@app.on_event("startup")
+async def startup_event():
+    """Print service status on startup"""
+    print("🚀 Audio Comic Reader starting up...")
+    print(f"✅ PDF Processor: Ready")
+    print(f"{'✅' if vision_analyzer else '⚠️'} Vision Analyzer: {'Ready' if vision_analyzer else 'Not configured (missing OpenAI API key)'}")
+    print(f"{'✅' if tts_service else '⚠️'} TTS Service: {'Ready' if tts_service else 'Not configured (missing Murf API key)'}")
+    print(f"✅ Translation Service: Ready")
+    print("🌐 Server is ready to accept requests!")
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return JSONResponse({
+        "status": "healthy",
+        "services": {
+            "vision_analyzer": vision_analyzer is not None,
+            "tts_service": tts_service is not None,
+            "translation_service": True,
+            "pdf_processor": True
+        },
+        "environment": {
+            "openai_api_key_configured": bool(config.OPENAI_API_KEY),
+            "murf_api_key_configured": bool(config.MURF_API_KEY)
+        }
+    })
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):

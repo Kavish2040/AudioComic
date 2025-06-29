@@ -11,6 +11,3 @@ python-dotenv==1.0.0
 aiofiles==23.2.0
 aiohttp==3.9.1
 jinja2==3.1.2
-pyttsx3==2.90
-murf==2.0.0
-poppler-utils

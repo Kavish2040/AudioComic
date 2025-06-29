@@ -10,8 +10,8 @@ from .murf_tts import MurfTTSService
 class ComicReader:
     """Main service that orchestrates comic reading functionality"""
     
-    def __init__(self, pdf_processor: PDFProcessor, vision_analyzer: VisionAnalyzer, 
-                 tts_service: MurfTTSService):
+    def __init__(self, pdf_processor: PDFProcessor, vision_analyzer: Optional[VisionAnalyzer], 
+                 tts_service: Optional[MurfTTSService]):
         self.pdf_processor = pdf_processor
         self.vision_analyzer = vision_analyzer
         self.tts_service = tts_service
@@ -58,6 +58,23 @@ class ComicReader:
             Dictionary containing analysis and audio data
         """
         try:
+            # Check if vision analyzer is available
+            if not self.vision_analyzer:
+                return {
+                    "panels": [{
+                        "panel_id": 1,
+                        "reading_order": 1,
+                        "text_for_speech": "Vision analysis service not available. Please configure OpenAI API key.",
+                        "audio_url": None,
+                        "has_audio": False,
+                        "voice_id": None,
+                        "description": "Service unavailable"
+                    }],
+                    "page_summary": "Vision analysis service not configured",
+                    "total_panels": 1,
+                    "total_panels_with_audio": 0
+                }
+            
             # Analyze the page
             analysis = await self.vision_analyzer.analyze_page(page_image_path)
             
@@ -68,13 +85,20 @@ class ComicReader:
                 # Extract text for this panel
                 panel_text = await self.vision_analyzer.get_panel_text(panel)
                 
-                # Generate audio if there's text
+                # Generate audio if there's text and TTS service is available
                 audio_url = None
                 voice_id = None
                 if panel_text and panel_text.strip() and panel_text != "No text in this panel.":
                     # Determine voice based on text content and language
                     voice_id = self._determine_voice_for_panel(panel, voice_settings, language_code)
-                    audio_url = await self.tts_service.generate_speech(panel_text, voice_id)
+                    
+                    # Generate audio only if TTS service is available
+                    if self.tts_service:
+                        try:
+                            audio_url = await self.tts_service.generate_speech(panel_text, voice_id)
+                        except Exception as e:
+                            print(f"⚠️ TTS generation failed: {str(e)}")
+                            audio_url = None
                 
                 # Add audio info to panel
                 panel_with_audio = {
