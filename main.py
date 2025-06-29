@@ -61,6 +61,11 @@ active_sessions: Dict[str, Dict[str, Any]] = {}
 async def startup_event():
     """Print service status on startup"""
     print("🚀 Audio Comic Reader starting up...")
+    print(f"🔍 Environment Debug:")
+    print(f"   - OPENAI_API_KEY: {'Set' if config.OPENAI_API_KEY else 'NOT SET'}")
+    print(f"   - MURF_API_KEY: {'Set' if config.MURF_API_KEY else 'NOT SET'}")
+    print(f"   - DEBUG: {config.DEBUG}")
+    print(f"   - PORT: {config.PORT}")
     print(f"✅ PDF Processor: Ready")
     print(f"{'✅' if vision_analyzer else '⚠️'} Vision Analyzer: {'Ready' if vision_analyzer else 'Not configured (missing OpenAI API key)'}")
     print(f"{'✅' if tts_service else '⚠️'} TTS Service: {'Ready' if tts_service else 'Not configured (missing Murf API key)'}")
@@ -80,7 +85,28 @@ async def health_check():
         },
         "environment": {
             "openai_api_key_configured": bool(config.OPENAI_API_KEY),
-            "murf_api_key_configured": bool(config.MURF_API_KEY)
+            "murf_api_key_configured": bool(config.MURF_API_KEY),
+            "openai_key_length": len(config.OPENAI_API_KEY) if config.OPENAI_API_KEY else 0,
+            "murf_key_length": len(config.MURF_API_KEY) if config.MURF_API_KEY else 0
+        }
+    })
+
+@app.get("/debug/env")
+async def debug_environment():
+    """Debug endpoint to check environment variables (remove in production)"""
+    import os
+    return JSONResponse({
+        "environment_variables": {
+            "OPENAI_API_KEY": "SET" if os.getenv("OPENAI_API_KEY") else "NOT SET",
+            "MURF_API_KEY": "SET" if os.getenv("MURF_API_KEY") else "NOT SET",
+            "PORT": os.getenv("PORT", "NOT SET"),
+            "DEBUG": os.getenv("DEBUG", "NOT SET"),
+        },
+        "config_values": {
+            "OPENAI_API_KEY": "SET" if config.OPENAI_API_KEY else "NOT SET",
+            "MURF_API_KEY": "SET" if config.MURF_API_KEY else "NOT SET",
+            "PORT": config.PORT,
+            "DEBUG": config.DEBUG,
         }
     })
 

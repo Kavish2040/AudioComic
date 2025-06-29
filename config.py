@@ -1,8 +1,11 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
+# Load environment variables (only if .env file exists - for local development)
+try:
+    load_dotenv()
+except:
+    pass
 
 class Config:
     # API Keys
