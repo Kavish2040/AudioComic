@@ -2,7 +2,13 @@ import base64
 import json
 from typing import List, Dict, Any
 import asyncio
-from openai import AsyncOpenAI
+try:
+    from openai import AsyncOpenAI
+    OPENAI_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️ OpenAI import failed: {e}")
+    OPENAI_AVAILABLE = False
+    AsyncOpenAI = None
 from PIL import Image
 import io
 
@@ -12,11 +18,23 @@ class VisionAnalyzer:
     """Service for analyzing comic pages using vision AI"""
     
     def __init__(self):
-        if not config.OPENAI_API_KEY:
+        if not OPENAI_AVAILABLE:
+            print("⚠️ Warning: OpenAI library not available. Vision analysis will use fallback mode.")
+            self.client = None
+        elif not config.OPENAI_API_KEY:
             print("⚠️ Warning: OpenAI API key not found. Vision analysis will use fallback mode.")
             self.client = None
         else:
-            self.client = AsyncOpenAI(api_key=config.OPENAI_API_KEY)
+            try:
+                # Try to initialize with minimal parameters to avoid compatibility issues
+                self.client = AsyncOpenAI(
+                    api_key=config.OPENAI_API_KEY,
+                    timeout=30.0
+                )
+                print("✅ OpenAI AsyncClient initialized successfully")
+            except Exception as e:
+                print(f"⚠️ Warning: Failed to initialize OpenAI client: {str(e)}")
+                self.client = None
         
     async def analyze_page(self, image_path: str) -> Dict[str, Any]:
         """
