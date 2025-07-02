@@ -396,15 +396,15 @@ class ComicReader:
         
         if text_type == 'speech':
             if speaker and speaker.lower() != 'unknown':
-                return f"{speaker} says: {text_content}"
+                return f"{text_content}"
             else:
                 return text_content
                 
         elif text_type == 'thought':
             if speaker and speaker.lower() != 'unknown':
-                return f"{speaker} thinks: {text_content}"
+                return f"{text_content}"
             else:
-                return f"Thinking: {text_content}"
+                return text_content
                 
         elif text_type == 'narration':
             return text_content

@@ -310,16 +310,16 @@ class VisionAnalyzer:
                 if text_type == 'speech':
                     speaker = text_element.get('speaker', 'Character')
                     if speaker and speaker.lower() != 'unknown':
-                        speech_texts.append(f"{speaker} says: {text_content}")
+                        speech_texts.append(f"{text_content}")
                     else:
                         speech_texts.append(text_content)
                         
                 elif text_type == 'thought':
                     speaker = text_element.get('speaker', 'Character')
                     if speaker and speaker.lower() != 'unknown':
-                        thought_texts.append(f"{speaker} thinks: {text_content}")
+                        thought_texts.append(f"{text_content}")
                     else:
-                        thought_texts.append(f"Thinking: {text_content}")
+                        thought_texts.append(text_content)
                         
                 elif text_type == 'narration':
                     narration_texts.append(text_content)
