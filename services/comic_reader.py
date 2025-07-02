@@ -338,13 +338,13 @@ class ComicReader:
             voice_mapping = {
                 "narrator_scene": "en-US-ken",        # Deep, authoritative narrator
                 "narrator_general": "en-US-ken",      # General narrator
-                "male": "en-US-miles",                # Standard male voice
-                "female": "en-US-natalie",            # Standard female voice
-                "child": "en-US-natalie",             # Higher, younger voice
+                "male": "en-US-charles",              # Standard male voice - Charles
+                "female": "en-US-phoebe",             # Standard female voice - Phoebe
+                "child": "en-US-phoebe",              # Higher, younger voice - Phoebe
                 "elderly": "en-US-ken",               # Deeper, more measured
                 "authority": "en-US-ken",             # Authoritative voice
-                "villain": "en-US-terrell",           # Deeper, more dramatic male
-                "hero": "en-US-miles",                # Strong, confident male
+                "villain": "en-US-charles",           # Deeper, more dramatic male - Charles
+                "hero": "en-US-charles",              # Strong, confident male - Charles
             }
             
             selected_voice = voice_mapping.get(character_type, "en-US-miles")
@@ -744,10 +744,10 @@ class ComicReader:
             # Fallback to English if language not supported
             print(f"🎭 Language {language_code} not supported, falling back to English")
             fallback_voices = {
-                "male": "en-US-miles",
-                "female": "en-US-natalie"
+                "male": "en-US-charles",
+                "female": "en-US-phoebe"
             }
-            return fallback_voices.get(gender, "en-US-natalie")
+            return fallback_voices.get(gender, "en-US-phoebe")
 
     def _get_gender_from_speaker(self, speaker: str) -> Optional[str]:
         """
