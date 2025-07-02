@@ -7,6 +7,7 @@ import shutil
 from pathlib import Path
 import uuid
 from typing import List, Dict, Any
+import json
 
 from config import config
 from services.pdf_processor import PDFProcessor
@@ -14,6 +15,7 @@ from services.vision_analyzer import VisionAnalyzer
 from services.murf_tts import MurfTTSService
 from services.comic_reader import ComicReader
 from services.translation_service import TranslationService
+from services.preload_manager import PreloadManager
 
 # Create FastAPI app
 app = FastAPI(title="Audio Comic Reader", version="1.0.0")
@@ -54,6 +56,9 @@ translation_service = TranslationService()
 # Initialize comic reader with available services
 comic_reader = ComicReader(pdf_processor, vision_analyzer, tts_service)
 
+# Initialize preload manager for background processing
+preload_manager = PreloadManager(comic_reader, max_workers=2, preload_ahead=2)
+
 # Store active sessions
 active_sessions: Dict[str, Dict[str, Any]] = {}
 
@@ -70,7 +75,18 @@ async def startup_event():
     print(f"{'✅' if vision_analyzer else '⚠️'} Vision Analyzer: {'Ready' if vision_analyzer else 'Not configured (missing OpenAI API key)'}")
     print(f"{'✅' if tts_service else '⚠️'} TTS Service: {'Ready' if tts_service else 'Not configured (missing Murf API key)'}")
     print(f"✅ Translation Service: Ready")
+    
+    # Start preload manager background processing now that event loop is running
+    preload_manager.start_background_processing()
+    print(f"🚀 Preload Manager: Ready (preloading {preload_manager.preload_ahead} pages ahead)")
     print("🌐 Server is ready to accept requests!")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Clean up on shutdown"""
+    print("🛑 Audio Comic Reader shutting down...")
+    preload_manager.stop_background_processing()
+    print("✅ Cleanup completed")
 
 @app.get("/health")
 async def health_check():
@@ -165,13 +181,23 @@ async def upload_comic(
             "translated_panels": {}  # Cache for translated panel data
         }
         
+        # Trigger initial preloading of first few pages
+        print(f"🚀 Starting initial preloading for session {session_id}")
+        await preload_manager.preload_upcoming_pages(
+            session_id, 
+            0,  # Start from page 0
+            pages, 
+            preferred_language
+        )
+        
         return JSONResponse({
             "session_id": session_id,
             "filename": file.filename,
             "total_pages": len(pages),
             "preferred_language": preferred_language,
             "language_name": translation_service.get_language_name(preferred_language),
-            "message": "Comic uploaded successfully"
+            "message": "Comic uploaded successfully",
+            "preload_started": True
         })
         
     except Exception as e:
@@ -220,28 +246,44 @@ async def analyze_page(session_id: str, page_num: int):
         preferred_language = session_data.get("preferred_language", "en-US")
         print(f"🌐 Using language: {preferred_language}")
         
-        # Analyze page with vision model and generate audio with proper voice selection
-        print("🤖 Starting vision analysis and audio generation...")
-        analysis = await comic_reader.analyze_and_generate_audio(
-            page_image_path, 
-            language_code=preferred_language
-        )
+        # Check if page is already preloaded
+        preloaded_analysis = preload_manager.get_preloaded_page(session_id, page_num)
         
-        print(f"✅ Analysis complete. Found {len(analysis.get('panels', []))} panels")
-        
-        # Log panel details
-        for i, panel in enumerate(analysis.get('panels', [])):
-            text_elements = panel.get('text_elements', [])
-            print(f"  Panel {i+1}: {len(text_elements)} text elements")
-            print(f"    Text for speech: '{panel.get('text_for_speech', '')[:100]}...'")
-            print(f"    Voice ID: {panel.get('voice_id', 'None')}")
-            for j, text_elem in enumerate(text_elements):
-                print(f"    Text {j+1}: '{text_elem.get('text', '')[:50]}...'")
+        if preloaded_analysis:
+            print(f"⚡ Using preloaded analysis for page {page_num}")
+            analysis = preloaded_analysis
+        else:
+            # Analyze page with vision model and generate audio with proper voice selection
+            print("🤖 Starting vision analysis and audio generation...")
+            analysis = await comic_reader.analyze_and_generate_audio(
+                page_image_path, 
+                language_code=preferred_language
+            )
+            
+            print(f"✅ Analysis complete. Found {len(analysis.get('panels', []))} panels")
+            
+            # Log panel details
+            for i, panel in enumerate(analysis.get('panels', [])):
+                text_elements = panel.get('text_elements', [])
+                print(f"  Panel {i+1}: {len(text_elements)} text elements")
+                print(f"    Text for speech: '{panel.get('text_for_speech', '')[:100]}...'")
+                print(f"    Voice ID: {panel.get('voice_id', 'None')}")
+                for j, text_elem in enumerate(text_elements):
+                    print(f"    Text {j+1}: '{text_elem.get('text', '')[:50]}...'")
         
         # Update session data
         session_data["current_page"] = page_num
         session_data["panels"] = analysis["panels"]
         session_data["current_panel"] = 0
+        
+        # Trigger background preloading of upcoming pages
+        print("🚀 Triggering background preloading of upcoming pages...")
+        await preload_manager.preload_upcoming_pages(
+            session_id, 
+            page_num, 
+            session_data["pages"], 
+            preferred_language
+        )
         
         return JSONResponse(analysis)
         
@@ -253,15 +295,17 @@ async def analyze_page(session_id: str, page_num: int):
 async def generate_audio(
     session_id: str,
     text: str = Form(...),
-    voice_id: str = Form("default"),
-    gender: str = Form(None)
+    voice_id: str = Form(None),
+    gender: str = Form(None),
+    style: str = Form(None),
+    rate: int = Form(0, ge=-50, le=50),
+    pitch: int = Form(0, ge=-50, le=50)
 ):
-    """Generate audio for text using Murf AI"""
+    """Generate audio for text using Murf AI with custom settings."""
     try:
         print(f"🎤 Generating audio for session {session_id}")
         print(f"📝 Text: '{text[:100]}...'")
-        print(f"🎵 Voice: {voice_id}")
-        print(f"👤 Gender: {gender}")
+        print(f"🎵 Voice: {voice_id}, Style: {style}, Rate: {rate}, Pitch: {pitch}")
         
         if session_id not in active_sessions:
             print(f"❌ Session {session_id} not found")
@@ -269,7 +313,14 @@ async def generate_audio(
         
         # Generate audio
         print("🔄 Calling TTS service...")
-        audio_url = await tts_service.generate_speech(text, voice_id, gender=gender)
+        audio_url = await tts_service.generate_speech(
+            text, 
+            voice_id=voice_id, 
+            gender=gender,
+            style=style,
+            rate=rate,
+            pitch=pitch
+        )
         
         print(f"✅ Audio generated: {audio_url}")
         
@@ -476,14 +527,22 @@ async def get_session_status(session_id: str):
         raise HTTPException(status_code=404, detail="Session not found")
     
     session_data = active_sessions[session_id]
+    
+    # Get preload statistics
+    preload_stats = preload_manager.get_preload_stats(session_id)
+    
     return JSONResponse({
+        "session_id": session_id,
         "current_page": session_data["current_page"],
         "current_panel": session_data["current_panel"],
         "total_pages": len(session_data["pages"]),
-        "total_panels": len(session_data["panels"]),
         "filename": session_data["filename"],
         "preferred_language": session_data.get("preferred_language", "en-US"),
-        "language_name": translation_service.get_language_name(session_data.get("preferred_language", "en-US"))
+        "language_name": translation_service.get_language_name(session_data.get("preferred_language", "en-US")),
+        "has_panels": bool(session_data.get("panels")),
+        "total_panels": len(session_data.get("panels", [])),
+        "total_panels_with_audio": sum(1 for p in session_data.get("panels", []) if p.get("has_audio", False)),
+        "preload_stats": preload_stats
     })
 
 @app.post("/session/{session_id}/navigate")
@@ -545,10 +604,49 @@ async def cleanup_session(session_id: str):
             if os.path.exists(page_path):
                 os.remove(page_path)
         
+        # Clear preload data for this session
+        preload_manager.clear_session_data(session_id)
+        
         # Remove session
         del active_sessions[session_id]
     
     return JSONResponse({"message": "Session cleaned up successfully"})
+
+@app.get("/session/{session_id}/preload-status/{page_num}")
+async def get_page_preload_status(session_id: str, page_num: int):
+    """Get preload status for a specific page"""
+    if session_id not in active_sessions:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    session_data = active_sessions[session_id]
+    
+    if page_num >= len(session_data["pages"]):
+        raise HTTPException(status_code=400, detail="Invalid page number")
+    
+    status = preload_manager.get_preload_status(session_id, page_num)
+    is_preloaded = preload_manager.is_page_preloaded(session_id, page_num)
+    
+    return JSONResponse({
+        "session_id": session_id,
+        "page_num": page_num,
+        "status": status,
+        "is_preloaded": is_preloaded,
+        "has_data": is_preloaded
+    })
+
+@app.get("/voices")
+async def get_voices():
+    """Get available voices from voice.json"""
+    try:
+        voice_file = Path("voice.json")
+        if voice_file.exists():
+            with open(voice_file, 'r', encoding='utf-8') as f:
+                voices = json.load(f)
+            return {"voices": voices}
+        else:
+            return {"voices": [], "error": "Voice file not found"}
+    except Exception as e:
+        return {"voices": [], "error": str(e)}
 
 if __name__ == "__main__":
     import uvicorn

@@ -45,15 +45,20 @@ class MurfTTSService:
             return "en-US-ken"  # Ken - narrator voice
 
     async def generate_speech(self, text: str, voice_id: Optional[str] = None, 
-                            settings: Optional[Dict[str, Any]] = None, gender: Optional[str] = None) -> str:
+                            gender: Optional[str] = None,
+                            style: Optional[str] = None,
+                            rate: Optional[int] = 0,
+                            pitch: Optional[int] = 0) -> str:
         """
         Generate speech audio from text using Murf AI
         
         Args:
             text: Text to convert to speech
             voice_id: Murf AI voice ID to use
-            settings: Voice settings (speed, pitch, etc.)
             gender: Gender of the speaker
+            style: Optional voice style (e.g., 'Angry', 'Sad')
+            rate: Optional speech rate (-50 to 50)
+            pitch: Optional speech pitch (-50 to 50)
             
         Returns:
             URL path to the generated audio file
@@ -61,42 +66,45 @@ class MurfTTSService:
         try:
             if not self.api_key:
                 return await self._generate_fallback_audio(text)
-            # Use gender-based voice if provided
-            if gender:
+
+            if gender and not voice_id:
                 voice_id = self.select_voice_for_gender(gender)
             if not voice_id:
                 voice_id = self.default_voice_settings["voice_id"]
-            voice_settings = {**self.default_voice_settings}
-            if settings:
-                voice_settings.update(settings)
+            
             audio_filename = f"audio_{uuid.uuid4().hex}.mp3"
             audio_path = os.path.join(self.audio_dir, audio_filename)
+            
             payload = {
                 "text": text,
                 "voiceId": voice_id,
+                "style": style,
+                "rate": rate,
+                "pitch": pitch,
                 "format": "MP3",
                 "channelType": "MONO",
                 "sampleRate": 44100
             }
-            # Add optional settings if present
-            if "rate" in voice_settings:
-                payload["rate"] = voice_settings["rate"]
-            if "pitch" in voice_settings:
-                payload["pitch"] = voice_settings["pitch"]
-            if "style" in voice_settings:
-                payload["style"] = voice_settings["style"]
-            if "variation" in voice_settings:
-                payload["variation"] = voice_settings["variation"]
+
+            # Clean up payload from None values only
+            final_payload = {k: v for k, v in payload.items() if v is not None}
+            
+            # Only remove style if it's empty string, but keep 0 values for rate and pitch
+            if 'style' in final_payload and final_payload['style'] == '':
+                del final_payload['style']
+
             headers = {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 "api-key": self.api_key
             }
-            print(f"🎤 Generating audio for text: '{text[:50]}...' with voice: {voice_id}")
+            
+            print(f"🎤 Generating audio for text: '{text[:50]}...' with voice: {voice_id}, style: {style}, rate: {rate}, pitch: {pitch}")
+            
             async with aiohttp.ClientSession() as session:
                 async with session.post(
                     f"https://api.murf.ai/v1/speech/generate",
-                    json=payload,
+                    json=final_payload,
                     headers=headers
                 ) as response:
                     print(f"📡 Murf AI API response status: {response.status}")

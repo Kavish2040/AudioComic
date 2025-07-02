@@ -139,6 +139,7 @@ class VisionAnalyzer:
         4. Identify the approximate coordinates/bounds of each panel
         5. Describe what's happening in each panel briefly
         6. **CRITICAL**: Identify the speaker/character for each text element with specific gender detection
+        7. **VERY IMPORTANT**: Describe the emotional tone of the panel. For example, is the scene "dramatic", "funny", "sad", "action-packed", "romantic", "mysterious" or "neutral"?
 
         Please respond with a JSON object in this exact format:
         {
@@ -167,7 +168,7 @@ class VisionAnalyzer:
                             "text": "BOOM!"
                         }
                     ],
-                    "description": "Brief description of what's happening in this panel"
+                    "description": "Brief description of what's happening in this panel, including the emotional tone."
                 }
             ],
             "page_summary": "Overall summary of what happens on this page",
@@ -197,6 +198,7 @@ class VisionAnalyzer:
         - If you can't determine exact bounds, provide reasonable estimates
         - Include ALL visible text, even small sound effects
         - **BE SPECIFIC about speaker gender** - this is crucial for voice selection
+        - **Include the emotional tone** in the panel description.
         """
     
     def _parse_analysis_response(self, response_text: str) -> Dict[str, Any]:

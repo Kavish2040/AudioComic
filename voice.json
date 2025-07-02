@@ -1,0 +1,4277 @@
+[
+    {
+      "voiceId": "en-UK-hazel",
+      "displayName": "Hazel (F)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Promo"
+          ]
+        },
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "id-ID": {
+          "detail": "Indonesian (Indonesia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "ro-RO": {
+          "detail": "Romanian (Romania)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "tr-TR": {
+          "detail": "Turkish (Turkey)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-cooper",
+      "displayName": "Cooper (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Angry",
+        "Inspirational",
+        "Sad",
+        "Newscast"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Angry",
+            "Inspirational",
+            "Sad",
+            "Newscast"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-imani",
+      "displayName": "Imani (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "it-IT-giorgio",
+      "displayName": "Giorgio (M)",
+      "locale": "it-IT",
+      "displayLanguage": "Italian",
+      "accent": "Italy",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "bn-IN-arnab",
+      "displayName": "Arnab (M)",
+      "locale": "bn-IN",
+      "displayLanguage": "Bengali",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "bn-IN": {
+          "detail": "Bengali (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-wayne",
+      "displayName": "Wayne (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration",
+        "Conversational",
+        "Inspirational",
+        "Promo",
+        "NewsCast",
+        "Calm",
+        "Sad",
+        "Angry"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Conversational",
+            "Inspirational",
+            "Promo",
+            "NewsCast",
+            "Calm",
+            "Sad",
+            "Angry"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-daniel",
+      "displayName": "Daniel (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Inspirational",
+        "Sad",
+        "Storytelling"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Inspirational",
+            "Sad",
+            "Storytelling"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "hr-HR-marija",
+      "displayName": "Marija (F)",
+      "locale": "hr-HR",
+      "displayLanguage": "Croatian",
+      "accent": "Croatia",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Narration"
+      ],
+      "supportedLocales": {
+        "hr-HR": {
+          "detail": "Croatian (Croatia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "bn-IN-anwesha",
+      "displayName": "Anwesha (F)",
+      "locale": "bn-IN",
+      "displayLanguage": "Bengali",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "bn-IN": {
+          "detail": "Bengali (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "es-MX-alejandro",
+      "displayName": "Alejandro (M)",
+      "locale": "es-MX",
+      "displayLanguage": "Spanish",
+      "accent": "Mexico",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-joyce",
+      "displayName": "Joyce (F)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-zion",
+      "displayName": "Zion (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Promo",
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Promo",
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-IN-isha",
+      "displayName": "Isha (F)",
+      "locale": "en-IN",
+      "displayLanguage": "English",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-riley",
+      "displayName": "Riley (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Promo",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "ro-RO": {
+          "detail": "Romanian (Romania)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "bg-BG": {
+          "detail": "Bulgarian (Bulgaria)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Promo",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ko-KR-hwan",
+      "displayName": "Hwan (M)",
+      "locale": "ko-KR",
+      "displayLanguage": "Korean",
+      "accent": "Korea",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "ko-KR": {
+          "detail": "Korean (South Korea)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "fr-FR-adélie",
+      "displayName": "Adélie (F)",
+      "locale": "fr-FR",
+      "displayLanguage": "French",
+      "accent": "France",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-carter",
+      "displayName": "Carter (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Narration",
+        "Documentary",
+        "Calm"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Narration",
+            "Documentary",
+            "Calm"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ta-IN-sarvesh",
+      "displayName": "Sarvesh (M)",
+      "locale": "ta-IN",
+      "displayLanguage": "Tamil",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "ta-IN": {
+          "detail": "Tamil (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-gabriel",
+      "displayName": "Gabriel (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Documentary",
+        "Promo",
+        "Evil"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Conversational"
+          ]
+        },
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Documentary",
+            "Promo",
+            "Evil"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-juliet",
+      "displayName": "Juliet (F)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-IN-arohi",
+      "displayName": "Arohi (F)",
+      "locale": "en-IN",
+      "displayLanguage": "English",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Conversational",
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "fr-FR-maxime",
+      "displayName": "Maxime (M)",
+      "locale": "fr-FR",
+      "displayLanguage": "French",
+      "accent": "France",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "de-DE-josephine",
+      "displayName": "Josephine (F)",
+      "locale": "de-DE",
+      "displayLanguage": "German",
+      "accent": "Germany",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-hugo",
+      "displayName": "Hugo (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-samantha",
+      "displayName": "Samantha (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Luxury",
+        "Promo",
+        "Angry",
+        "Sad",
+        "Newscast"
+      ],
+      "supportedLocales": {
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Luxury",
+            "Promo",
+            "Angry",
+            "Sad",
+            "Newscast"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "de-DE-erna",
+      "displayName": "Erna (F)",
+      "locale": "de-DE",
+      "displayLanguage": "German",
+      "accent": "Germany",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "zh-CN-baolin",
+      "displayName": "Baolin (F)",
+      "locale": "zh-CN",
+      "displayLanguage": "Chinese",
+      "accent": "China",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "zh-CN": {
+          "detail": "Chinese (China)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pt-BR-isadora",
+      "displayName": "Isadora (F)",
+      "locale": "pt-BR",
+      "displayLanguage": "Portuguese",
+      "accent": "Brazil",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "pt-BR": {
+          "detail": "Portuguese (Brazil)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "it-IT-vincenzo",
+      "displayName": "Vincenzo (M)",
+      "locale": "it-IT",
+      "displayLanguage": "Italian",
+      "accent": "Italy",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-terrell",
+      "displayName": "Terrell (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Inspirational",
+        "Narration",
+        "Calm",
+        "Promo",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Promo"
+          ]
+        },
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Promo",
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Inspirational",
+            "Narration",
+            "Calm",
+            "Promo",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-denzel",
+      "displayName": "Denzel (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Promo",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Promo",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-heidi",
+      "displayName": "Heidi (F)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-miles",
+      "displayName": "Miles (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Sports Commentary",
+        "Narration",
+        "Newscast",
+        "Sad",
+        "Angry",
+        "Calm",
+        "Terrified",
+        "Inspirational",
+        "Pirate",
+        "Customer Support Agent"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Promo"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Promo"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Sports Commentary",
+            "Narration",
+            "Newscast",
+            "Sad",
+            "Angry",
+            "Calm",
+            "Terrified",
+            "Inspirational",
+            "Pirate",
+            "Customer Support Agent"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-abigail",
+      "displayName": "Abigail (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Narration",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "fr-FR-justine",
+      "displayName": "Justine (F)",
+      "locale": "fr-FR",
+      "displayLanguage": "French",
+      "accent": "France",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad",
+        "Angry"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad",
+            "Angry"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "it-IT-greta",
+      "displayName": "Greta (F)",
+      "locale": "it-IT",
+      "displayLanguage": "Italian",
+      "accent": "Italy",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-shane",
+      "displayName": "Shane (M)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-peter",
+      "displayName": "Peter (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "nl-NL-famke",
+      "displayName": "Famke (F)",
+      "locale": "nl-NL",
+      "displayLanguage": "Dutch",
+      "accent": "Netherlands",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "nl-NL": {
+          "detail": "Dutch (Netherlands)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-ivy",
+      "displayName": "Ivy (F)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Angry",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Angry",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "nl-NL-dirk",
+      "displayName": "Dirk (M)",
+      "locale": "nl-NL",
+      "displayLanguage": "Dutch",
+      "accent": "Netherlands",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        },
+        "nl-NL": {
+          "detail": "Dutch (Netherlands)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "fr-FR-axel",
+      "displayName": "Axel (M)",
+      "locale": "fr-FR",
+      "displayLanguage": "French",
+      "accent": "France",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "es-ES-carla",
+      "displayName": "Carla (F)",
+      "locale": "es-ES",
+      "displayLanguage": "Spanish",
+      "accent": "Spain",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-claire",
+      "displayName": "Claire (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Narration",
+        "Luxury"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Luxury"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ko-KR-jangmi",
+      "displayName": "Jangmi (F)",
+      "locale": "ko-KR",
+      "displayLanguage": "Korean",
+      "accent": "Korea",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "ko-KR": {
+          "detail": "Korean (South Korea)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ko-KR-sanghoon",
+      "displayName": "SangHoon (M)",
+      "locale": "ko-KR",
+      "displayLanguage": "Korean",
+      "accent": "Korea",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo"
+      ],
+      "supportedLocales": {
+        "ko-KR": {
+          "detail": "Korean (South Korea)",
+          "availableStyles": [
+            "Conversational",
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ja-JP-denki",
+      "displayName": "Denki (M)",
+      "locale": "ja-JP",
+      "displayLanguage": "Japanese",
+      "accent": "Japan",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "ja-JP": {
+          "detail": "Japanese (Japan)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "it-IT-vera",
+      "displayName": "Vera (F)",
+      "locale": "it-IT",
+      "displayLanguage": "Italian",
+      "accent": "Italy",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "hi-IN-rahul",
+      "displayName": "Rahul (M)",
+      "locale": "hi-IN",
+      "displayLanguage": "Hindi",
+      "accent": "India",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "es-ES-elvira",
+      "displayName": "Elvira (F)",
+      "locale": "es-ES",
+      "displayLanguage": "Spanish",
+      "accent": "Spain",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational",
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "es-ES-enrique",
+      "displayName": "Enrique (M)",
+      "locale": "es-ES",
+      "displayLanguage": "Spanish",
+      "accent": "Spain",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm"
+      ],
+      "supportedLocales": {
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-aiden",
+      "displayName": "Aiden (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Narration",
+        "Character"
+      ],
+      "supportedLocales": {
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational",
+            "Narration",
+            "Character"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-ronnie",
+      "displayName": "Ronnie (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Promo",
+        "Conversational",
+        "Angry",
+        "Sad",
+        "NewsCast"
+      ],
+      "supportedLocales": {
+        "id-ID": {
+          "detail": "Indonesian (Indonesia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "tr-TR": {
+          "detail": "Turkish (Turkey)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "bg-BG": {
+          "detail": "Bulgarian (Bulgaria)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Promo",
+            "Conversational",
+            "Angry",
+            "Sad",
+            "NewsCast"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-amber",
+      "displayName": "Amber (F)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Documentary",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Documentary",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "hi-IN-shweta",
+      "displayName": "Shweta (F)",
+      "locale": "hi-IN",
+      "displayLanguage": "Hindi",
+      "accent": "India",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "hi-IN-amit",
+      "displayName": "Amit (M)",
+      "locale": "hi-IN",
+      "displayLanguage": "Hindi",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-jimm",
+      "displayName": "Jimm (M)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Promo",
+            "Conversational"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Conversational",
+            "Promo"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-pearl",
+      "displayName": "Pearl (F)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Storytelling",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Storytelling",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pt-BR-benício",
+      "displayName": "Benício (M)",
+      "locale": "pt-BR",
+      "displayLanguage": "Portuguese",
+      "accent": "Brazil",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "pt-BR": {
+          "detail": "Portuguese (Brazil)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-freddie",
+      "displayName": "Freddie (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "id-ID": {
+          "detail": "Indonesian (Indonesia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Promo",
+            "Conversational"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-ryan",
+      "displayName": "Ryan (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration",
+        "Conversational",
+        "Promo",
+        "Angry",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Conversational",
+            "Promo",
+            "Angry",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pt-BR-eloa",
+      "displayName": "Eloa (F)",
+      "locale": "pt-BR",
+      "displayLanguage": "Portuguese",
+      "accent": "Brazil",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo"
+      ],
+      "supportedLocales": {
+        "pt-BR": {
+          "detail": "Portuguese (Brazil)",
+          "availableStyles": [
+            "Conversational",
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-charlotte",
+      "displayName": "Charlotte (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "de-DE-lia",
+      "displayName": "Lia (F)",
+      "locale": "de-DE",
+      "displayLanguage": "German",
+      "accent": "Germany",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-natalie",
+      "displayName": "Natalie (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Promo",
+        "Narration",
+        "Newscast Formal",
+        "Meditative",
+        "Sad",
+        "Angry",
+        "Conversational",
+        "Newscast Casual",
+        "Furious",
+        "Sorrowful",
+        "Terrified",
+        "Inspirational"
+      ],
+      "supportedLocales": {
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Promo",
+            "Conversational"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Promo"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Promo",
+            "Narration",
+            "Newscast Formal",
+            "Meditative",
+            "Sad",
+            "Angry",
+            "Conversational",
+            "Newscast Casual",
+            "Furious",
+            "Sorrowful",
+            "Terrified",
+            "Inspirational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-michelle",
+      "displayName": "Michelle (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-phoebe",
+      "displayName": "Phoebe (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "es-ES-carmen",
+      "displayName": "Carmen (F)",
+      "locale": "es-ES",
+      "displayLanguage": "Spanish",
+      "accent": "Spain",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-caleb",
+      "displayName": "Caleb (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Promo",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Promo",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-iris",
+      "displayName": "Iris (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Friendly",
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Friendly",
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-harrison",
+      "displayName": "Harrison (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Narration",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-marcus",
+      "displayName": "Marcus (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-josie",
+      "displayName": "Josie (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Narration",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-ariana",
+      "displayName": "Ariana (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-daisy",
+      "displayName": "Daisy (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Narration",
+        "NewsCast",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Narration",
+            "NewsCast",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-charles",
+      "displayName": "Charles (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "NewsCast",
+        "Inspirational",
+        "Sad",
+        "Angry"
+      ],
+      "supportedLocales": {
+        "id-ID": {
+          "detail": "Indonesian (Indonesia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "el-GR": {
+          "detail": "Greek (Greece)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "ro-RO": {
+          "detail": "Romanian (Romania)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "NewsCast",
+            "Inspirational",
+            "Sad",
+            "Angry"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-reggie",
+      "displayName": "Reggie (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Promo"
+      ],
+      "supportedLocales": {
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "sk-SK-tibor",
+      "displayName": "Tibor (M)",
+      "locale": "sk-SK",
+      "displayLanguage": "Slovak",
+      "accent": "Slovakia",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration"
+      ],
+      "supportedLocales": {
+        "sk-SK": {
+          "detail": "Slovak (Slovakia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-julia",
+      "displayName": "Julia (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Narration",
+        "Witch",
+        "Conversational",
+        "Promo",
+        "Storytelling",
+        "Calm",
+        "Newscast",
+        "Angry",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Witch",
+            "Conversational",
+            "Promo",
+            "Storytelling",
+            "Calm",
+            "Newscast",
+            "Angry",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-SCOTT-emily",
+      "displayName": "Emily (F)",
+      "locale": "en-SCOTT",
+      "displayLanguage": "English",
+      "accent": "Scotland",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-SCOTT": {
+          "detail": "English (Scotland)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-dylan",
+      "displayName": "Dylan (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Documentary",
+        "Conversational",
+        "Inspirational",
+        "Newscast"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Documentary",
+            "Conversational",
+            "Inspirational",
+            "Newscast"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "es-MX-valeria",
+      "displayName": "Valeria (F)",
+      "locale": "es-MX",
+      "displayLanguage": "Spanish",
+      "accent": "Mexico",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-IN-eashwar",
+      "displayName": "Eashwar (M)",
+      "locale": "en-IN",
+      "displayLanguage": "English",
+      "accent": "India",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Narration",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-evelyn",
+      "displayName": "Evelyn (F)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Promo",
+            "Conversational"
+          ]
+        },
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "de-DE-lara",
+      "displayName": "Lara (F)",
+      "locale": "de-DE",
+      "displayLanguage": "German",
+      "accent": "Germany",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-evander",
+      "displayName": "Evander (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Friendly",
+        "Narration",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Friendly",
+            "Narration",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-SCOTT-rory",
+      "displayName": "Rory (M)",
+      "locale": "en-SCOTT",
+      "displayLanguage": "English",
+      "accent": "Scotland",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-SCOTT": {
+          "detail": "English (Scotland)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pt-BR-yago",
+      "displayName": "Yago (M)",
+      "locale": "pt-BR",
+      "displayLanguage": "Portuguese",
+      "accent": "Brazil",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "pt-BR": {
+          "detail": "Portuguese (Brazil)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ta-IN-iniya",
+      "displayName": "Iniya (F)",
+      "locale": "ta-IN",
+      "displayLanguage": "Tamil",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "ta-IN": {
+          "detail": "Tamil (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-leyton",
+      "displayName": "Leyton (M)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Narration",
+        "Calm",
+        "Angry",
+        "Sad",
+        "Promo",
+        "Newscast",
+        "Terrified",
+        "Inspirational"
+      ],
+      "supportedLocales": {
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational",
+            "Narration",
+            "Calm",
+            "Angry",
+            "Sad",
+            "Promo",
+            "Newscast",
+            "Terrified",
+            "Inspirational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ko-KR-minseo",
+      "displayName": "Minseo (F)",
+      "locale": "ko-KR",
+      "displayLanguage": "Korean",
+      "accent": "Korea",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "ko-KR": {
+          "detail": "Korean (South Korea)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "fr-FR-louise",
+      "displayName": "Louise (F)",
+      "locale": "fr-FR",
+      "displayLanguage": "French",
+      "accent": "France",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "zh-CN-wei",
+      "displayName": "Wei (F)",
+      "locale": "zh-CN",
+      "displayLanguage": "Chinese",
+      "accent": "China",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "zh-CN": {
+          "detail": "Chinese (China)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ko-KR-gyeong",
+      "displayName": "Gyeong (F)",
+      "locale": "ko-KR",
+      "displayLanguage": "Korean",
+      "accent": "Korea",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "ko-KR": {
+          "detail": "Korean (South Korea)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "de-DE-matthias",
+      "displayName": "Matthias (M)",
+      "locale": "de-DE",
+      "displayLanguage": "German",
+      "accent": "Germany",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Angry"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        },
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Angry"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-IN-rohan",
+      "displayName": "Rohan (M)",
+      "locale": "en-IN",
+      "displayLanguage": "English",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-delilah",
+      "displayName": "Delilah (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Narration",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-paul",
+      "displayName": "Paul (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Audiobook",
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Audiobook",
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-lucas",
+      "displayName": "Lucas (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Promo"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "bn-IN-abhik",
+      "displayName": "Abhik (M)",
+      "locale": "bn-IN",
+      "displayLanguage": "Bengali",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "bn-IN": {
+          "detail": "Bengali (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-angela",
+      "displayName": "Angela (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Promo"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-naomi",
+      "displayName": "Naomi (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Inspirational"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Inspirational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "es-MX-carlos",
+      "displayName": "Carlos (M)",
+      "locale": "es-MX",
+      "displayLanguage": "Spanish",
+      "accent": "Mexico",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "nl-NL-merel",
+      "displayName": "Merel (F)",
+      "locale": "nl-NL",
+      "displayLanguage": "Dutch",
+      "accent": "Netherlands",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "nl-NL": {
+          "detail": "Dutch (Netherlands)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ja-JP-kenji",
+      "displayName": "Kenji (M)",
+      "locale": "ja-JP",
+      "displayLanguage": "Japanese",
+      "accent": "Japan",
+      "description": "",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "ja-JP": {
+          "detail": "Japanese (Japan)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-alicia",
+      "displayName": "Alicia (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Angry",
+        "Calm"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Angry",
+            "Calm"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-IN-alia",
+      "displayName": "Alia (F)",
+      "locale": "en-IN",
+      "displayLanguage": "English",
+      "accent": "India",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Narration",
+        "Promo",
+        "Documentary"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Narration",
+            "Promo",
+            "Documentary"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "zh-CN-jiao",
+      "displayName": "Jiao (F)",
+      "locale": "zh-CN",
+      "displayLanguage": "Chinese",
+      "accent": "China",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "zh-CN": {
+          "detail": "Chinese (China)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-june",
+      "displayName": "June (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Promo"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-ashton",
+      "displayName": "Ashton (M)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration",
+        "Promo"
+      ],
+      "supportedLocales": {
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Narration",
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-finley",
+      "displayName": "Finley (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Promo",
+        "Narration",
+        "Conversational",
+        "Angry",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Promo",
+            "Narration",
+            "Conversational",
+            "Angry",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pl-PL-blazej",
+      "displayName": "Blazej (M)",
+      "locale": "pl-PL",
+      "displayLanguage": "Polish",
+      "accent": "Poland",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "pl-PL": {
+          "detail": "Polish (Poland)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "el-GR-stavros",
+      "displayName": "Stavros (M)",
+      "locale": "el-GR",
+      "displayLanguage": "Greek",
+      "accent": "Greece",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration"
+      ],
+      "supportedLocales": {
+        "el-GR": {
+          "detail": "Greek (Greece)",
+          "availableStyles": [
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "zh-CN-zhang",
+      "displayName": "Zhang (M)",
+      "locale": "zh-CN",
+      "displayLanguage": "Chinese",
+      "accent": "China",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm"
+      ],
+      "supportedLocales": {
+        "zh-CN": {
+          "detail": "Chinese (China)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-sophia",
+      "displayName": "Sophia (F)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-kylie",
+      "displayName": "Kylie (F)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Calm"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational",
+            "Calm"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-jayden",
+      "displayName": "Jayden (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration",
+        "Friendly",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration",
+            "Friendly",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-IN-aarav",
+      "displayName": "Aarav (M)",
+      "locale": "en-IN",
+      "displayLanguage": "English",
+      "accent": "India",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "de-DE-björn",
+      "displayName": "Björn (M)",
+      "locale": "de-DE",
+      "displayLanguage": "German",
+      "accent": "Germany",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational",
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "bn-IN-ishani",
+      "displayName": "Ishani (F)",
+      "locale": "bn-IN",
+      "displayLanguage": "Bengali",
+      "accent": "India",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "bn-IN": {
+          "detail": "Bengali (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "zh-CN-yuxan",
+      "displayName": "Yuxan (M)",
+      "locale": "zh-CN",
+      "displayLanguage": "Chinese",
+      "accent": "China",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "zh-CN": {
+          "detail": "Chinese (China)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "fr-FR-louis",
+      "displayName": "Louis (M)",
+      "locale": "fr-FR",
+      "displayLanguage": "French",
+      "accent": "France",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Promo",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Promo",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ko-KR-jong-su",
+      "displayName": "Jong-su (M)",
+      "locale": "ko-KR",
+      "displayLanguage": "Korean",
+      "accent": "Korea",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "ko-KR": {
+          "detail": "Korean (South Korea)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-harper",
+      "displayName": "Harper (M)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Casual"
+      ],
+      "supportedLocales": {
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational",
+            "Casual"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ta-IN-abirami",
+      "displayName": "Abirami (F)",
+      "locale": "ta-IN",
+      "displayLanguage": "Tamil",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "ta-IN": {
+          "detail": "Tamil (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-ruby",
+      "displayName": "Ruby (F)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Angry",
+        "Sad",
+        "Newscast",
+        "Calm"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "id-ID": {
+          "detail": "Indonesian (Indonesia)",
+          "availableStyles": [
+            "Narration",
+            "Conversational"
+          ]
+        },
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "hr-HR": {
+          "detail": "Croatian (Croatia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "tr-TR": {
+          "detail": "Turkish (Turkey)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "el-GR": {
+          "detail": "Greek (Greece)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Angry",
+            "Sad",
+            "Newscast",
+            "Calm"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ja-JP-kimi",
+      "displayName": "Kimi (F)",
+      "locale": "ja-JP",
+      "displayLanguage": "Japanese",
+      "accent": "Japan",
+      "description": "",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "ja-JP": {
+          "detail": "Japanese (Japan)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-ken",
+      "displayName": "Ken (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Newscast",
+        "Storytelling",
+        "Calm",
+        "Furious",
+        "Angry",
+        "Sobbing",
+        "Sad",
+        "Wizard",
+        "Audiobook",
+        "Clown"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Promo",
+            "Conversational"
+          ]
+        },
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Promo"
+          ]
+        },
+        "tr-TR": {
+          "detail": "Turkish (Turkey)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "hr-HR": {
+          "detail": "Croatian (Croatia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "el-GR": {
+          "detail": "Greek (Greece)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Newscast",
+            "Storytelling",
+            "Calm",
+            "Furious",
+            "Angry",
+            "Sobbing",
+            "Sad",
+            "Wizard",
+            "Audiobook",
+            "Clown"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pt-BR-silvio",
+      "displayName": "Silvio (M)",
+      "locale": "pt-BR",
+      "displayLanguage": "Portuguese",
+      "accent": "Brazil",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "pt-BR": {
+          "detail": "Portuguese (Brazil)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ta-IN-mani",
+      "displayName": "Mani (M)",
+      "locale": "ta-IN",
+      "displayLanguage": "Tamil",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Narration",
+            "Conversational"
+          ]
+        },
+        "ta-IN": {
+          "detail": "Tamil (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "de-DE-ralf",
+      "displayName": "Ralf (M)",
+      "locale": "de-DE",
+      "displayLanguage": "German",
+      "accent": "Germany",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-jaxon",
+      "displayName": "Jaxon (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-river",
+      "displayName": "River (NB)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "NonBinary",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-IN-priya",
+      "displayName": "Priya (F)",
+      "locale": "en-IN",
+      "displayLanguage": "English",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Narration",
+        "Promo"
+      ],
+      "supportedLocales": {
+        "en-IN": {
+          "detail": "English (India)",
+          "availableStyles": [
+            "Conversational",
+            "Narration",
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-theo",
+      "displayName": "Theo (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration",
+        "Promo",
+        "Calm",
+        "Sad",
+        "Angry",
+        "Character"
+      ],
+      "supportedLocales": {
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "tr-TR": {
+          "detail": "Turkish (Turkey)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "el-GR": {
+          "detail": "Greek (Greece)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "sk-SK": {
+          "detail": "Slovak (Slovakia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "ro-RO": {
+          "detail": "Romanian (Romania)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "bg-BG": {
+          "detail": "Bulgarian (Bulgaria)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Narration",
+            "Promo",
+            "Calm",
+            "Sad",
+            "Angry",
+            "Character"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-katie",
+      "displayName": "Katie (F)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        },
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pl-PL-jacek",
+      "displayName": "Jacek (M)",
+      "locale": "pl-PL",
+      "displayLanguage": "Polish",
+      "accent": "Poland",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "pl-PL": {
+          "detail": "Polish (Poland)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "it-IT-lorenzo",
+      "displayName": "Lorenzo (M)",
+      "locale": "it-IT",
+      "displayLanguage": "Italian",
+      "accent": "Italy",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo"
+      ],
+      "supportedLocales": {
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational",
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-maverick",
+      "displayName": "Maverick (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Narration"
+      ],
+      "supportedLocales": {
+        "de-DE": {
+          "detail": "German (Germany)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "hi-IN-shaan",
+      "displayName": "Shaan (M)",
+      "locale": "hi-IN",
+      "displayLanguage": "Hindi",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-amara",
+      "displayName": "Amara (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "it-IT": {
+          "detail": "Italian (Italy)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        },
+        "fr-FR": {
+          "detail": "French (France)",
+          "availableStyles": [
+            "Promo"
+          ]
+        },
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-UK-mason",
+      "displayName": "Mason (M)",
+      "locale": "en-UK",
+      "displayLanguage": "English",
+      "accent": "UK",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Documentary",
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-UK": {
+          "detail": "English (UK)",
+          "availableStyles": [
+            "Documentary",
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pt-BR-gustavo",
+      "displayName": "Gustavo (M)",
+      "locale": "pt-BR",
+      "displayLanguage": "Portuguese",
+      "accent": "Brazil",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "pt-BR": {
+          "detail": "Portuguese (Brazil)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "hi-IN-kabir",
+      "displayName": "Kabir (M)",
+      "locale": "hi-IN",
+      "displayLanguage": "Hindi",
+      "accent": "India",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "es-ES-javier",
+      "displayName": "Javier (M)",
+      "locale": "es-ES",
+      "displayLanguage": "Spanish",
+      "accent": "Spain",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "es-ES": {
+          "detail": "Spanish (Spain)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-AU-mitch",
+      "displayName": "Mitch (M)",
+      "locale": "en-AU",
+      "displayLanguage": "English",
+      "accent": "Australia",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Casual",
+        "Promo",
+        "Narration"
+      ],
+      "supportedLocales": {
+        "en-AU": {
+          "detail": "English (Australia)",
+          "availableStyles": [
+            "Conversational",
+            "Casual",
+            "Promo",
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pt-BR-heitor",
+      "displayName": "Heitor (M)",
+      "locale": "pt-BR",
+      "displayLanguage": "Portuguese",
+      "accent": "Brazil",
+      "description": "Middle-Aged",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo"
+      ],
+      "supportedLocales": {
+        "pt-BR": {
+          "detail": "Portuguese (Brazil)",
+          "availableStyles": [
+            "Conversational",
+            "Promo"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "ko-KR-seok",
+      "displayName": "Seok (M)",
+      "locale": "ko-KR",
+      "displayLanguage": "Korean",
+      "accent": "Korea",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Audiobook"
+      ],
+      "supportedLocales": {
+        "ko-KR": {
+          "detail": "Korean (South Korea)",
+          "availableStyles": [
+            "Audiobook"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-edmund",
+      "displayName": "Edmund (M)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Sports Commentary",
+        "Inspirational",
+        "Sad",
+        "NewsCast"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Sports Commentary",
+            "Inspirational",
+            "Sad",
+            "NewsCast"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "hi-IN-ayushi",
+      "displayName": "Ayushi (F)",
+      "locale": "hi-IN",
+      "displayLanguage": "Hindi",
+      "accent": "India",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "hi-IN": {
+          "detail": "Hindi (India)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "pl-PL-kasia",
+      "displayName": "Kasia (F)",
+      "locale": "pl-PL",
+      "displayLanguage": "Polish",
+      "accent": "Poland",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "pl-PL": {
+          "detail": "Polish (Poland)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "sk-SK-nina",
+      "displayName": "Nina (F)",
+      "locale": "sk-SK",
+      "displayLanguage": "Slovak",
+      "accent": "Slovakia",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Narration"
+      ],
+      "supportedLocales": {
+        "sk-SK": {
+          "detail": "Slovak (Slovakia)",
+          "availableStyles": [
+            "Narration"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "es-MX-luisa",
+      "displayName": "Luisa (F)",
+      "locale": "es-MX",
+      "displayLanguage": "Spanish",
+      "accent": "Mexico",
+      "description": "Middle-Aged",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "es-MX": {
+          "detail": "Spanish (Mexico)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "zh-CN-tao",
+      "displayName": "Tao (M)",
+      "locale": "zh-CN",
+      "displayLanguage": "Chinese",
+      "accent": "China",
+      "description": "Young Adult",
+      "gender": "Male",
+      "availableStyles": [
+        "Conversational",
+        "Promo",
+        "Calm",
+        "Sad"
+      ],
+      "supportedLocales": {
+        "zh-CN": {
+          "detail": "Chinese (China)",
+          "availableStyles": [
+            "Conversational",
+            "Promo",
+            "Calm",
+            "Sad"
+          ]
+        }
+      }
+    },
+    {
+      "voiceId": "en-US-molly",
+      "displayName": "Molly (F)",
+      "locale": "en-US",
+      "displayLanguage": "English",
+      "accent": "US & Canada",
+      "description": "Young Adult",
+      "gender": "Female",
+      "availableStyles": [
+        "Conversational"
+      ],
+      "supportedLocales": {
+        "en-US": {
+          "detail": "English (US & Canada)",
+          "availableStyles": [
+            "Conversational"
+          ]
+        }
+      }
+    }
+  ]

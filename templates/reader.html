@@ -5,19 +5,19 @@
 {% block extra_css %}
 <style>
     :root {
-        --text-primary: #1f2937;
-        --text-secondary: #6b7280;
-        --text-muted: #9ca3af;
-        --background: #ffffff;
-        --surface: #f9fafb;
-        --border: #e5e7eb;
-        --border-light: #f3f4f6;
-        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        --radius: 8px;
-        --radius-lg: 12px;
-        --accent-orange: #F59E0B;
+        --text-primary: #2d3748;
+        --text-secondary: #718096;
+        --text-muted: #a0aec0;
+        --background: #fefefe;
+        --surface: #f7fafc;
+        --border: #e2e8f0;
+        --border-light: #f1f5f9;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --radius: 12px;
+        --radius-lg: 16px;
+        --accent: #4f46e5;
+        --accent-light: #6366f1;
     }
 
     * {
@@ -27,26 +27,25 @@
     }
 
     body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         background: var(--background);
         color: var(--text-primary);
         line-height: 1.6;
+        font-size: 15px;
     }
 
-    /* Clean Typography */
+    /* Minimal Typography */
     h1, h2, h3, h4, h5, h6 {
-        font-weight: 600;
-        letter-spacing: -0.025em;
-        margin-bottom: 1rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        margin-bottom: 0.75rem;
         color: var(--text-primary);
     }
 
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.75rem; }
-    h3 { font-size: 1.5rem; }
-    h4 { font-size: 1.25rem; }
-    h5 { font-size: 1.125rem; }
-    h6 { font-size: 1rem; }
+    h3 { font-size: 1.125rem; }
+    h4 { font-size: 1rem; }
+    h5 { font-size: 0.9rem; }
+    h6 { font-size: 0.85rem; }
 
     /* Clean Reader Layout */
     .reader-container {
@@ -222,17 +221,17 @@
         background: rgba(245, 158, 11, 0.1);
     }
 
-    /* Clean Control Panel */
+    /* Minimal Control Panel */
     .control-panel {
-        background: var(--background);
+        background: var(--surface);
         border-radius: var(--radius-lg);
-        padding: 1.5rem;
-        box-shadow: var(--shadow-md);
+        padding: 2rem;
         border: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
     }
 
     .control-section {
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
     }
 
     .control-section:last-child {
@@ -242,114 +241,168 @@
     .section-title {
         color: var(--text-primary);
         font-size: 1rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
+        font-weight: 500;
+        margin-bottom: 1.25rem;
+        letter-spacing: -0.01em;
+    }
+
+    .section-header {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        justify-content: space-between;
+        margin-bottom: 1.25rem;
     }
 
-    .section-title i {
-        color: var(--accent-orange);
-        font-size: 1rem;
+    .ai-indicator {
+        background: var(--accent);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
     }
 
-    /* Clean Buttons */
+    /* Minimal Buttons */
+    .control-buttons {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
     .btn {
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 1.5rem;
         border-radius: var(--radius);
         font-weight: 500;
         font-size: 0.875rem;
         border: 1px solid var(--border);
         cursor: pointer;
-        transition: all 0.2s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        text-decoration: none;
+        transition: all 0.15s ease;
         background: var(--background);
         color: var(--text-primary);
+        text-decoration: none;
     }
 
     .btn:hover {
         background: var(--surface);
+        transform: translateY(-1px);
+    }
+
+    .btn-outline {
+        background: var(--background);
+        color: var(--text-secondary);
+        border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+        background: var(--surface);
+        color: var(--text-primary);
         border-color: var(--text-secondary);
     }
 
     .btn-primary {
-        background: var(--accent-orange);
+        background: var(--accent);
         color: white;
-        border-color: var(--accent-orange);
+        border-color: var(--accent);
     }
 
     .btn-primary:hover {
-        background: #d97706;
-        border-color: #d97706;
+        background: var(--accent-light);
+        border-color: var(--accent-light);
     }
 
     .btn-secondary {
-        background: var(--surface);
-        color: var(--text-primary);
-        border-color: var(--border);
+        background: var(--text-secondary);
+        color: white;
+        border-color: var(--text-secondary);
     }
 
     .btn-secondary:hover {
-        background: var(--border-light);
-        color: var(--text-primary);
-    }
-
-    .btn-success {
-        background: #10b981;
-        color: white;
-        border-color: #10b981;
-    }
-
-    .btn-success:hover {
-        background: #059669;
-        border-color: #059669;
-        color: white;
+        background: var(--text-primary);
+        border-color: var(--text-primary);
     }
 
     .btn:disabled {
-        opacity: 0.5;
+        opacity: 0.4;
         cursor: not-allowed;
+        transform: none;
     }
 
-    /* Professional Switches */
-    .form-check {
+    /* Minimal Preferences */
+    .preferences-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .preference-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .preference-item {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
+        gap: 0.75rem;
+        cursor: pointer;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        position: relative;
     }
 
-    .form-check-input {
-        width: 1.2rem;
-        height: 1.2rem;
-        border-radius: 0.25rem;
-        border: 2px solid rgba(255, 255, 255, 0.4);
-        background: rgba(255, 255, 255, 0.1);
-        transition: all 0.2s ease;
+    .preference-item input {
+        position: absolute;
+        opacity: 0;
         cursor: pointer;
     }
-    
-    .form-check-input[type="radio"] {
+
+    .checkmark, .radiomark {
+        width: 18px;
+        height: 18px;
+        background: var(--background);
+        border: 2px solid var(--border);
+        border-radius: 4px;
+        transition: all 0.15s ease;
+        position: relative;
+    }
+
+    .radiomark {
         border-radius: 50%;
     }
 
-    .form-check-input:checked {
-        background: var(--accent-color);
-        border-color: var(--accent-color);
+    .preference-item:hover .checkmark,
+    .preference-item:hover .radiomark {
+        border-color: var(--accent);
     }
 
-    .form-check-input:focus {
-        box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+    .preference-item input:checked ~ .checkmark,
+    .preference-item input:checked ~ .radiomark {
+        background: var(--accent);
+        border-color: var(--accent);
     }
 
-    .form-check-label {
-        color: var(--text-primary);
-        font-weight: 500;
-        cursor: pointer;
+    .preference-item input:checked ~ .checkmark::after {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 2px;
+        width: 4px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    .preference-item input:checked ~ .radiomark::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+        transform: translate(-50%, -50%);
     }
 
     /* Professional Audio Player */
@@ -398,6 +451,94 @@
         font-weight: 600;
         margin-bottom: 0.25rem;
         color: var(--text-primary);
+    }
+
+    /* Minimal Voice Controls */
+    .voice-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .control-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .control-label {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    .control-select {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--background);
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        transition: all 0.15s ease;
+    }
+
+    .control-select:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .control-slider {
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--border-light);
+        outline: none;
+        appearance: none;
+        cursor: pointer;
+    }
+
+    .control-slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        cursor: pointer;
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .control-slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        cursor: pointer;
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .preferences-grid,
+        .control-row {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .control-buttons {
+            flex-direction: column;
+        }
+        
+        .control-panel {
+            padding: 1.5rem;
+        }
     }
 
     .audio-status {
@@ -644,6 +785,9 @@
                     <div class="progress-bar">
                         <div class="progress-fill" id="pageProgress" style="width: 0%"></div>
                     </div>
+                    <div class="preload-status" id="preloadStatus" style="display: none; font-size: 0.75rem; color: var(--text-muted);">
+                        <i class="fas fa-rocket"></i> <span id="preloadText">Preloading...</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -660,94 +804,93 @@
                 <div id="panelOverlays" class="panel-overlays"></div>
             </div>
 
-            <!-- Professional Control Panel -->
+            <!-- Control Panel -->
             <div class="control-panel">
                 <div class="control-section">
-                    <h6 class="section-title">
-                        <i class="fas fa-cog"></i>
-                        Reading Controls
-                    </h6>
-                    <div class="d-flex align-items-center gap-3 flex-wrap">
-                        <button class="btn btn-secondary" onclick="previousPage()" id="prevPageBtn">
-                            <i class="fas fa-chevron-left"></i>
+                    <h5 class="section-title">Reading Controls</h5>
+                    <div class="control-buttons">
+                        <button class="btn btn-outline" onclick="previousPage()" id="prevPageBtn">
                             Previous
                         </button>
-                        <button class="btn btn-secondary" onclick="nextPage()" id="nextPageBtn">
+                        <button class="btn btn-outline" onclick="nextPage()" id="nextPageBtn">
                             Next
-                            <i class="fas fa-chevron-right"></i>
                         </button>
                         <button class="btn btn-primary" onclick="analyzePage()" id="analyzeBtn">
-                            <i class="fas fa-magic"></i>
                             Analyze Page
                         </button>
-                        <button class="btn btn-success" onclick="generatePageSummary()">
-                            <i class="fas fa-file-audio"></i>
+                        <button class="btn btn-secondary" onclick="generatePageSummary()">
                             Page Summary
                         </button>
                     </div>
                 </div>
 
                 <div class="control-section">
-                    <h6 class="section-title">
-                        <i class="fas fa-cog"></i>
-                        Reading Preferences
-                    </h6>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="autoPlaySwitch" checked>
-                                <label class="form-check-label" for="autoPlaySwitch">
-                                    <i class="fas fa-play-circle" style="margin-right: 0.5rem; color: var(--accent-orange);"></i>
-                                    Auto-play audio
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="autoAdvanceSwitch" checked>
-                                <label class="form-check-label" for="autoAdvanceSwitch">
-                                    <i class="fas fa-forward" style="margin-right: 0.5rem; color: var(--accent-orange);"></i>
-                                    Auto-advance panels
-                                </label>
-                            </div>
+                    <h5 class="section-title">Reading Preferences</h5>
+                    <div class="preferences-grid">
+                        <div class="preference-group">
+                            <label class="preference-item">
+                                <input type="checkbox" id="autoPlaySwitch" checked>
+                                <span class="checkmark"></span>
+                                Auto-play audio
+                            </label>
+                            <label class="preference-item">
+                                <input type="checkbox" id="autoAdvanceSwitch" checked>
+                                <span class="checkmark"></span>
+                                Auto-advance panels
+                            </label>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="bgMusicSwitch" checked>
-                                <label class="form-check-label" for="bgMusicSwitch">
-                                    <i class="fas fa-music" style="margin-right: 0.5rem; color: var(--accent-orange);"></i>
-                                    Background music
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="readingMode" value="panel" checked>
-                                <label class="form-check-label">
-                                    <i class="fas fa-th-large" style="margin-right: 0.5rem; color: var(--accent-orange);"></i>
-                                    Panel by panel
-                                </label>
-                            </div>
+                        <div class="preference-group">
+                            <label class="preference-item">
+                                <input type="checkbox" id="bgMusicSwitch" checked>
+                                <span class="checkmark"></span>
+                                Background music
+                            </label>
+                            <label class="preference-item">
+                                <input type="radio" name="readingMode" value="panel" checked>
+                                <span class="radiomark"></span>
+                                Panel by panel
+                            </label>
                         </div>
                     </div>
                 </div>
 
                 <div class="control-section">
-                    <h6 class="section-title">
-                        <i class="fas fa-microphone"></i>
-                        Voice Settings
-                    </h6>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="voiceSelect" class="form-label" style="color: var(--text-primary);">Voice Selection:</label>
-                            <select class="form-select" id="voiceSelect" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-light); border-radius: 8px;">
-                                <option value="en-US-natalie">Natalie (Female)</option>
-                                <option value="en-US-miles">Miles (Male)</option>
-                                <option value="en-US-ken">Ken (Narrator)</option>
-                                <option value="en-US-river">River (Child-friendly)</option>
-                                <option value="en-US-ariana">Ariana (Female)</option>
-                                <option value="en-US-terrell">Terrell (Male)</option>
-                            </select>
+                    <div class="section-header">
+                        <h5 class="section-title">Voice Customization</h5>
+                        <span class="ai-indicator" id="autoDetectedIndicator" style="display: none;">
+                            AI Auto-detected
+                        </span>
+                    </div>
+                    <div class="voice-controls">
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label class="control-label">Voice</label>
+                                <select class="control-select" id="voiceSelect">
+                                    <option value="">Auto-select</option>
+                                    <!-- Voice options will be loaded dynamically -->
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Style</label>
+                                <select class="control-select" id="voiceStyleSelect">
+                                    <option value="Default">Default</option>
+                                    <option value="Angry">Angry</option>
+                                    <option value="Sad">Sad</option>
+                                    <option value="Promotional">Upbeat</option>
+                                    <option value="Newscast">Newscast</option>
+                                    <option value="Conversational">Conversational</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="volumeSlider" class="form-label" style="color: var(--text-primary);">Volume:</label>
-                            <input type="range" class="form-range" id="volumeSlider" min="0" max="100" value="80" style="background: rgba(255, 255, 255, 0.1); border-radius: 4px;">
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label class="control-label">Speed: <span id="speedValue">0</span></label>
+                                <input type="range" class="control-slider" id="speedSlider" min="-50" max="50" value="0">
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Pitch: <span id="pitchValue">0</span></label>
+                                <input type="range" class="control-slider" id="pitchSlider" min="-50" max="50" value="0">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -835,14 +978,19 @@
     let isPlaying = false;
     let autoAdvanceTimeout = null;
     let readingMode = 'panel';
+    let voices = []; // Store loaded voices for style updates
 
     // Initialize the reader
     document.addEventListener('DOMContentLoaded', function() {
         initializeReader();
         setupEventListeners();
         loadSessionInfo();
+        loadVoices();
         loadFirstPage();
         updateVoiceInfo();
+        
+        // Set up periodic preload status checks
+        setInterval(checkPreloadStatus, 3000); // Check every 3 seconds
     });
 
     function initializeReader() {
@@ -880,7 +1028,17 @@
         // Set up audio player listeners
         const audioPlayer = document.getElementById('audioPlayer');
         if (audioPlayer) {
-            audioPlayer.addEventListener('ended', function() {
+            // Store the main ended handler for reuse
+            window.mainAudioEndedHandler = function() {
+                // Don't handle auto-advance if we're playing a sequence
+                if (isPlayingSequence) {
+                    return; // Let the sequence handler take control
+                }
+                
+                // Call the main audio ended handler
+                handleAudioEnded();
+                
+                // Then handle auto-advance if enabled
                 if (autoAdvance) {
                     if (readingMode === 'panel') {
                         nextPanel();
@@ -888,7 +1046,9 @@
                         nextPage();
                     }
                 }
-            });
+            };
+            
+            audioPlayer.addEventListener('ended', window.mainAudioEndedHandler);
         }
 
         // Set up volume controls
@@ -911,6 +1071,14 @@
 
         // Initialize background music
         initializeBackgroundMusic();
+
+        // Set up voice customization listeners
+        document.getElementById('speedSlider').addEventListener('input', (e) => {
+            document.getElementById('speedValue').textContent = e.target.value;
+        });
+        document.getElementById('pitchSlider').addEventListener('input', (e) => {
+            document.getElementById('pitchValue').textContent = e.target.value;
+        });
     }
 
     function initializeBackgroundMusic() {
@@ -1032,6 +1200,9 @@
         console.log('🔄 Auto-analyzing new page...');
         updateStatus('analyzing');
         await analyzeCurrentPage();
+        
+        // Check preload status after page load
+        await checkPreloadStatus();
     }
 
     async function analyzeCurrentPage() {
@@ -1170,10 +1341,24 @@
         }
     }
 
+    // Global variables for sequential audio playback
+    let currentAudioQueue = [];
+    let currentAudioIndex = 0;
+    let isPlayingSequence = false;
+
     async function playCurrentPanel() {
         if (panels.length === 0 || currentPanel >= panels.length) return;
 
         const panel = panels[currentPanel];
+
+        // Check if panel has multiple pre-generated audio parts (from analysis)
+        if (panel.audio_parts && panel.audio_parts.length > 1) {
+            console.log(`🎵 Panel has ${panel.audio_parts.length} audio parts, playing sequentially`);
+            await playAudioSequence(panel.audio_parts);
+            return;
+        }
+
+        // Fallback to single audio generation
         const text = panel.text_for_speech || 'No text in this panel.';
 
         if (text === 'No text in this panel.') {
@@ -1184,16 +1369,30 @@
         try {
             showLoading();
 
-            // Use auto-detected voice from panel analysis, or fall back to manual selection
-            const voiceSelect = document.getElementById('voiceSelect');
-            const voiceId = panel.voice_id || (voiceSelect ? voiceSelect.value : 'en-US-natalie');
+            // Get user-selected voice settings (prioritize user selection over auto-detection)
+            const userVoiceId = document.getElementById('voiceSelect').value;
+            const userStyle = document.getElementById('voiceStyleSelect').value;
+            const userRate = parseInt(document.getElementById('speedSlider').value);
+            const userPitch = parseInt(document.getElementById('pitchSlider').value);
+
+            // Use user selection if available, otherwise fall back to auto-detected
+            const voiceId = userVoiceId || panel.voice_id;
+            const style = userStyle === 'Default' ? '' : (userStyle || panel.speech_style || '');
+            const rate = userRate || 0;
+            const pitch = userPitch || 0;
+
+            console.log(`🎤 Generating audio with user settings: Voice=${voiceId}, Style=${style}, Rate=${rate}, Pitch=${pitch}`);
+
+            const formData = new URLSearchParams();
+            formData.append('text', text);
+            formData.append('voice_id', voiceId);
+            formData.append('style', style);
+            formData.append('rate', rate);
+            formData.append('pitch', pitch);
 
             const response = await fetch(`/generate-audio/${sessionId}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `text=${encodeURIComponent(text)}&voice_id=${voiceId}`
+                body: formData
             });
 
             if (!response.ok) {
@@ -1226,6 +1425,96 @@
         }
     }
 
+    async function playAudioSequence(audioParts) {
+        if (!audioParts || audioParts.length === 0) return;
+
+        // Prepare the audio queue
+        currentAudioQueue = audioParts.map(url => `/static/audio/${url.split('/').pop()}`);
+        currentAudioIndex = 0;
+        isPlayingSequence = true;
+
+        console.log(`🎵 Starting audio sequence with ${currentAudioQueue.length} parts`);
+
+        // Update audio info
+        document.getElementById('audioTitle').textContent = `Panel ${currentPanel + 1} Audio (1 of ${currentAudioQueue.length})`;
+        document.getElementById('audioStatus').textContent = 'Playing sequence...';
+
+        // Setup audio player for sequence playback
+        const audioPlayer = document.getElementById('audioPlayer');
+        
+        // Remove the main ended listener and add sequence listener
+        audioPlayer.removeEventListener('ended', window.mainAudioEndedHandler);
+        audioPlayer.addEventListener('ended', handleSequenceEnded);
+
+        // Ensure background music is playing
+        const bgMusic = document.getElementById('bgMusic');
+        const bgMusicSwitch = document.getElementById('bgMusicSwitch');
+        if (bgMusic && bgMusicSwitch && bgMusicSwitch.checked && bgMusic.paused) {
+            bgMusic.play().catch(e => console.log('Background music play failed:', e));
+        }
+
+        // Start playing the first audio
+        await playNextInSequence();
+    }
+
+    async function playNextInSequence() {
+        if (currentAudioIndex >= currentAudioQueue.length) {
+            // Sequence completed
+            isPlayingSequence = false;
+            document.getElementById('audioStatus').textContent = 'Sequence completed';
+            console.log('🎵 Audio sequence completed');
+            
+            // Restore main audio ended handler
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.removeEventListener('ended', handleSequenceEnded);
+            audioPlayer.addEventListener('ended', window.mainAudioEndedHandler);
+            
+            // Call the main handler to update UI
+            handleAudioEnded();
+            
+            // Trigger auto-advance if enabled
+            if (autoAdvance) {
+                console.log('🔄 Auto-advancing after sequence completion...');
+                if (readingMode === 'panel') {
+                    nextPanel();
+                } else {
+                    nextPage();
+                }
+            }
+            return;
+        }
+
+        const audioUrl = currentAudioQueue[currentAudioIndex];
+        console.log(`🎵 Playing audio part ${currentAudioIndex + 1}/${currentAudioQueue.length}: ${audioUrl}`);
+
+        // Update title to show progress
+        document.getElementById('audioTitle').textContent = `Panel ${currentPanel + 1} Audio (${currentAudioIndex + 1} of ${currentAudioQueue.length})`;
+
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.src = audioUrl;
+        currentAudioUrl = audioUrl;
+        
+        try {
+            await audioPlayer.play();
+        } catch (error) {
+            console.error('❌ Error playing audio:', error);
+            // Move to next audio if current fails
+            currentAudioIndex++;
+            await playNextInSequence();
+        }
+    }
+
+    function handleSequenceEnded() {
+        currentAudioIndex++;
+        playNextInSequence();
+    }
+
+    // Original audio ended handler for non-sequence playback
+    function handleAudioEnded() {
+        document.getElementById('audioStatus').textContent = 'Completed';
+        document.getElementById('playIcon').className = 'fas fa-play';
+    }
+
     function showPanelInfo() {
         if (panels.length === 0 || currentPanel >= panels.length) {
             return;
@@ -1241,9 +1530,15 @@
         document.getElementById('panelText').textContent = panelText;
         document.getElementById('panelDescription').textContent = panelDescription;
         
+        // Update voice controls to show auto-detected settings
+        updateVoiceControlsFromPanel(panel);
+        
         // Show voice information
         const voiceInfo = document.getElementById('voiceInfo');
         let voiceText = 'Voice: Auto-detected';
+        let styleText = panel.speech_style ? `Style: ${panel.speech_style}` : '';
+        let rateText = panel.rate !== undefined && panel.rate !== 0 ? `Rate: ${panel.rate > 0 ? '+' : ''}${panel.rate}` : '';
+        let pitchText = panel.pitch !== undefined && panel.pitch !== 0 ? `Pitch: ${panel.pitch > 0 ? '+' : ''}${panel.pitch}` : '';
         
         if (panel.voice_id) {
             const voiceNames = {
@@ -1257,7 +1552,8 @@
             voiceText = `Voice: ${voiceNames[panel.voice_id] || panel.voice_id}`;
         }
         
-        voiceInfo.textContent = voiceText;
+        const voiceInfoParts = [voiceText, styleText, rateText, pitchText].filter(Boolean);
+        voiceInfo.textContent = voiceInfoParts.join(' | ');
         
         // Show panel info section
         panelInfo.style.display = 'block';
@@ -1322,12 +1618,28 @@
                 `Panel ${index + 1}: ${panel.description || 'Visual content'}`
             ).join('. ');
 
+            // Get user-selected voice settings
+            const userVoiceId = document.getElementById('voiceSelect').value;
+            const userStyle = document.getElementById('voiceStyleSelect').value;
+            const userRate = parseInt(document.getElementById('speedSlider').value);
+            const userPitch = parseInt(document.getElementById('pitchSlider').value);
+
+            // Use user selection if available, otherwise use default narrator voice
+            const voiceId = userVoiceId || 'en-US-ken';
+            const style = userStyle === 'Default' ? '' : (userStyle || '');
+            const rate = userRate || 0;
+            const pitch = userPitch || 0;
+
+            const formData = new URLSearchParams();
+            formData.append('text', summaryText);
+            formData.append('voice_id', voiceId);
+            formData.append('style', style);
+            formData.append('rate', rate);
+            formData.append('pitch', pitch);
+
             const response = await fetch(`/generate-audio/${sessionId}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `text=${encodeURIComponent(summaryText)}&voice_id=en-US-ken`
+                body: formData
             });
 
             if (!response.ok) {
@@ -1408,12 +1720,172 @@
             if (response.ok) {
                 const sessionData = await response.json();
                 console.log('🌐 Session language:', sessionData.language_name);
+                
+                // Update preload status display
+                updatePreloadStatus(sessionData.preload_stats);
             }
         } catch (error) {
             console.error('❌ Error loading session info:', error);
         }
     }
+    
+    function updatePreloadStatus(preloadStats) {
+        const preloadStatus = document.getElementById('preloadStatus');
+        const preloadText = document.getElementById('preloadText');
+        
+        if (!preloadStats) {
+            preloadStatus.style.display = 'none';
+            return;
+        }
+        
+        const { total_pages, completed, processing, failed } = preloadStats;
+        
+        if (total_pages === 0) {
+            preloadStatus.style.display = 'none';
+            return;
+        }
+        
+        let statusText = '';
+        let statusClass = '';
+        
+        if (processing > 0) {
+            statusText = `Preloading ${processing} pages...`;
+            statusClass = 'text-warning';
+        } else if (completed > 0) {
+            statusText = `${completed} pages ready`;
+            statusClass = 'text-success';
+        } else if (failed > 0) {
+            statusText = `${failed} pages failed`;
+            statusClass = 'text-danger';
+        } else {
+            preloadStatus.style.display = 'none';
+            return;
+        }
+        
+        preloadText.textContent = statusText;
+        preloadText.className = statusClass;
+        preloadStatus.style.display = 'block';
+    }
+    
+    async function checkPreloadStatus() {
+        try {
+            const response = await fetch(`/session/${sessionId}/status`);
+            if (response.ok) {
+                const sessionData = await response.json();
+                updatePreloadStatus(sessionData.preload_stats);
+            }
+        } catch (error) {
+            console.error('❌ Error checking preload status:', error);
+        }
+    }
 
+    async function loadVoices() {
+        try {
+            const response = await fetch('/voices');
+            if (response.ok) {
+                const data = await response.json();
+                voices = data.voices || []; // Store in global variable
+                
+                const voiceSelect = document.getElementById('voiceSelect');
+                voiceSelect.innerHTML = '<option value="">Auto-select</option>';
+                
+                // Group voices by language
+                const voicesByLanguage = {};
+                voices.forEach(voice => {
+                    const language = voice.displayLanguage || 'Other';
+                    if (!voicesByLanguage[language]) {
+                        voicesByLanguage[language] = [];
+                    }
+                    voicesByLanguage[language].push(voice);
+                });
+                
+                // Add voices grouped by language
+                Object.keys(voicesByLanguage).sort().forEach(language => {
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = language;
+                    
+                    voicesByLanguage[language].forEach(voice => {
+                        const option = document.createElement('option');
+                        option.value = voice.voiceId;
+                        option.textContent = `${voice.displayName} (${voice.gender})`;
+                        optgroup.appendChild(option);
+                    });
+                    
+                    voiceSelect.appendChild(optgroup);
+                });
+                
+                // Set up voice selection change handler
+                voiceSelect.addEventListener('change', function() {
+                    updateVoiceStyles(this.value);
+                });
+                
+                console.log(`🎵 Loaded ${voices.length} voices`);
+            }
+        } catch (error) {
+            console.error('❌ Error loading voices:', error);
+        }
+    }
+    
+    function updateVoiceStyles(voiceId) {
+        const styleSelect = document.getElementById('voiceStyleSelect');
+        styleSelect.innerHTML = '<option value="Default">Default</option>';
+        
+        if (!voiceId) return;
+        
+        const selectedVoice = voices.find(v => v.voiceId === voiceId);
+        if (selectedVoice && selectedVoice.availableStyles) {
+            selectedVoice.availableStyles.forEach(style => {
+                const option = document.createElement('option');
+                option.value = style;
+                option.textContent = style;
+                styleSelect.appendChild(option);
+            });
+        }
+    }
+    
+    function updateVoiceControlsFromPanel(panel) {
+        const autoDetectedIndicator = document.getElementById('autoDetectedIndicator');
+        
+        // Check if panel has auto-detected settings
+        const hasAutoDetectedSettings = panel.voice_id || panel.speech_style || 
+                                      (panel.rate !== undefined && panel.rate !== 0) || 
+                                      (panel.pitch !== undefined && panel.pitch !== 0);
+        
+        // Show/hide auto-detected indicator
+        if (hasAutoDetectedSettings) {
+            autoDetectedIndicator.style.display = 'inline';
+        } else {
+            autoDetectedIndicator.style.display = 'none';
+        }
+        
+        // Always update voice selection to match auto-detected voice (this allows dynamic character voices)
+        if (panel.voice_id) {
+            document.getElementById('voiceSelect').value = panel.voice_id;
+            updateVoiceStyles(panel.voice_id);
+        } else {
+            // Reset to auto-select if no specific voice detected
+            document.getElementById('voiceSelect').value = '';
+            updateVoiceStyles('');
+        }
+        
+        // Always update style selection to match auto-detected style
+        if (panel.speech_style) {
+            document.getElementById('voiceStyleSelect').value = panel.speech_style;
+        } else {
+            document.getElementById('voiceStyleSelect').value = 'Default';
+        }
+        
+        // Always update rate slider to match auto-detected rate
+        const rateValue = panel.rate !== undefined ? panel.rate : 0;
+        document.getElementById('speedSlider').value = rateValue;
+        document.getElementById('speedValue').textContent = rateValue;
+        
+        // Always update pitch slider to match auto-detected pitch
+        const pitchValue = panel.pitch !== undefined ? panel.pitch : 0;
+        document.getElementById('pitchSlider').value = pitchValue;
+        document.getElementById('pitchValue').textContent = pitchValue;
+    }
+    
     async function updateVoiceInfo() {
         // This function can be used to update voice information based on user preferences
         console.log('🎵 Voice info updated');

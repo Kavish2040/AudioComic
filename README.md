@@ -16,6 +16,12 @@ A professional web application that converts comic PDFs into interactive audio e
 - **Language Selection**: Choose your preferred language at the start of each session
 - **Real-time Translation**: Text is translated and audio is generated in your selected language
 
+### ⚡ Smart Preloading (NEW!)
+- **Background Processing**: Pages are analyzed and audio is generated in the background
+- **Seamless Navigation**: No delays when moving between pages - everything is preloaded
+- **Progress Tracking**: Real-time status updates showing preload progress
+- **Resource Optimization**: Intelligent preloading of upcoming pages while current page plays
+
 #### Supported Languages
 - **English**: US, UK
 - **Spanish**: Spain, Mexico
@@ -122,6 +128,7 @@ This will test:
 - **MurfTTSService**: Generates speech using Murf AI
 - **TranslationService**: Translates text using Murf AI Translation API
 - **ComicReader**: Orchestrates the reading experience
+- **PreloadManager**: Handles background processing and preloading of upcoming pages
 
 ### API Endpoints
 - `POST /upload`: Upload comic with language preference
@@ -129,7 +136,8 @@ This will test:
 - `POST /translate-panels/{session_id}`: Translate panel text
 - `POST /translate-and-generate-audio/{session_id}`: Translate and generate audio
 - `GET /languages`: Get supported languages
-- `GET /session/{session_id}/status`: Get session status
+- `GET /session/{session_id}/status`: Get session status with preload statistics
+- `GET /session/{session_id}/preload-status/{page_num}`: Get preload status for specific page
 
 ## 🤝 Contributing
 

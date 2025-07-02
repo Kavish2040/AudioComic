@@ -1033,7 +1033,7 @@
                                 <h4>Drop document here to upload</h4>
                             </div>
                             <input type="file" id="fileInput" class="file-input" accept=".pdf">
-                            <button type="button" class="btn-upload" onclick="document.getElementById('fileInput').click()">
+                            <button type="button" class="btn-upload" onclick="selectFile(event)">
                                 Select from device
                             </button>
                             <div class="upload-text">
@@ -1148,14 +1148,24 @@
             }
         });
         
-        // Click to upload (only in initial state)
+        // Click to upload (only in initial state and not on button)
         uploadArea.addEventListener('click', function(e) {
-            // Only allow click to upload in initial state
-            if (document.getElementById('uploadInitialState').style.display !== 'none') {
+            // Only allow click to upload in initial state and if not clicking the button
+            if (document.getElementById('uploadInitialState').style.display !== 'none' && 
+                !e.target.classList.contains('btn-upload')) {
                 fileInput.click();
             }
         });
     });
+
+    function selectFile(event) {
+        // Prevent event bubbling to avoid double-clicking
+        event.stopPropagation();
+        event.preventDefault();
+        
+        // Trigger file input
+        document.getElementById('fileInput').click();
+    }
 
     function handleFileUpload(file) {
         // Validate file
